@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10030a" />
+  <title>Countdown | Hack the Wu</title>
+  <link rel="icon" href="/assets/favicon-32.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..700&family=DM+Mono:wght@400;500&family=Dela+Gothic+One&display=swap" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .countdown-page {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 100%, #8e241f, transparent 65%),
+        linear-gradient(var(--night), #350a15);
+    }
+    .countdown h1 { font-size: clamp(2rem, 8vw, 5rem); }
+    .countdown time { color: var(--muted); }
+    .countdown-clock {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(4px, 2vw, 24px);
+      margin: 2rem 0;
+      font-family: var(--font-mono);
+    }
+    .countdown-clock[hidden] { display: none; }
+    .countdown-clock dt { font-size: clamp(.65rem, 2.5vw, 1rem); }
+    .countdown-clock dd {
+      margin: 0;
+      color: var(--gold);
+      font-size: clamp(1.8rem, 8vw, 5rem);
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-clock div { display: flex; flex-direction: column-reverse; }
+  </style>
+  <script src="/countdown.js" defer></script>
+</head>
+<body class="countdown-page">
+  <main class="countdown">
+    <h1>Hack the Wu</h1>
+    <p><time id="countdown-target" datetime="2027-03-26T17:00:00-05:00">March 26, 2027 at 5:00 PM CDT</time></p>
+    <dl class="countdown-clock" id="countdown-clock" aria-label="Time remaining" hidden>
+      <div><dt>Days</dt><dd id="days">00</dd></div>
+      <div><dt>Hours</dt><dd id="hours">00</dd></div>
+      <div><dt>Minutes</dt><dd id="minutes">00</dd></div>
+      <div><dt>Seconds</dt><dd id="seconds">00</dd></div>
+    </dl>
+    <a class="btn" href="/">Back to Hack the Wu</a>
+  </main>
+</body>
+</html>
