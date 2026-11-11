@@ -22,12 +22,17 @@ async function enter() {
   const h1 = hero.querySelector("h1");
   const items = hero.querySelectorAll("[data-enter-item]");
   const media = hero.querySelector("[data-enter-media]");
-  const split = SplitText.create(h1, { type: "lines", mask: "lines", maskClass: "line-mask" });
-
   gsap.set([h1, ...items], { opacity: 1 });
   root.classList.add("m-enter-done");
-  const tl = gsap.timeline({ defaults: { ease: "expo.out" }, onComplete: () => split.revert() });
-  tl.from(split.lines, { yPercent: 110, duration: 0.7, stagger: Math.min(0.08, 0.24 / split.lines.length) });
+  // The split stays in place after the entrance: reverting it re-lays the balanced h1 and makes the
+  // lines jump. autoSplit re-splits on resize, and the returned tween keeps its finished state.
+  SplitText.create(h1, {
+    type: "lines", mask: "lines", maskClass: "line-mask", autoSplit: true,
+    onSplit: (self) => gsap.from(self.lines, {
+      yPercent: 110, duration: 0.7, ease: "expo.out", stagger: Math.min(0.08, 0.24 / self.lines.length),
+    }),
+  });
+  const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
   if (items.length) tl.from(items, { y: 12, opacity: 0, duration: 0.52, stagger: 0.06 }, 0.35);
   if (media) tl.from(media.querySelector("img") || media, { scale: 1.05, duration: 1.1, ease: "power3.out" }, 0);
 }
