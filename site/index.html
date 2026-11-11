@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SASE at Wichita State</title>
-  <meta name="description" content="Society of Asian Scientists and Engineers at Wichita State University." />
+  <meta name="description" content="Society of Asian Scientists and Engineers at Wichita State University: career workshops, cultural events and community service, open to every major." />
   <meta property="og:title" content="SASE at Wichita State" />
   <meta property="og:description" content="Society of Asian Scientists and Engineers at Wichita State University." />
   <meta property="og:image" content="assets/logo/sase-square.png" />
@@ -13,87 +13,128 @@
   <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Saira:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600&display=swap" />
   <link rel="stylesheet" href="css/style.css" />
+  <script>document.documentElement.classList.add("m-enter");setTimeout(()=>document.documentElement.classList.add("m-enter-done"),900)</script>
 </head>
 <body>
   <header id="site-header"></header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div>
-          <p class="eyebrow">Wichita State University Chapter</p>
-          <h1>Society of Asian Scientists and Engineers</h1>
-          <p class="lead">
+    <section class="hero" data-enter aria-labelledby="hero-h">
+      <div class="container">
+        <div class="hero-text">
+          <p class="eyebrow" data-enter-item>Wichita State University Chapter</p>
+          <h1 id="hero-h">Society of Asian Scientists and Engineers</h1>
+          <p class="hero-lead" data-enter-item>
             Preparing Asian heritage scientists and engineers for success in the global business world,
             celebrating diversity on campus and in the workplace, and giving back to our community.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-accent" href="#join">Become a member</a>
+          <div class="hero-actions" data-enter-item>
+            <a class="btn" href="#join">Become a member <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
             <a class="btn btn-ghost" href="events.html">See upcoming events</a>
           </div>
         </div>
-        <picture>
-          <source srcset="assets/logo/sase-mark-dark.png" media="(prefers-color-scheme: dark)" />
-          <img class="hero-logo" src="assets/logo/sase-mark.png" alt="" width="400" height="549" />
-        </picture>
+        <!-- Swap for a chapter group photo later: <img src="assets/photos/chapter.jpg" alt="..." style="inset:0;width:100%;height:100%;object-fit:cover"> -->
+        <div class="hero-art" data-enter-media aria-hidden="true">
+          <span class="ring ring-2"></span>
+          <span class="ring ring-1"></span>
+          <picture>
+            <source srcset="assets/logo/sase-mark-dark.svg" media="(prefers-color-scheme: dark)" />
+            <img src="assets/logo/sase-mark.svg" alt="" width="400" height="549" />
+          </picture>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="screen" id="about" aria-labelledby="about-h">
       <div class="container">
-        <div class="section-head"><h2>What we do</h2></div>
+        <div class="screen-head">
+          <h2 id="about-h">What we do</h2>
+        </div>
         <div class="pillars">
-          <div class="pillar">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></div>
+          <article class="pillar">
             <h3>Professional development</h3>
             <p>Resume workshops, mock interviews, industry panels, and the SASE national and regional conferences.</p>
-          </div>
-          <div class="pillar">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg></div>
+            <span class="tag cat-professional">Professional</span>
+          </article>
+          <article class="pillar">
             <h3>Culture &amp; diversity</h3>
             <p>Celebrate Asian heritage and build an inclusive community across every STEM major.</p>
-          </div>
-          <div class="pillar">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+            <span class="tag cat-cultural">Cultural</span>
+          </article>
+          <article class="pillar">
             <h3>Community service</h3>
             <p>Volunteer around Wichita, mentor younger students, and give back together.</p>
-          </div>
+            <span class="tag cat-service">Service</span>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt">
-      <div class="container two-col">
-        <div>
-          <div class="section-head">
-            <h2>Upcoming events</h2>
-            <a href="events.html">Full calendar →</a>
+    <!-- Moment: pinned-chapters (taste-skill deal), driven by GSAP ScrollTrigger in js/motion.js -->
+    <section class="screen chapters" id="membership" data-chapters aria-labelledby="membership-h">
+      <div class="pc-stage">
+        <div class="container pc-grid">
+          <div class="pc-text">
+            <h2 id="membership-h">How membership works</h2>
+            <p>Membership is free. Paying dues supports the chapter and puts you on the points system.</p>
+            <ol class="pc-steps">
+              <li class="pc-step">
+                <h3>Come to any event, free</h3>
+                <p><span>Every general meeting, workshop and social is open to all WSU students. You don't need to pay to be a general body member.</span></p>
+                <figure class="pc-visual">
+                  <div class="window">
+                    <div class="window-head"><strong>Coming up</strong><a class="link" href="events.html">Full calendar</a></div>
+                    <div id="upcoming" class="event-list"><p class="muted">Loading events…</p></div>
+                  </div>
+                </figure>
+              </li>
+              <li class="pc-step">
+                <h3>Pay dues to earn points</h3>
+                <p><span>Dues are optional. Once you've paid, every event you attend earns points toward the semester leaderboard.</span></p>
+                <figure class="pc-visual">
+                  <div class="window">
+                    <div class="member-card">
+                      <img class="mc-wordmark" src="assets/logo/sase-wordmark-dark.png" alt="" width="140" height="30" />
+                      <div>
+                        <p class="mc-label">Paid member</p>
+                        <p class="mc-sem" data-semester>Fall 2026</p>
+                        <p class="mc-school">Wichita State University</p>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              </li>
+              <li class="pc-step">
+                <h3>Climb the leaderboard</h3>
+                <p><span>Top point earners get chapter opportunities, like possibly having their trip to the SASE National Convention paid for.</span></p>
+                <figure class="pc-visual">
+                  <div class="window">
+                    <div class="window-head"><strong>Top members</strong><a class="link" href="leaderboard.html">Leaderboard</a></div>
+                    <div class="mini-board" id="top-members"><p class="muted">Loading leaderboard…</p></div>
+                  </div>
+                </figure>
+              </li>
+            </ol>
           </div>
-          <div id="upcoming" class="event-list"><p class="muted">Loading…</p></div>
-        </div>
-        <div>
-          <div class="section-head">
-            <h2>Top members</h2>
-            <a href="leaderboard.html">Leaderboard →</a>
-          </div>
-          <div class="mini-board" id="top-members"><p class="muted">Loading…</p></div>
+          <div class="pc-visuals"></div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="screen" id="board" aria-labelledby="board-h">
       <div class="container">
-        <div class="section-head"><h2>Executive board</h2></div>
+        <div class="screen-head">
+          <h2 id="board-h">Executive board</h2>
+        </div>
         <!-- Photos: put a square photo in assets/officers/ (e.g. kaymie-nguyen.jpg), then replace that
              officer's <div class="officer-initials">..</div> with
-             <img class="officer-photo" src="assets/officers/kaymie-nguyen.jpg" alt="" width="104" height="104" /> -->
+             <img class="officer-photo" src="assets/officers/kaymie-nguyen.jpg" alt="" width="300" height="300" /> -->
         <div class="officers">
           <div class="officer"><div class="officer-initials" aria-hidden="true">KN</div><strong>Kaymie Nguyen</strong><span>President</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">AN</div><strong>Andrew Ngo</strong><span>External Vice President</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">PD</div><strong>Preston Dinh</strong><span>Internal Vice President</span></div>
-          <div class="officer"><div class="officer-initials" aria-hidden="true">RR</div><strong>Ronish Rasaily</strong><span>Secretary</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">LN</div><strong>Linda Nguyen</strong><span>Treasurer</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">JH</div><strong>Jasmine Huynh</strong><span>Event Coordinator</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">JN</div><strong>Jacob Nguyen</strong><span>Event Coordinator</span></div>
@@ -101,29 +142,32 @@
           <div class="officer"><div class="officer-initials" aria-hidden="true">VT</div><strong>Vina Truong</strong><span>Media Coordinator</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">AH</div><strong>Austin Helgerson</strong><span>Professional Development Chair</span></div>
           <div class="officer"><div class="officer-initials" aria-hidden="true">VN</div><strong>Viet Nguyen</strong><span>Fundraising Chair</span></div>
+          <div class="officer"><div class="officer-initials" aria-hidden="true">RR</div><strong>Ronish Rasaily</strong><span>Secretary</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt">
+    <section class="sponsors" id="sponsors" aria-labelledby="sponsors-h">
       <div class="container">
-        <div class="section-head"><h2>Sponsors &amp; partners</h2></div>
+        <div class="screen-head">
+          <h2 id="sponsors-h">Sponsors &amp; partners</h2>
+        </div>
         <div class="sponsor-row">
-          <a class="sponsor" href="https://mochinutwichita.com/" target="_blank" rel="noopener">Mochinut Wichita</a>
-          <a class="sponsor" href="https://www.lunarpickleball.com/" target="_blank" rel="noopener">Lunar Pickleball</a>
+            <a class="sponsor" href="https://mochinutwichita.com/" target="_blank" rel="noopener"><img src="assets/sponsors/mochinut-wichita.webp" alt="" width="375" height="69" /><span>Mochinut Wichita <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></span></a>
+            <a class="sponsor" href="https://www.lunarpickleball.com/" target="_blank" rel="noopener"><img src="assets/sponsors/lunar-pickleball.png" alt="" width="737" height="255" /><span>Lunar Pickleball <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></span></a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="join">
+    <section class="screen close" id="join" aria-labelledby="join-h">
       <div class="container">
-        <div class="join">
-          <h2>Join SASE</h2>
+        <div>
+          <h2 id="join-h">Join SASE</h2>
           <p class="lead">
             Open to all majors and backgrounds. Come to any general body meeting, or sign up below to get on our mailing list.
           </p>
           <div class="hero-actions">
-            <a class="btn" id="join-link" href="#">Sign up</a>
+            <a class="btn" data-join href="#">Sign up <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
             <a class="btn btn-ghost" id="discord-link" href="#">Join the Discord</a>
           </div>
         </div>
@@ -133,14 +177,19 @@
 
   <footer id="site-footer"></footer>
 
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/motion.js"></script>
   <script type="module">
     import { config } from "./js/config.js";
     import { upcomingEvents, leaderboard } from "./js/data.js";
     import { esc, eventCard, showError } from "./js/util.js";
 
-    document.querySelector("#join-link").href = config.links.join;
+    document.querySelectorAll("[data-join]").forEach((a) => (a.href = config.links.join));
     document.querySelector("#discord-link").href = config.links.discord;
+    document.querySelectorAll("[data-semester]").forEach((el) => (el.textContent = config.currentSemester.name));
 
     const upcomingEl = document.querySelector("#upcoming");
     upcomingEvents(3)

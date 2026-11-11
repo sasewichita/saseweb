@@ -8,18 +8,22 @@
   <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Saira:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600&display=swap" />
   <link rel="stylesheet" href="css/style.css" />
+  <script>document.documentElement.classList.add("m-enter");setTimeout(()=>document.documentElement.classList.add("m-enter-done"),900)</script>
 </head>
 <body>
   <header id="site-header"></header>
 
-  <main class="section">
-    <div class="container">
-      <h1>Events</h1>
-      <p class="lead">Meetings, workshops, socials, and service. Most events earn points toward the leaderboard.</p>
-
-      <div class="calendar" style="margin-top:24px;">
+  <main>
+    <section class="page-intro" data-enter>
+      <div class="container">
+        <h1>Events calendar</h1>
+        <p class="lead" data-enter-item>Meetings, workshops, socials and service days, all free to attend. Paid members earn points at most of them.</p>
+      </div>
+    </section>
+    <div class="container" style="padding-bottom:96px;">
+      <div class="calendar">
         <div class="cal-head">
           <button class="btn btn-ghost btn-sm" id="prev" aria-label="Previous month">←</button>
           <h2 id="month-label"></h2>
@@ -47,7 +51,11 @@
 
   <footer id="site-footer"></footer>
 
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/motion.js"></script>
   <script type="module">
     import { listEvents } from "./js/data.js";
     import { esc, eventCard, showError } from "./js/util.js";

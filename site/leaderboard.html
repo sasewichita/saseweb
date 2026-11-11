@@ -8,26 +8,30 @@
   <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Saira:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600&display=swap" />
   <link rel="stylesheet" href="css/style.css" />
+  <script>document.documentElement.classList.add("m-enter");setTimeout(()=>document.documentElement.classList.add("m-enter-done"),900)</script>
 </head>
 <body>
   <header id="site-header"></header>
 
-  <main class="section">
-    <div class="container">
-      <div class="section-head">
+  <main>
+    <section class="page-intro" data-enter>
+      <div class="container">
+      <div class="section-head" style="margin:0; align-items:end;">
         <div>
           <h1>Points leaderboard</h1>
-          <p class="lead" style="margin:0;">Earn points by attending events, volunteering, and helping run the chapter.</p>
-          <p class="muted" style="margin:8px 0 0;">Only paid members are ranked, and the top 5 are shown. Search your name or WSU ID to see where you stand. If you haven't paid dues yet, you'll see where you'd place once you do.</p>
+          <p class="lead" data-enter-item>Paid members earn points by attending events, volunteering, and helping run the chapter. Top earners may get their trip to the SASE National Convention paid for.</p>
+          <p class="muted" data-enter-item>Membership is free; paying dues supports the chapter and puts you on the points system. Only paid members are ranked, and the top 5 are shown. Search your name or WSU ID to see where you stand. If you haven't paid yet, you'll see where you'd place once you do.</p>
         </div>
-        <div class="segmented" role="group" aria-label="Time range">
+        <div class="segmented" role="group" aria-label="Time range" data-enter-item>
           <button id="range-semester" aria-pressed="true"></button>
           <button id="range-all" aria-pressed="false">All time</button>
         </div>
       </div>
-
+      </div>
+    </section>
+    <div class="container" style="padding-bottom:96px;">
       <div id="podium" class="podium"></div>
 
       <div class="toolbar">
@@ -50,7 +54,11 @@
 
   <footer id="site-footer"></footer>
 
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/motion.js"></script>
   <script type="module">
     import { config } from "./js/config.js";
     import { leaderboard, findByWsuId } from "./js/data.js";
