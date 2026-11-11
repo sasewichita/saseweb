@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hack the Wu · Year of the Goat</title>
+  <meta name="description" content="Hack the Wu is SASE at Wichita State's second annual hackathon: beginner friendly and open to every undergrad and grad student, in every major." />
+  <meta property="og:title" content="Hack the Wu · Year of the Goat" />
+  <meta property="og:description" content="SASE at Wichita State's second annual hackathon. Beginner friendly, open to all students and majors." />
+  <meta name="theme-color" content="#2a070c" />
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&family=Rethink+Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E7%BE%8A&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add("js","m-enter");setTimeout(()=>document.documentElement.classList.add("m-enter-done"),900)</script>
+</head>
+<body>
+  <!-- Shared paper-cut shapes, reused across the page with <use>. The goat faces left. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="lantern-fill" cx="50%" cy="72%" r="75%">
+        <stop offset="0" stop-color="#fff1b8" />
+        <stop offset=".45" stop-color="#f7b643" />
+        <stop offset="1" stop-color="#d2552f" />
+      </radialGradient>
+    </defs>
+    <symbol id="goat" viewBox="0 0 400 360">
+      <g class="g-body">
+        <!-- horns -->
+        <path d="M112 96C106 58 130 30 172 22c-22 18-36 44-38 76z" />
+        <path d="M96 98C86 64 102 34 140 18c-18 22-26 50-22 80z" />
+        <!-- ear, head, beard -->
+        <path d="M126 100c14-10 32-8 42 2-12 8-28 10-42 6z" />
+        <path d="M144 114c-2-18-22-28-40-24-16 4-36 20-54 38-7 7-4 16 5 17 14 1 32-4 45-6 22-1 46-6 44-25z" />
+        <path d="M60 143c-3 18 2 34 12 42 1-16 5-30 10-44z" />
+        <!-- neck, body, tail -->
+        <path d="M112 222c-12-36-16-66-18-94l44-14c4 34 16 54 44 64z" />
+        <path d="M118 204c0-32 42-42 92-38 50-6 104 0 116 32 10 30 0 58-26 66-40 10-120 10-152-2-22-10-30-32-30-58z" />
+        <path d="M320 192c14-12 26-26 22-38-9 6-22 14-30 28z" />
+        <!-- legs -->
+        <path d="M134 246l-8 86h18l18-80z" />
+        <path d="M164 254l6 78h18l-2-78z" />
+        <path d="M254 254l-6 78h18l16-76z" />
+        <path d="M284 244c12 30 14 48 6 88h18c10-36 14-64 16-98z" />
+      </g>
+      <g class="g-cut">
+        <circle cx="98" cy="116" r="5" />
+        <path d="M262 196a26 26 0 1 1-22 30 4 4 0 0 1 8-1 18 18 0 1 0 15-21 4 4 0 0 1-1-8z" />
+        <path d="M150 212c10-16 30-22 48-14a4 4 0 0 1-3 7c-14-6-30-2-38 11a4 4 0 0 1-7-4z" />
+      </g>
+    </symbol>
+    <symbol id="lantern" viewBox="0 0 60 84">
+      <path d="M13 9Q30 0 47 9l7 49Q30 67 6 58z" fill="url(#lantern-fill)" />
+      <path d="M13 9Q30 0 47 9" fill="none" stroke="#7c121c" stroke-width="2.5" stroke-linecap="round" />
+      <rect x="19" y="61" width="22" height="5" rx="2" fill="#7c121c" />
+      <ellipse cx="30" cy="72" rx="4" ry="7" fill="#fff1b8" opacity=".85" />
+    </symbol>
+    <symbol id="wheat" viewBox="0 0 40 200">
+      <path d="M20 200Q17 130 20 72" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+      <path d="M20 150Q8 132 4 108Q16 122 20 142z" fill="currentColor" />
+      <g fill="currentColor">
+        <ellipse cx="20" cy="12" rx="4.5" ry="10" />
+        <ellipse cx="13" cy="26" rx="4.5" ry="9" transform="rotate(-24 13 26)" />
+        <ellipse cx="27" cy="26" rx="4.5" ry="9" transform="rotate(24 27 26)" />
+        <ellipse cx="12" cy="40" rx="4.5" ry="9" transform="rotate(-26 12 40)" />
+        <ellipse cx="28" cy="40" rx="4.5" ry="9" transform="rotate(26 28 40)" />
+        <ellipse cx="12" cy="54" rx="4.5" ry="9" transform="rotate(-26 12 54)" />
+        <ellipse cx="28" cy="54" rx="4.5" ry="9" transform="rotate(26 28 54)" />
+        <ellipse cx="13" cy="68" rx="4.5" ry="9" transform="rotate(-24 13 68)" />
+        <ellipse cx="27" cy="68" rx="4.5" ry="9" transform="rotate(24 27 68)" />
+      </g>
+    </symbol>
+  </svg>
+
+  <header class="top">
+    <div class="container top-inner">
+      <a class="brand" href="#top">Hack the Wu</a>
+      <nav class="top-nav" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#details">Details</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-sm" data-discord href="#">Get updates</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero: a paper-cut night. Back to front: stars, lanterns, far ridge, the peak
+         (moon + crag + goat), mid ridge, prairie and wheat. main.js moves the layers on scroll. -->
+    <section class="hero" data-enter aria-labelledby="hero-h">
+      <div class="scene" aria-hidden="true">
+        <div class="stars" data-stars></div>
+
+        <div class="lantern" data-depth=".9" style="--x:3%;--y:44%;--s:34px;--d:0s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth=".5" style="--x:44%;--y:13%;--s:22px;--d:-2s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth="1.3" style="--x:56%;--y:52%;--s:46px;--d:-4s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth=".4" style="--x:66%;--y:9%;--s:18px;--d:-1s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth=".7" style="--x:92%;--y:17%;--s:28px;--d:-3s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth="1.1" style="--x:88%;--y:58%;--s:38px;--d:-5s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth=".35" style="--x:27%;--y:8%;--s:16px;--d:-2.5s"><svg><use href="#lantern" /></svg></div>
+        <div class="lantern" data-depth=".6" style="--x:49%;--y:30%;--s:24px;--d:-1.5s"><svg><use href="#lantern" /></svg></div>
+
+        <svg class="ridge ridge-far" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+          <path d="M0 320V210l80-60 70 40 90-100 90 90 90-50 100 90 120-100 80 50L820 60l110 130 110-50 100 70 120-100 90 70 90-50v190z" />
+        </svg>
+        <svg class="ridge ridge-mid" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+          <path d="M0 320V250l110-70 80 50 120-90 100 80 90-40 130 90 110-70 90 40 120-100 110 90 100-50 90 60 100-80 90 60v130z" />
+        </svg>
+        <svg class="ridge ridge-near" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+          <path d="M0 320v-70c200-50 380 10 600-10s400 30 600-5c120-20 200 5 240-5v90z" />
+        </svg>
+        <div class="wheat" data-wheat></div>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow" data-enter-item>SASE at Wichita State · 2nd annual hackathon</p>
+          <h1 id="hero-h">Hack the Wu: <span class="h1-sub">Year of the Goat</span></h1>
+          <p class="hero-lead" data-enter-item>
+            A beginner-friendly hackathon at Wichita State, open to every undergrad and grad student in every major.
+            Date and venue coming soon.
+          </p>
+          <div class="hero-actions" data-enter-item>
+            <a class="btn btn-light" data-discord href="#">Get updates on Discord</a>
+            <a class="btn btn-ghost-light" href="#about">See what to expect</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="peak" data-enter-media aria-hidden="true">
+        <svg viewBox="0 60 700 840">
+          <g class="peak-moon">
+            <circle class="moon" cx="350" cy="330" r="240" />
+            <circle class="moon-ring" cx="350" cy="330" r="206" />
+          </g>
+          <g class="peak-crag">
+            <path class="crag" d="M70 900l90-130 50-70 30-88 44-52 46-12h150l34 26 36 66 24 82 60 80 56 98z" />
+            <path class="crag-facet" d="M330 548h150l34 26-70 30-64 96-40 200h-70l40-210z" />
+            <path class="crag-facet" d="M210 700l30-88 44-52-14 100-60 240H70l90-130z" opacity=".5" />
+            <g class="peak-goat" data-goat><use href="#goat" x="212" y="300" width="300" height="270" /></g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-h">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="about-h">What Hack the Wu is</h2>
+          <p>Teams spend a weekend building something new, from an app to a hardware project, then show it off at the end. This is our second year running it.</p>
+        </div>
+        <div class="points">
+          <article>
+            <h3>Beginner friendly</h3>
+            <p>Never been to a hackathon or written much code? You're exactly who we built this for.</p>
+          </article>
+          <article>
+            <h3>Open to all students</h3>
+            <p>Undergrad and grad students are both welcome to join.</p>
+          </article>
+          <article>
+            <h3>Every major welcome</h3>
+            <p>Design, business, science and engineering students all bring something a team needs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- The climb: on wide screens this holds in place while the goat hops ledge to ledge with the scroll. -->
+    <section class="section section-alt climb" id="weekend" data-climb aria-labelledby="climb-h">
+      <div class="container climb-stage">
+        <div class="climb-text">
+          <h2 id="climb-h">How the weekend goes</h2>
+          <ol class="steps">
+            <li class="step">
+              <span class="step-n">01</span>
+              <div><h3>Team up</h3><p>Teams need designers, planners and presenters as much as programmers.</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">02</span>
+              <div><h3>Build something new</h3><p>Spend the weekend on anything from an app to a hardware project.</p></div>
+            </li>
+            <li class="step">
+              <span class="step-n">03</span>
+              <div><h3>Show it off</h3><p>At the end, every team shows what they built.</p></div>
+            </li>
+          </ol>
+        </div>
+        <div class="climb-art" aria-hidden="true">
+          <svg viewBox="0 0 600 640">
+            <circle class="climb-sun" cx="300" cy="190" r="128" />
+            <path class="mtn-back" d="M0 640l110-170 60-40 70-120 60 60 80-110 70 130 60 30 90 220z" />
+            <path class="mtn" d="M0 640l150-220 60-70 50-110 40-50 45 55 55 105 70 90 130 200z" />
+            <path class="mtn-facet" d="M300 190l45 55 55 105 70 90 130 200H330l40-180-50-110z" />
+            <path class="ledge" d="M130 502h124l-14 14H146z" />
+            <path class="ledge" d="M310 372h124l-14 14H326z" />
+            <path class="trail" d="M90 610Q110 520 190 500Q300 420 370 370Q372 250 300 190" />
+            <path class="trail-lit" id="hop1" pathLength="1" d="M90 610Q110 520 190 500" />
+            <path class="trail-lit" id="hop2" pathLength="1" d="M190 500Q300 420 370 370" />
+            <path class="trail-lit" id="hop3" pathLength="1" d="M370 370Q372 250 300 190" />
+            <circle class="stop" cx="190" cy="500" r="7" />
+            <circle class="stop" cx="370" cy="370" r="7" />
+            <circle class="stop" cx="300" cy="190" r="7" />
+            <g class="climber" transform="translate(300 190)">
+              <g class="climber-flip"><use href="#goat" x="-60" y="-91" width="110" height="99" /></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="details" aria-labelledby="details-h">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="details-h">Event details</h2>
+          <p>We'll post the schedule, prizes and sign-up here as they're confirmed.</p>
+        </div>
+        <div class="ticket" data-ticket>
+          <dl class="details">
+            <div><dt>When</dt><dd>Date coming soon</dd></div>
+            <div><dt>Where</dt><dd>Wichita State University, room to be announced</dd></div>
+            <div><dt>Who</dt><dd>All undergrad and grad students, any major</dd></div>
+            <div><dt>Theme</dt><dd>Year of the Goat</dd></div>
+          </dl>
+          <div class="ticket-stub" aria-hidden="true">
+            <div class="seal"><span class="seal-char" lang="zh">羊</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq" aria-labelledby="faq-h">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <h2 id="faq-h">Questions</h2>
+        </div>
+        <div class="faq">
+          <details class="qa" name="faq" open>
+            <summary><h3>Do I need to know how to code?</h3></summary>
+            <p>No. Hack the Wu is beginner friendly, and teams need designers, planners and presenters as much as programmers.</p>
+          </details>
+          <details class="qa" name="faq">
+            <summary><h3>Who can attend?</h3></summary>
+            <p>Any undergrad or grad student, from any major.</p>
+          </details>
+          <details class="qa" name="faq">
+            <summary><h3>When is it?</h3></summary>
+            <p>The date isn't set yet. Join our Discord to hear the moment it is.</p>
+          </details>
+          <details class="qa" name="faq">
+            <summary><h3>Who runs it?</h3></summary>
+            <p>The Society of Asian Scientists and Engineers (SASE) chapter at Wichita State.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="close" data-fireworks aria-labelledby="close-h">
+      <canvas class="sparks" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 id="close-h">Hear first when sign-ups open</h2>
+        <p class="lead">Join the SASE Discord for announcements, or email us with questions.</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" data-discord href="#">Join the Discord</a>
+          <a class="btn btn-ghost-light" href="mailto:wichita@saseconnect.org">Email wichita@saseconnect.org</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="container foot-inner">
+      <div class="foot-brand">
+        <img src="assets/sase-mark-dark.svg" alt="" width="28" height="38" />
+        <span>Hosted by <a href="https://sasewichita.org">SASE at Wichita State</a></span>
+      </div>
+      <span class="muted">Early preview. Details will change.</span>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
