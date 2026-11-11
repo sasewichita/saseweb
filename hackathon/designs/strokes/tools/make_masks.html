@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Six Strokes: build the glyph mask atlas</title>
+    <!--
+      Builds ../glyphs/masks.png: six forms of 羊, white on black, each in a 384 px cell (3 x 2).
+      Open this page through a local web server, wait for the picture, then use "Save masks.png".
+      Sources:
+        0 oracle bone, 1 bronze, 2 small seal, 3 clerical: public-domain SVGs from Wikimedia Commons
+          (../glyphs/src/, file names listed in ../glyphs/SOURCES.md)
+        4 modern form: Noto Sans SC Light (SIL Open Font License)
+        5 pixel form: DotGothic16 (SIL Open Font License), drawn at its native 16 px
+    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300&family=DotGothic16&display=block&text=%E7%BE%8A"
+      rel="stylesheet"
+    />
+    <style>
+      body { margin: 16px; background: #222; color: #ddd; font: 14px system-ui; }
+      canvas { display: block; max-width: 100%; border: 1px solid #555; margin: 12px 0; }
+      a { color: #fc6; }
+    </style>
+  </head>
+  <body>
+    <p>Six forms of 羊 as masks. <a id="save" download="masks.png" href="#">Save masks.png</a></p>
+    <canvas id="atlas" width="1152" height="768"></canvas>
+    <script type="module">
+      const CELL = 384;
+      const FIT = 0.62; // the ink fills this share of a cell
+      const PIXEL_SPAN = 0.72; // the 16 x 16 pixel form covers this share of a cell
+      const atlas = document.getElementById('atlas');
+      const out = atlas.getContext('2d');
+      out.fillStyle = '#000';
+      out.fillRect(0, 0, atlas.width, atlas.height);
+
+      const loadImage = (src) =>
+        new Promise((res, rej) => {
+          const im = new Image();
+          im.onload = () => res(im);
+          im.onerror = () => rej(new Error('could not load ' + src));
+          im.src = src;
+        });
+
+      // ink box of whatever was drawn (alpha > 40)
+      function inkBox(ctx, w, h) {
+        const d = ctx.getImageData(0, 0, w, h).data;
+        let x0 = w, y0 = h, x1 = 0, y1 = 0;
+        for (let y = 0; y < h; y++)
+          for (let x = 0; x < w; x++)
+            if (d[(y * w + x) * 4 + 3] > 40) {
+              if (x < x0) x0 = x;
+              if (x > x1) x1 = x;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+        return { x0, y0, x1: x1 + 1, y1: y1 + 1 };
+      }
+
+      // draw `paint` big, measure it, then place it centred in cell n as white on black
+      function place(n, paint) {
+        const B = 1200;
+        const big = document.createElement('canvas');
+        big.width = big.height = B;
+        const bx = big.getContext('2d', { willReadFrequently: true });
+        paint(bx, B);
+        const box = inkBox(bx, B, B);
+        const bw = box.x1 - box.x0;
+        const bh = box.y1 - box.y0;
+        const s = (CELL * FIT) / Math.max(bw, bh);
+        const cell = document.createElement('canvas');
+        cell.width = cell.height = CELL;
+        const cx = cell.getContext('2d');
+        cx.imageSmoothingQuality = 'high';
+        cx.drawImage(big, box.x0, box.y0, bw, bh, (CELL - bw * s) / 2, (CELL - bh * s) / 2, bw * s, bh * s);
+        // turn the black-on-clear drawing into white-on-black
+        cx.globalCompositeOperation = 'source-in';
+        cx.fillStyle = '#fff';
+        cx.fillRect(0, 0, CELL, CELL);
+        out.drawImage(cell, (n % 3) * CELL, Math.floor(n / 3) * CELL);
+      }
+
+      const svgs = ['oracle', 'bronze', 'seal', 'clerical'];
+      for (let i = 0; i < svgs.length; i++) {
+        const im = await loadImage(`../glyphs/src/${svgs[i]}.svg`);
+        place(i, (ctx, B) => ctx.drawImage(im, 0, 0, B, B));
+      }
+
+      await document.fonts.load('300 200px "Noto Sans SC"', '羊');
+      await document.fonts.load('16px "DotGothic16"', '羊');
+      place(4, (ctx, B) => {
+        ctx.fillStyle = '#000';
+        ctx.font = '300 800px "Noto Sans SC"';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('羊', B / 2, B / 2);
+      });
+
+      // the pixel form: drawn at 16 px, read back as a 16 x 16 grid, then blown up with hard edges
+      {
+        const small = document.createElement('canvas');
+        small.width = small.height = 48;
+        const sx = small.getContext('2d', { willReadFrequently: true });
+        sx.fillStyle = '#000';
+        sx.font = '16px "DotGothic16"';
+        sx.textBaseline = 'alphabetic';
+        sx.fillText('羊', 16, 32);
+        const box = inkBox(sx, 48, 48);
+        const gx = Math.round((box.x0 + box.x1) / 2 - 8);
+        const gy = Math.round((box.y0 + box.y1) / 2 - 8);
+        const d = sx.getImageData(gx, gy, 16, 16).data;
+        const px = (CELL * PIXEL_SPAN) / 16;
+        const ox = 2 * CELL + (CELL * (1 - PIXEL_SPAN)) / 2;
+        const oy = CELL + (CELL * (1 - PIXEL_SPAN)) / 2;
+        out.fillStyle = '#fff';
+        const rows = [];
+        for (let y = 0; y < 16; y++) {
+          let row = '';
+          for (let x = 0; x < 16; x++) {
+            const on = d[(y * 16 + x) * 4 + 3] > 127;
+            row += on ? '#' : '.';
+            if (on) out.fillRect(ox + x * px, oy + y * px, px, px);
+          }
+          rows.push(row);
+        }
+        window.__pixelRows = rows;
+      }
+
+      document.getElementById('save').href = atlas.toDataURL('image/png');
+      window.__atlas = atlas.toDataURL('image/png');
+    </script>
+  </body>
+</html>
