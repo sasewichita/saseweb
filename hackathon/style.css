@@ -110,10 +110,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
   padding-bottom: 4svh;
 }
 .hero-lanterns a { position: relative; width: 100%; text-decoration: none; color: var(--ink); animation: bob 6s ease-in-out infinite; transition: translate .3s var(--ease), filter .3s var(--ease); }
-.hero-lanterns a[href="#about"] { grid-area: 2 / 1; top: -9px; left: 5%; animation-delay: -2s; }
-.hero-lanterns a[href="#details"] { grid-area: 1 / 2; top: -8px; left: -8%; animation-delay: -4s; }
-.hero-lanterns a[href="#faq"] { grid-area: 2 / 3; top: 11px; left: 3%; }
-.hero-lanterns a[href="/countdown"] { grid-area: 3 / 2; top: 7px; left: 21%; animation-delay: -1s; }
+.hero-lanterns a[href="#about"] { grid-area: 2 / 1; animation-delay: -2s; }
+.hero-lanterns a[href="#details"] { grid-area: 1 / 2; animation-delay: -4s; }
+.hero-lanterns a[href="#faq"] { grid-area: 2 / 3; }
+.hero-lanterns a[href="/countdown"] { grid-area: 3 / 2; left: 12%; animation-delay: -1s; }
 .hero-lanterns svg { display: block; width: 100%; aspect-ratio: 60 / 84; }
 .hero-lanterns span { position: absolute; inset: 31% 0 auto; text-align: center; font-family: var(--font-mono); font-weight: 500; font-size: clamp(.6rem, .3rem + .46vw, .9rem); text-transform: uppercase; }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-12px) rotate(2.5deg); } }
