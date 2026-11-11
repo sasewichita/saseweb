@@ -5,19 +5,22 @@ The chapter website. It has an events calendar, a points leaderboard, and an off
 - **Plain HTML/CSS/JS.** There's no build step or framework, so any officer can edit it.
 - **[Supabase](https://supabase.com)** (free tier) stores events, members, and points, and handles officer logins.
 - **[Cloudflare Pages](https://pages.cloudflare.com)** (free) hosts the site. It can use a custom domain at no cost.
+- **[GSAP](https://github.com/greensock/gsap)** runs the page animations. It loads from a CDN, so there's still nothing to install.
+- **[taste-skill](https://github.com/leonxlnx/taste-skill)** guided the design. It's a Claude Code skill for building company-grade websites; see [Design & motion](#design--motion).
 
 With no Supabase keys configured, the site runs in **demo mode** using sample data. That way you can preview it right away.
 
 ```
 site/                  ← everything that gets deployed
-  index.html           home: about, upcoming events, top members, officers, sponsors
+  index.html           home: about, how membership works (live events + top members), officers, sponsors, join
   events.html          month calendar + event list (with "Add to Google Calendar")
   leaderboard.html     semester / all-time rankings
   admin.html           officer-only: award points, manage events & members, undo entries
   js/config.js         ← org settings + Supabase keys (edit this)
   js/data.js           all database calls (and demo data)
+  js/motion.js         GSAP animations (hero entrance, membership scroll section)
   css/style.css        theme colors at the top
-  assets/              logos / photos go here
+  assets/              logos, sponsor logos, photos
 supabase/schema.sql    database tables + security rules
 .github/workflows/     keeps the free Supabase project from pausing
 ```
@@ -103,6 +106,24 @@ update public.member_private set paid_member = true where lower(wsu_id) = lower(
 
 The SQL files in `supabase/` besides `schema.sql` are one-time migrations for the existing project. `schema.sql` already includes them for a fresh setup.
 
+## Design & motion
+
+The site was redesigned with [taste-skill](https://github.com/leonxlnx/taste-skill) and [GSAP](https://github.com/greensock/gsap).
+
+**taste-skill** is a Claude Code skill with design rules and checking scripts. It was used to:
+- pick the type pairing (Zilla Slab for headings, Rethink Sans for body text) and the scroll moment for the home page;
+- lay the home page out as roughly one section per screen, with equal left and right edges;
+- keep motion to three places: the hero entrance, one scroll section, and hover/press feedback;
+- check copy and screenshot the page at desktop and phone widths.
+
+The SASE brand colours were kept instead of a generated palette.
+
+**GSAP** (3.13, loaded from jsDelivr in each page's `<script>` tags) powers `site/js/motion.js`:
+- **Hero entrance:** the heading rises line by line (SplitText), then the text and buttons fade up and the logo settles. It runs once on load, on every public page.
+- **How membership works:** on screens 1024px wide and 640px tall or larger, the section holds in place for one screen of scroll while its three steps open in turn (ScrollTrigger). The panel on the right shows the member card, then the live upcoming events, then the live top 5. Smaller screens show the steps as static rows.
+
+Hover and press effects are plain CSS in `style.css`. With reduced motion turned on, or if GSAP fails to load, everything shows in its finished state.
+
 ## Branding & placeholders
 
 Logo files live in `site/assets/logo/`:
@@ -110,7 +131,8 @@ Logo files live in `site/assets/logo/`:
 | File | Used for |
 | --- | --- |
 | `sase-wordmark.png` / `sase-wordmark-dark.png` | Header (light / dark mode, swapped automatically) |
-| `sase-mark.png` / `sase-mark-dark.png` | Hero and footer icon (light / dark mode) |
+| `sase-mark.svg` / `sase-mark-dark.svg` | Hero logo, a sharp vector trace of the mark (light / dark mode) |
+| `sase-mark.png` / `sase-mark-dark.png` | Footer icon (light / dark mode) |
 | `sase-icon.png` | Gold/cream icon for use on navy backgrounds |
 | `sase-square.png`, `favicon-32.png`, `apple-touch-icon.png` | Link previews, browser tab, phone home screen |
 
@@ -120,9 +142,11 @@ The colors come from the SASE Brand Guide 2025 (national colorway) and are set a
 - sandy brown `#DBC8B6`
 - brand white `#E9E8E8`
 
-Headings use Saira, and body text uses IBM Plex Sans, both from Google Fonts. The brand guide PDF is kept out of the repo.
+Headings use Zilla Slab, and body text uses Rethink Sans, both from Google Fonts. The brand guide PDF is kept out of the repo.
 
-Officer photos and sponsor logos are still placeholders. These are the dashed boxes; search the HTML for `img-placeholder` and `logo-placeholder`. Put image files in `site/assets/`, then swap each placeholder `<div>` for an `<img>`.
+Sponsor logos live in `site/assets/sponsors/`, taken from each sponsor's own website. The Mochinut logo is small (69px tall); a larger file from them would look sharper.
+
+Officers still show initials instead of photos. The comment above the "Executive board" section in `site/index.html` explains how to swap in a square photo.
 
 Other things to update:
 - **Social links, contact email, join link:** `site/js/config.js`.
