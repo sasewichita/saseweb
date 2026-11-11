@@ -1,0 +1,483 @@
+/* BLACKLIGHT: the second print. Black line work on bone paper; a light brings up the colour. */
+
+:root {
+  --bone: #ece6d6;
+  --ink: #0f0f13;
+  --yellow: #f2c40a;
+  --pale: #f7e08a;
+  --blue: #2645cc;
+  --display: 'Anybody', 'Arial Black', Impact, sans-serif;
+  --mono: 'Martian Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* the pupil, written by mock.js every frame (css px) */
+  --px: 50vw;
+  --py: 50vh;
+  --pw: 60vmin;
+  --ph: 18vmin;
+  --open: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bone);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.frame :focus-visible,
+.strip :focus-visible {
+  outline-color: var(--yellow);
+}
+
+.skip {
+  position: fixed;
+  left: 12px;
+  top: -80px;
+  z-index: 60;
+  background: var(--ink);
+  color: var(--bone);
+  padding: 12px 16px;
+}
+.skip:focus {
+  top: 12px;
+}
+
+/* ---------- the print ---------- */
+.eye {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+.no-webgl .eye {
+  display: none;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  z-index: 2;
+  height: 100svh;
+  min-height: 560px;
+}
+
+.slot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--pw);
+  height: var(--ph);
+  transform: translate3d(var(--px), var(--py), 0);
+  display: grid;
+  place-items: center;
+  container-type: size;
+  color: var(--bone);
+  z-index: 3;
+  pointer-events: none;
+  opacity: calc(1 - var(--open) * 3.2);
+}
+.no-webgl .slot {
+  background: var(--ink);
+  border-radius: 14px;
+}
+.slot h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-stretch: 150%;
+  font-variation-settings: 'wdth' 150;
+  font-size: min(46cqh, 7.9cqw);
+  line-height: 0.92;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+}
+.slot h1 small {
+  display: block;
+  margin-top: 0.62em;
+  font-family: var(--mono);
+  font-size: 0.2em;
+  font-weight: 500;
+  font-stretch: 112.5%;
+  letter-spacing: 0.34em;
+  color: var(--yellow);
+}
+
+/* plain black type set straight on the paper */
+.cap {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  max-width: 34ch;
+  opacity: calc(1 - var(--open) * 4);
+}
+.cap b {
+  font-weight: 700;
+}
+.cap--edition {
+  left: 28px;
+  top: 26px;
+}
+.cap--when {
+  right: 28px;
+  top: 26px;
+  text-align: right;
+}
+.cap--pitch {
+  left: 28px;
+  bottom: 100px;
+  font-size: 13.5px;
+  max-width: 32ch;
+}
+.actions {
+  position: absolute;
+  right: 28px;
+  bottom: 96px;
+  z-index: 2;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  opacity: calc(1 - var(--open) * 4);
+}
+.go {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 6px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  /* a thick yellow stroke under the word */
+  background: linear-gradient(var(--yellow), var(--yellow)) 0 88% / 100% 0.42em no-repeat;
+  transition: background-size 0.2s ease;
+}
+.go:hover {
+  background-size: 100% 0.9em;
+}
+.side {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* ---------- hidden notes ---------- */
+.notes {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: calc(1 - var(--open) * 4);
+}
+.note {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  padding: 2px 8px 3px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: var(--ink);
+  background: linear-gradient(var(--yellow), var(--yellow)) 0 70% / 100% 78% no-repeat;
+  transform: rotate(var(--r));
+  opacity: 0;
+}
+.note--long {
+  white-space: normal;
+  width: 25ch;
+}
+.all-lit .note {
+  opacity: 1 !important;
+}
+
+/* ---------- the lamp (cursor) ---------- */
+.lamp {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  pointer-events: none;
+  display: none;
+  mix-blend-mode: multiply;
+}
+.has-cursor .lamp {
+  display: block;
+}
+.lamp::before {
+  content: '';
+  position: absolute;
+  left: -190px;
+  top: -190px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247, 224, 138, 0.9) 0, rgba(247, 224, 138, 0.55) 45%, rgba(247, 224, 138, 0) 70%);
+}
+.lamp i {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #000;
+}
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+/* ---------- the black frame ---------- */
+.frame {
+  position: relative;
+  z-index: 3;
+  color: var(--bone);
+}
+.no-webgl .frame,
+.all-lit.no-webgl .frame {
+  background: var(--ink);
+}
+.about {
+  min-height: 100svh;
+  max-width: 1120px;
+  padding: 14vh 8vw 22vh;
+  display: grid;
+  align-content: center;
+  gap: 34px;
+}
+.about h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  font-size: clamp(34px, 6vw, 88px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--bone);
+}
+.about p {
+  margin: 0;
+}
+.lead {
+  max-width: 52ch;
+  font-size: 18px;
+  line-height: 1.6;
+}
+[data-lit] {
+  --lit: 0;
+}
+.all-lit [data-lit] {
+  --lit: 1 !important;
+}
+.lead,
+.points p {
+  color: rgb(236 230 214 / calc(0.6 + 0.4 * var(--lit)));
+}
+mark {
+  /* the yellow fades in under the word, and the type goes dark once it is mostly there */
+  color: color-mix(in srgb, var(--ink) calc(clamp(0, (var(--lit) - 0.45) * 2.2, 1) * 100%), var(--bone));
+  background: linear-gradient(color-mix(in srgb, var(--yellow) calc(var(--lit) * 100%), transparent), color-mix(in srgb, var(--yellow) calc(var(--lit) * 100%), transparent)) 0 78% / 100% 82% no-repeat;
+  padding: 0 0.15em;
+  margin: 0 -0.15em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.points li {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 8px 36px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid rgb(236 230 214 / 0.5);
+}
+.points li:last-child {
+  border-bottom: 1px solid rgb(236 230 214 / 0.5);
+}
+.points h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 115;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.points p {
+  font-size: 15px;
+  max-width: 46ch;
+}
+
+/* ---------- the bottom strip ---------- */
+.strip {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  background: var(--ink);
+  border-top: 2px solid var(--bone);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.strip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.strip li {
+  flex: 1 1 0;
+  display: flex;
+}
+.strip a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 4px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  font-size: clamp(12px, 1.9vw, 24px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  /* outlined type that fills yellow near the light */
+  color: rgb(242 196 10 / var(--lit));
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--yellow) calc(var(--lit) * 100%), var(--bone));
+  paint-order: stroke fill;
+}
+.all-lit .strip a {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--bone);
+}
+.strip a:hover {
+  color: var(--yellow);
+}
+
+/* ---------- phone: composed for 390 ---------- */
+@media (max-width: 760px) {
+  body {
+    font-size: 14px;
+  }
+  .cap {
+    font-size: 12px;
+  }
+  .cap--edition {
+    left: 16px;
+    right: 16px;
+    top: 16px;
+    max-width: none;
+  }
+  .cap--when {
+    left: 16px;
+    right: auto;
+    top: auto;
+    bottom: 292px;
+    text-align: left;
+  }
+  .cap--pitch {
+    left: 16px;
+    right: 16px;
+    bottom: 196px;
+    max-width: none;
+    font-size: 13px;
+  }
+  .actions {
+    left: 16px;
+    right: 16px;
+    bottom: 140px;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .go {
+    font-size: 20px;
+  }
+  .side {
+    font-size: 12px;
+  }
+  .note {
+    left: calc(var(--mx) * 1%);
+    top: calc(var(--my) * 1%);
+    font-size: 11px;
+  }
+  .note--long {
+    width: 21ch;
+  }
+  .about {
+    padding: 11vh 22px 26vh;
+    gap: 26px;
+  }
+  .lead {
+    font-size: 16px;
+  }
+  .points li {
+    grid-template-columns: 1fr;
+    padding: 18px 0;
+  }
+  .points h3 {
+    font-size: 24px;
+  }
+  .strip ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .strip li {
+    min-width: 0;
+  }
+  .strip a {
+    min-height: 46px;
+    font-size: 15px;
+    font-variation-settings: 'wdth' 100;
+    border-top: 1px solid rgb(236 230 214 / 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .go {
+    transition: none;
+  }
+  .lamp {
+    display: none !important;
+  }
+}
