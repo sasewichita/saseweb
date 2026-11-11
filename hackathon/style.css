@@ -100,12 +100,20 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
 /* The lantern links float to the right of the moon. Each one bobs on its own beat and lifts on hover. */
-.hero-lanterns { align-self: center; display: flex; gap: clamp(14px, 2vw, 30px); padding-bottom: 6svh; }
-.hero-lanterns a { position: relative; width: clamp(84px, 7.6vw, 112px); text-decoration: none; color: var(--ink); animation: bob 6s ease-in-out infinite; transition: translate .3s var(--ease), filter .3s var(--ease); }
-.hero-lanterns a:nth-child(1) { margin-top: 9svh; animation-delay: -2s; }
-.hero-lanterns a:nth-child(2) { margin-top: -5svh; animation-delay: -4s; }
-.hero-lanterns a:nth-child(3) { margin-top: 4svh; }
-.hero-lanterns a:nth-child(4) { margin-top: -3svh; animation-delay: -1s; }
+.hero-lanterns {
+  --lantern-width: clamp(76px, 7vw, 100px);
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, var(--lantern-width));
+  grid-template-rows: repeat(2, calc(var(--lantern-width) * .8)) auto;
+  column-gap: clamp(8px, 1vw, 16px);
+  padding-bottom: 4svh;
+}
+.hero-lanterns a { position: relative; width: 100%; text-decoration: none; color: var(--ink); animation: bob 6s ease-in-out infinite; transition: translate .3s var(--ease), filter .3s var(--ease); }
+.hero-lanterns a[href="#about"] { grid-area: 2 / 1; animation-delay: -2s; }
+.hero-lanterns a[href="#details"] { grid-area: 1 / 2; animation-delay: -4s; }
+.hero-lanterns a[href="#faq"] { grid-area: 2 / 3; }
+.hero-lanterns a[href="/countdown"] { grid-area: 3 / 2; left: 12%; animation-delay: -1s; }
 .hero-lanterns svg { display: block; width: 100%; aspect-ratio: 60 / 84; }
 .hero-lanterns span { position: absolute; inset: 31% 0 auto; text-align: center; font-family: var(--font-mono); font-weight: 500; font-size: clamp(.6rem, .3rem + .46vw, .9rem); text-transform: uppercase; }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-12px) rotate(2.5deg); } }
@@ -132,9 +140,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
   .eyebrow { margin-bottom: 14px; }
   .h1-main { font-size: min(18vw, 120px); white-space: normal; }
   .hero-copy { max-width: 44ch; margin-top: 22px; }
-  .hero-lanterns { justify-content: center; gap: 4px; padding: 24px 0 0; }
-  .hero-lanterns a { width: clamp(58px, 20vw, 84px); }
-  .hero-lanterns a:nth-child(n) { margin-top: 0; }
+  .hero-lanterns { --lantern-width: clamp(62px, 18vw, 84px); justify-content: center; padding: 24px 0 0; }
   .summit { position: relative; left: auto; top: auto; width: min(92vw, 440px); height: auto; margin: 28px auto 0; }
   .summit svg { position: relative; left: auto; top: auto; display: block; width: 100%; height: auto; }
   .clouds { height: 150px; margin: -100px 0 -50px; }
