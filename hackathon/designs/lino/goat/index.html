@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Hack the Wu · goat heroes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../kit/lino.css" />
+    <style>
+      :root { --block: #e0301e; }
+      html { background: var(--paper); color: var(--ink); }
+      body { margin: 0; padding: 28px 20px 60px; font-family: var(--mono); min-height: 100svh; }
+      h1 { font-family: var(--display); font-weight: 900; font-size: clamp(36px, 9vw, 72px); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 28px; line-height: 1; }
+      .opts { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 900px; }
+      .opt { display: block; padding: 28px 24px 30px; text-decoration: none; color: var(--paper); background: var(--salt), var(--ink); clip-path: var(--cut-b); transform: rotate(-0.5deg); min-height: 150px; }
+      .opt + .opt { background: var(--block); color: var(--ink); clip-path: var(--cut-c); transform: rotate(0.6deg); }
+      .opt b { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(30px, 7vw, 46px); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+      .opt span { font-size: 14px; line-height: 1.5; }
+      .opt:focus-visible { clip-path: none; outline: 3px solid var(--ink); outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <h1>Hack the Wu · goat heroes</h1>
+    <div class="opts">
+      <a class="opt" href="./whole-goat/"><b>Whole goat first</b><span>A carved goat head opens the page, then the scroll pushes into its eye.</span></a>
+      <a class="opt" href="./horned-mask/"><b>Horned mask</b><span>A horned mask frames the eye from the first screen.</span></a>
+    </div>
+  </body>
+</html>
