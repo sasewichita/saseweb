@@ -1,0 +1,173 @@
+/* A · New Year Print: register section. The last big print: a gold seal that lifts and slams. */
+#register {
+  --s: clamp(150px, 24vw, 300px);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+  align-items: start;
+  padding-bottom: clamp(96px, 16vh, 170px);
+  overflow: hidden;
+}
+#register h2 {
+  grid-column: 1 / 9;
+  grid-row: 1;
+  transform: rotate(-0.8deg);
+}
+#register .lede {
+  grid-column: 1 / 6;
+  grid-row: 2;
+  margin: 28px 0 0 4%;
+  transform: rotate(0.9deg);
+}
+#register .lines {
+  grid-column: 8 / 13;
+  grid-row: 2;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 28px 0 0;
+}
+#register .lines .bar {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 18px;
+  font-size: 12px;
+  text-decoration: none;
+}
+#register .lines .bar:nth-child(1) {
+  transform: rotate(-1.5deg);
+  margin-left: 6%;
+}
+#register .lines .bar:nth-child(2) {
+  transform: rotate(1.2deg);
+  margin-left: 0;
+}
+#register .lines .bar:hover {
+  transform: translate(2px, 2px) rotate(0.3deg);
+  background: var(--ink);
+  color: var(--gold);
+}
+
+/* the press: seal and its hidden print share one grid cell, the label overlaps them */
+#register .press {
+  grid-column: 2 / 13;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: var(--s) auto;
+  align-items: center;
+  justify-self: start;
+  margin-top: clamp(40px, 7vh, 80px);
+  min-height: 48px;
+  text-decoration: none;
+  color: var(--ink);
+}
+#register .press:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 12px;
+}
+#register .press-seal,
+#register .press-print {
+  grid-area: 1 / 1;
+  width: var(--s);
+  height: var(--s);
+  font-size: calc(var(--s) * 0.68);
+}
+#register .press-seal {
+  --seal-bg: var(--gold);
+  --seal-fg: var(--ink);
+  z-index: 1;
+  transform: rotate(-3deg);
+}
+/* the print below: same character, flat ink on red, a little off register */
+#register .press-print {
+  display: grid;
+  place-items: center;
+  border: 7px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--seal);
+  font-weight: 900;
+  line-height: 1;
+  clip-path: var(--cut-sq);
+  transform: translate(4px, 3px) rotate(-1.2deg);
+  user-select: none;
+}
+#register .press-label {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
+  margin-left: calc(var(--s) * -0.12);
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(76px, 15vw, 220px);
+  line-height: 0.85;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transform: rotate(1.3deg);
+}
+#register .press:hover .press-seal,
+#register .press:focus-visible .press-seal {
+  transform: translate(-8px, -9px) rotate(-4deg);
+}
+#register .press.is-struck .press-seal {
+  animation: seal-slam 0.2s steps(1) forwards;
+}
+#register .press.is-struck .press-print {
+  animation: print-struck 0.2s steps(1) forwards;
+}
+@keyframes seal-slam {
+  0% {
+    transform: translate(-14px, -16px) rotate(-5deg);
+  }
+  45% {
+    transform: translate(5px, 6px) rotate(-2deg);
+  }
+  100% {
+    transform: translate(2px, 3px) rotate(-3deg);
+  }
+}
+@keyframes print-struck {
+  0% {
+    transform: translate(4px, 3px) rotate(-1.2deg);
+  }
+  45% {
+    transform: translate(2px, 2px) rotate(-0.4deg);
+  }
+  100% {
+    transform: translate(3px, 3px) rotate(-0.8deg);
+  }
+}
+
+@media (max-width: 760px) {
+  #register {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 120px;
+  }
+  #register .lede {
+    margin: 22px 0 0 10px;
+  }
+  #register .press {
+    margin-top: 44px;
+    margin-left: 4px;
+    grid-template-columns: var(--s);
+    grid-template-rows: var(--s) auto;
+  }
+  #register .press-label {
+    grid-column: 1;
+    grid-row: 2;
+    margin: -36px 0 0 calc(var(--s) * 0.3);
+    font-size: clamp(60px, 18vw, 92px);
+  }
+  #register .lines {
+    margin: 52px 0 0;
+    gap: 12px;
+  }
+  #register .lines .bar {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Hack the Wu · Year of the Goat</title>
+    <meta
+      name="description"
+      content="Hack the Wu is SASE at Wichita State's second annual hackathon: beginner friendly and open to every undergrad and grad student, in every major."
+    />
+    <meta name="theme-color" content="#e0301e" />
+    <link rel="icon" href="../../../assets/favicon-32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- one glyph only, for the seal -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&text=%E7%BE%8A&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../kit/lino.css" />
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="s-about.css" />
+    <link rel="stylesheet" href="s-weekend.css" />
+    <link rel="stylesheet" href="s-lastyear.css" />
+    <link rel="stylesheet" href="s-details.css" />
+    <link rel="stylesheet" href="s-sponsors.css" />
+    <link rel="stylesheet" href="s-faq.css" />
+    <link rel="stylesheet" href="s-register.css" />
+  </head>
+  <body>
+    <a class="skip" href="#about">Skip to content</a>
+
+    <!-- the one fixed canvas: the eye print. Decoration only. -->
+    <canvas class="eye" id="eye" aria-hidden="true"></canvas>
+
+    <!-- ============ HERO (shell) ============ -->
+    <header class="hero" id="top" data-cursor="bar">
+      <div class="slot">
+        <h1>Hack the Wu <small>Year of the Goat</small></h1>
+      </div>
+      <p class="caption caption--edition"><b>SASE at Wichita State</b><br />2nd annual hackathon</p>
+      <p class="caption caption--when"><b>March 26–28, 2027</b><br />Wichita State University</p>
+      <p class="caption caption--pitch">
+        A beginner-friendly hackathon at Wichita State, open to every undergrad and grad student in every major.
+      </p>
+      <p class="hero-actions">
+        <a class="btn btn--block" href="register.html">Register</a>
+        <a class="btn btn--ink" href="https://discord.gg/VwQhFkzWNH">Get updates on Discord</a>
+      </p>
+      <span class="seal chop" lang="zh-Hant" aria-hidden="true">羊</span>
+    </header>
+
+    <main class="field">
+      <!-- ============ ABOUT (shell) ============ -->
+      <section class="sec" id="about" data-cursor="strike" aria-labelledby="about-h">
+        <h2 id="about-h">What Hack the Wu is</h2>
+        <p class="lede">
+          Teams spend a weekend building something new, from an app to a hardware project, then show it off at the
+          end. This is our second year running it.
+        </p>
+        <ol class="points">
+          <li>
+            <span class="num" aria-hidden="true">1</span>
+            <div>
+              <h3>Beginner friendly</h3>
+              <p>Never been to a hackathon or written much code? You're exactly who we built this for.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">2</span>
+            <div>
+              <h3>Open to all students</h3>
+              <p>Undergrad and grad students are both welcome to join.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">3</span>
+            <div>
+              <h3>Every major welcome</h3>
+              <p>Design, business, science and engineering students all bring something a team needs.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ WEEKEND: three pulls (shell) ============ -->
+      <section class="sec" id="weekend" data-cursor="roller" aria-labelledby="weekend-h">
+        <h2 id="weekend-h">How the weekend goes</h2>
+        <!-- a clear window onto the fixed eye canvas -->
+        <div class="window" data-window="pulls" aria-hidden="true"></div>
+        <ol class="pulls">
+          <li data-pull="1">
+            <span class="pull-n" aria-hidden="true">01</span>
+            <h3>Team up</h3>
+            <p>Teams need designers, planners and presenters as much as programmers.</p>
+          </li>
+          <li data-pull="2">
+            <span class="pull-n" aria-hidden="true">02</span>
+            <h3>Build something new</h3>
+            <p>Spend the weekend on anything from an app to a hardware project.</p>
+          </li>
+          <li data-pull="3">
+            <span class="pull-n" aria-hidden="true">03</span>
+            <h3>Show it off</h3>
+            <p>At the end, every team shows what they built.</p>
+          </li>
+        </ol>
+        <span class="seal pull-seal" lang="zh-Hant" aria-hidden="true">羊</span>
+      </section>
+
+      <!-- ============ LAST YEAR: seven carved prints (photos builder) ============ -->
+      <section class="sec" id="last-year" data-cursor="lens" aria-labelledby="last-year-h">
+        <p class="kicker">From our first hackathon</p>
+        <h2 id="last-year-h">Big ideas. Shared experience.</h2>
+        <p class="lede">
+          A look back at our first Hack the Wu: meeting teammates, building together, and sharing what we made.
+        </p>
+        <ul class="prints">
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/hackathon-community.webp" alt="Hack the Wu participants gathered for a group photo" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>A community of builders</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/team-collaboration.webp" alt="Hackathon teammates collaborating around laptops at a table" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>Ideas become team projects</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/project-presentation.webp" alt="Two participants presenting their project to the audience" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>A moment to share your work</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/img-3467.webp" alt="Students attending a workshop in a classroom at Hack the Wu" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>Learning something new, together</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/img-6698.webp" alt="Hack the Wu participants presenting their project on stage" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>Sharing ideas on stage</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/img-6952.webp" alt="Participants receiving awards on stage at Hack the Wu" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>Celebrating a weekend of building</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="print">
+              <img src="../../../assets/photos/img-6329.webp" alt="Hack the Wu participants gathered outside Wichita State University" width="1200" height="800" loading="lazy" decoding="async" />
+              <figcaption>The people who make it happen</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============ DETAILS and countdown (details builder) ============ -->
+      <section class="sec" id="details" data-cursor="seal" aria-labelledby="details-h">
+        <h2 id="details-h">Event details</h2>
+        <p class="lede">We'll post the schedule, prizes and sign-up here as they're confirmed.</p>
+        <dl class="facts">
+          <div>
+            <dt>When</dt>
+            <dd>March 26–28</dd>
+          </div>
+          <div>
+            <dt>Where</dt>
+            <dd>Wichita State University, room to be announced</dd>
+          </div>
+          <div>
+            <dt>Who</dt>
+            <dd>All undergrad and grad students, any major</dd>
+          </div>
+          <div>
+            <dt>Theme</dt>
+            <dd>Year of the Goat</dd>
+          </div>
+        </dl>
+        <!-- March 2027 as a carved month block. Weeks run Monday to Sunday so the three days sit together. -->
+        <table class="month">
+          <caption>
+            March 2027
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" abbr="Monday">M</th>
+              <th scope="col" abbr="Tuesday">T</th>
+              <th scope="col" abbr="Wednesday">W</th>
+              <th scope="col" abbr="Thursday">T</th>
+              <th scope="col" abbr="Friday">F</th>
+              <th scope="col" abbr="Saturday">S</th>
+              <th scope="col" abbr="Sunday">S</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+            <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+            <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+            <tr><td>22</td><td>23</td><td>24</td><td>25</td><td class="struck">26</td><td class="struck">27</td><td class="struck">28</td></tr>
+            <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <div class="count">
+          <p class="count-when"><time datetime="2027-03-26T17:00:00-05:00">March 26, 2027 at 5:00 PM CDT</time></p>
+          <dl class="clock" data-countdown role="timer" aria-label="Time remaining">
+            <div><dt>Days</dt><dd data-unit="days">00</dd></div>
+            <div><dt>Hours</dt><dd data-unit="hours">00</dd></div>
+            <div><dt>Minutes</dt><dd data-unit="minutes">00</dd></div>
+            <div><dt>Seconds</dt><dd data-unit="seconds">00</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ============ SPONSORS: collectors' seals (photos builder) ============ -->
+      <section class="sec" id="sponsors" data-cursor="bar" aria-labelledby="sponsors-h">
+        <p class="kicker">The community behind the build</p>
+        <h2 id="sponsors-h">Last Year's Sponsors</h2>
+        <p class="lede">
+          Thank you to the organizations that supported our first Hack the Wu and helped bring a weekend of ideas to
+          life.
+        </p>
+        <ul class="seals" aria-label="Last year's sponsors">
+          <li><img src="../../../assets/sponsors/ennovar.png" alt="Ennovar at Wichita State University" width="1008" height="792" loading="lazy" decoding="async" /></li>
+          <li><img src="../../../assets/sponsors/atlas.png" alt="ATLAS, Advanced Technologies Lab for Aerospace Systems" width="479" height="521" loading="lazy" decoding="async" /></li>
+          <li><img src="../../../assets/sponsors/summit-risk-solutions.png" alt="Summit Risk Solutions" width="500" height="500" loading="lazy" decoding="async" /></li>
+          <li><img src="../../../assets/sponsors/wsu-engineering.png" alt="Wichita State University College of Engineering" width="932" height="267" loading="lazy" decoding="async" /></li>
+          <li><img src="../../../assets/sponsors/mochinut.png" alt="Mochinut" width="527" height="473" loading="lazy" decoding="async" /></li>
+          <li><img src="../../../assets/sponsors/humlicek-dental.png" alt="Humlicek Dental" width="741" height="337" loading="lazy" decoding="async" /></li>
+        </ul>
+      </section>
+
+      <!-- ============ FAQ: four firecrackers on a fuse (details builder) ============ -->
+      <!-- Answers are open in the HTML so the page reads with scripts off. s-faq.js closes them on start. -->
+      <section class="sec" id="faq" data-cursor="spark" aria-labelledby="faq-h">
+        <h2 id="faq-h">Questions</h2>
+        <div class="crackers">
+          <div class="cracker">
+            <h3><button type="button" id="faq-q1" aria-expanded="true" aria-controls="faq-a1">Do I need to know how to code?</button></h3>
+            <div class="answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <p>No. Hack the Wu is beginner friendly, and teams need designers, planners and presenters as much as programmers.</p>
+            </div>
+          </div>
+          <div class="cracker">
+            <h3><button type="button" id="faq-q2" aria-expanded="true" aria-controls="faq-a2">Who can attend?</button></h3>
+            <div class="answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <p>Any undergrad or grad student, from any major.</p>
+            </div>
+          </div>
+          <div class="cracker">
+            <h3><button type="button" id="faq-q3" aria-expanded="true" aria-controls="faq-a3">When is it?</button></h3>
+            <div class="answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <p>March 26–28 at Wichita State University. Join our Discord for the full schedule and venue announcements.</p>
+            </div>
+          </div>
+          <div class="cracker">
+            <h3><button type="button" id="faq-q4" aria-expanded="true" aria-controls="faq-a4">Who runs it?</button></h3>
+            <div class="answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <p>The Society of Asian Scientists and Engineers (SASE) chapter at Wichita State.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ REGISTER: the seal press (details builder) ============ -->
+      <section class="sec" id="register" data-cursor="seal" aria-labelledby="register-h">
+        <h2 id="register-h">Hear first when sign-ups open</h2>
+        <p class="lede">Join the SASE Discord for announcements, or email us with questions.</p>
+        <a class="press" href="register.html">
+          <span class="seal press-seal" lang="zh-Hant" aria-hidden="true">羊</span>
+          <span class="press-label">Register</span>
+        </a>
+        <p class="lines">
+          <a class="bar" href="https://discord.gg/VwQhFkzWNH">Get updates on Discord</a>
+          <a class="bar" href="mailto:wichita@saseconnect.org">wichita@saseconnect.org</a>
+        </p>
+      </section>
+
+      <!-- ============ FOOTER: the eye shut (shell) ============ -->
+      <footer class="foot" data-cursor="bar">
+        <!-- a clear window onto the fixed eye canvas, where the eye is shut -->
+        <div class="window" data-window="shut" aria-hidden="true"></div>
+        <p class="foot-host">Hosted by <a href="https://sasewichita.org">SASE at Wichita State</a></p>
+        <p class="foot-mail"><a href="mailto:wichita@saseconnect.org">wichita@saseconnect.org</a></p>
+        <p class="foot-note">Early preview. Details will change.</p>
+      </footer>
+    </main>
+
+    <!-- ============ NAVIGATION: the fuse (shell) ============ -->
+    <nav class="fuse" aria-label="Sections">
+      <ol>
+        <li><a href="#about">About</a></li>
+        <li><a href="#weekend">Weekend</a></li>
+        <li><a href="#last-year">Last year</a></li>
+        <li><a href="#details">Details</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#register">Register</a></li>
+      </ol>
+    </nav>
+
+    <script type="module" src="site.js"></script>
+    <script type="module" src="s-about.js"></script>
+    <script type="module" src="s-weekend.js"></script>
+    <script type="module" src="s-lastyear.js"></script>
+    <script type="module" src="s-details.js"></script>
+    <script type="module" src="s-sponsors.js"></script>
+    <script type="module" src="s-faq.js"></script>
+    <script type="module" src="s-register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lino kit: eye states</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #121110; }
+      canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+    </style>
+  </head>
+  <body>
+    <!-- A bench for the eye module. Set any state from the URL, for example:
+         demo.html?pal=newyear&flood=0.5   demo.html?lid=1   demo.html?passY=1&passK=0.4
+         demo.html?pal=original&lineGain=0.45&sclera=0.7   demo.html?look=200,200 -->
+    <canvas id="eye" aria-hidden="true"></canvas>
+    <script type="module">
+      import { createEye, PALETTES } from './eye.js';
+      const q = new URLSearchParams(location.search);
+      const num = (k, d) => (q.has(k) ? Number(q.get(k)) : d);
+      const eye = createEye(document.getElementById('eye'), { dpr: Math.min(devicePixelRatio || 1, 2), palette: PALETTES[q.get('pal') || 'newyear'] });
+      Object.assign(eye.state, {
+        flood: num('flood', 0), lid: num('lid', 0), passY: num('passY', 1), passK: num('passK', 1),
+        open: num('open', 0), lineGain: num('lineGain', 1), scleraShade: num('sclera', 0),
+        scale: num('scale', 1), center: [num('cx', 0), num('cy', 0.02)], autoBlink: false, still: !q.has('look'),
+      });
+      const draw = () => { eye.resize(); eye.render(0, 0.016); };
+      if (q.has('look')) {
+        const [x, y] = q.get('look').split(',').map(Number);
+        eye.lookAt(x, y);
+        for (let i = 0; i < 90; i++) eye.render(0.2, 0.016);
+      } else draw();
+      addEventListener('resize', draw);
+      window.__eye = eye;
+    </script>
+  </body>
+</html>

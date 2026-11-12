@@ -1,0 +1,193 @@
+/* Weekend: three pulls. Bare paper, then red rolls on, then the key, then the seal. */
+#weekend.wk-on {
+  background: none;
+  padding: 0;
+}
+#weekend.wk-track {
+  height: 360svh;
+}
+#weekend .wk-stage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 0;
+}
+#weekend.wk-track .wk-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+#weekend .wk-paper,
+#weekend .wk-roll {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+#weekend .wk-paper {
+  background: var(--paper);
+}
+#weekend .wk-roll .red {
+  position: absolute;
+  inset: 0;
+}
+#weekend .wk-stage > h2 {
+  position: absolute;
+  left: clamp(18px, 4vw, 56px);
+  top: clamp(16px, 4vh, 40px);
+  margin: 0;
+  z-index: 2;
+  max-width: 60vw;
+}
+/* the window onto the eye: desktop left, about 58 percent */
+#weekend .wk-stage .window {
+  position: absolute;
+  left: clamp(18px, 3vw, 44px);
+  top: 34svh;
+  width: 56vw;
+  height: 56svh;
+  z-index: 1;
+}
+#weekend .pulls {
+  position: absolute;
+  z-index: 3;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  left: calc(3vw + 56vw + 28px);
+  right: 150px;
+  top: 34svh;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 3.5vh, 30px);
+}
+#weekend .pulls li {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 16px 14px 74px;
+  clip-path: var(--cut-b);
+  transform: rotate(-0.8deg);
+  min-height: 72px;
+}
+#weekend .pulls li:nth-child(2) {
+  transform: rotate(0.9deg);
+  margin-left: 22px;
+  clip-path: var(--cut-c);
+}
+#weekend .pulls li:nth-child(3) {
+  transform: rotate(-0.3deg);
+  margin-left: 6px;
+  clip-path: var(--cut-a);
+}
+#weekend .pulls li.is-on {
+  background: var(--paper);
+  color: var(--ink);
+}
+#weekend .pulls h3,
+#weekend .pulls p {
+  margin: 0;
+  color: inherit;
+}
+#weekend .pulls p {
+  margin-top: 4px;
+}
+#weekend .pull-n {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font: 900 44px / 1 var(--display);
+  color: var(--paper);
+  padding: 4px 6px 2px;
+}
+#weekend .pulls li.is-on .pull-n {
+  background: var(--gold);
+  color: var(--ink);
+  clip-path: polygon(0 6%, 40% 0, 100% 8%, 96% 100%, 50% 94%, 4% 100%);
+  animation: wkstrike 0.2s steps(3) 1;
+}
+@keyframes wkstrike {
+  0% {
+    transform: translate(-6px, -5px) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+/* the gold pull seal, stamped in the lower corner of the window */
+#weekend .pull-seal {
+  position: absolute;
+  z-index: 4;
+  left: calc(3vw + 56vw - 74px);
+  top: calc(34svh + 56svh - 74px);
+  font-size: 44px;
+  visibility: hidden;
+}
+#weekend .pull-seal.is-stamped {
+  visibility: visible;
+  animation: wkseal 0.2s steps(3) 1;
+}
+@keyframes wkseal {
+  0% {
+    transform: rotate(-3deg) translate(8px, -8px) scale(1.5);
+  }
+  100% {
+    transform: rotate(-3deg);
+  }
+}
+@media (max-width: 900px) {
+  #weekend .wk-stage {
+    padding-bottom: 72px;
+  }
+  #weekend .wk-stage > h2 {
+    max-width: calc(100vw - 36px);
+  }
+}
+@media (max-width: 760px) {
+  #weekend .wk-stage .window {
+    left: 14px;
+    top: 106px;
+    width: calc(100vw - 28px);
+    height: 22svh;
+  }
+  #weekend .pulls {
+    left: 14px;
+    right: 14px;
+    top: calc(106px + 22svh + 14px);
+    gap: 8px;
+  }
+  #weekend .pulls li {
+    min-height: 0;
+    padding: 8px 12px 10px 58px;
+  }
+  #weekend .pulls li:nth-child(n) {
+    margin-left: 0;
+  }
+  #weekend .pull-n {
+    font-size: 34px;
+    left: 8px;
+    top: 6px;
+  }
+  #weekend .pull-seal {
+    left: calc(100vw - 14px - 62px);
+    top: calc(106px + 22svh - 62px);
+    font-size: 36px;
+  }
+}
+/* scripts off or no WebGL: a plain list */
+html.no-webgl #weekend .window {
+  display: none;
+}
+html.no-webgl #weekend .pulls {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  margin: 100px 18px 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  #weekend .pulls li.is-on .pull-n,
+  #weekend .pull-seal.is-stamped {
+    animation: none;
+  }
+}
