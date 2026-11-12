@@ -118,8 +118,8 @@
 #weekend .pull-seal {
   position: absolute;
   z-index: 4;
-  left: calc(3vw + 56vw - 74px);
-  top: calc(34svh + 56svh - 74px);
+  left: calc(var(--wx, 0px) + var(--ww, 0px) - 74px);
+  top: calc(var(--wy, 0px) + var(--wh, 0px) - 74px);
   font-size: 44px;
   visibility: hidden;
 }
@@ -136,24 +136,51 @@
   }
 }
 @media (max-width: 900px) {
-  #weekend .wk-stage {
-    padding-bottom: 72px;
-  }
   #weekend .wk-stage > h2 {
     max-width: calc(100vw - 36px);
   }
 }
-@media (max-width: 760px) {
+@media (max-width: 900px) and (min-width: 761px) {
   #weekend .wk-stage .window {
-    left: 14px;
-    top: 106px;
-    width: calc(100vw - 28px);
-    height: 22svh;
+    height: min(56svh, calc(100svh - 34svh - 84px));
   }
   #weekend .pulls {
-    left: 14px;
-    right: 14px;
-    top: calc(106px + 22svh + 14px);
+    top: 34svh;
+    bottom: 80px;
+    right: 24px;
+    overflow: hidden;
+  }
+}
+@media (max-width: 760px) {
+  #weekend .wk-stage {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(16px, 4vh, 40px) 14px 78px;
+    gap: 12px;
+  }
+  #weekend .wk-stage > h2 {
+    position: relative;
+    left: auto;
+    top: auto;
+    max-width: none;
+    flex: none;
+  }
+  #weekend .wk-stage .window {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    flex: 1 1 0;
+    min-height: 16svh;
+  }
+  #weekend .pulls {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    flex: none;
     gap: 8px;
   }
   #weekend .pulls li {
@@ -169,8 +196,6 @@
     top: 6px;
   }
   #weekend .pull-seal {
-    left: calc(100vw - 14px - 62px);
-    top: calc(106px + 22svh - 62px);
     font-size: 36px;
   }
 }

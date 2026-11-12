@@ -51,7 +51,7 @@
   #last-year .prints li:nth-child(1) { grid-column: 1 / 8; grid-row: 1; z-index: 1; }
   #last-year .prints li:nth-child(2) { grid-column: 8 / 12; grid-row: 1; margin: 9% 0 0 -2%; z-index: 3; }
   #last-year .prints li:nth-child(3) { grid-column: 2 / 6; grid-row: 2; margin: -4% 0 0 0; z-index: 4; }
-  #last-year .prints li:nth-child(4) { grid-column: 5 / 10; grid-row: 2; margin: 5% 0 0 4%; z-index: 2; }
+  #last-year .prints li:nth-child(4) { grid-column: 5 / 10; grid-row: 2; margin: 5% 0 0 4%; z-index: 5; }
   #last-year .prints li:nth-child(5) { grid-column: 10 / 13; grid-row: 2; margin: 14% 0 0 0; z-index: 3; }
   #last-year .prints li:nth-child(6) { grid-column: 3 / 7; grid-row: 3; margin: 2% 0 0 0; z-index: 3; }
   #last-year .prints li:nth-child(7) { grid-column: 7 / 12; grid-row: 3; margin: -2% 0 0 3%; z-index: 4; }
@@ -87,7 +87,6 @@
   position: relative;
   aspect-ratio: var(--ar, 3 / 2);
   clip-path: var(--edge, var(--cut-a));
-  background: var(--ink);
 }
 #last-year .stack {
   position: absolute;
@@ -125,7 +124,7 @@
   inset: -20%;
   mix-blend-mode: normal;
   opacity: 0.5;
-  background: repeating-linear-gradient(var(--a, 20deg), #000 0, #fff 3.25px, #000 6.5px);
+  background: repeating-linear-gradient(var(--a, 20deg), #000 0, #fff 2.4px, #000 4.8px);
 }
 /* bone turns the white to paper, ink lifts the black */
 #last-year .tb {
@@ -227,20 +226,20 @@
 }
 
 /* ---------- entry: the print is pulled across with a hard wipe ---------- */
-#last-year.ly-on .prints li:not(.is-in) .stack,
-#last-year.ly-on .prints li:not(.is-in) figcaption {
+#last-year.ly-on .prints li.ly-wait .stack,
+#last-year.ly-on .prints li.ly-wait figcaption {
   visibility: hidden;
 }
 #last-year.ly-on .prints li.is-in .stack {
-  animation: ly-pull 0.56s steps(8, jump-end) both;
+  animation: ly-pull 0.3s steps(6, jump-end) both;
   animation-delay: var(--d, 0s);
 }
 #last-year.ly-on .prints li:nth-child(even).is-in .stack {
   animation-name: ly-pull-v;
 }
 #last-year.ly-on .prints li.is-in figcaption {
-  animation: ly-tag 0.24s steps(3, jump-end) both;
-  animation-delay: calc(var(--d, 0s) + 0.5s);
+  animation: ly-tag 0.2s steps(3, jump-end) both;
+  animation-delay: calc(var(--d, 0s) + 0.25s);
 }
 @keyframes ly-pull {
   from { clip-path: inset(0 100% 0 0); }
@@ -255,8 +254,8 @@
   to { transform: translate(0, 0) rotate(var(--tag, -1.4deg)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  #last-year.ly-on .prints li:not(.is-in) .stack,
-  #last-year.ly-on .prints li:not(.is-in) figcaption {
+  #last-year.ly-on .prints li.ly-wait .stack,
+  #last-year.ly-on .prints li.ly-wait figcaption {
     visibility: visible;
   }
   #last-year.ly-on .prints li.is-in .stack,

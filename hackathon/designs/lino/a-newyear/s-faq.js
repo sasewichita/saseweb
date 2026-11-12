@@ -23,16 +23,17 @@ function init() {
     svg.setAttribute('class', 'burst');
     svg.setAttribute('viewBox', '-100 -100 200 200');
     svg.setAttribute('aria-hidden', 'true');
-    const n = 18 + Math.floor(r() * 10);
+    const n = 15 + Math.floor(r() * 3);
+    const p = (ang, rad) => `${(Math.cos(ang) * rad).toFixed(1)},${(Math.sin(ang) * rad).toFixed(1)}`;
     for (let k = 0; k < n; k++) {
-      const a = (k / n) * Math.PI * 2 + (r() - 0.5) * 0.18;
-      const len = 40 + r() * 52;
-      const w = 0.06 + r() * 0.07;
-      const r0 = 12 + r() * 6;
-      const p = (ang, rad) => `${(Math.cos(ang) * rad).toFixed(1)},${(Math.sin(ang) * rad).toFixed(1)}`;
+      const a = (k / n) * Math.PI * 2 + (r() - 0.5) * 0.14;
+      const long = k % 3 !== 1;
+      const len = long ? 74 + r() * 26 : 40 + r() * 24;
+      const w = 0.11 + r() * 0.1;
+      const r0 = 6 + r() * 5;
       const poly = document.createElementNS(NS, 'polygon');
-      poly.setAttribute('points', `${p(a - w, r0)} ${p(a, len)} ${p(a + w, r0)}`);
-      poly.setAttribute('fill', k % 7 === 3 ? '#f0b90a' : '#121110');
+      poly.setAttribute('points', `${p(a - w, r0)} ${p(a - w * 0.3, len)} ${p(a + w * 0.5, len - 4)} ${p(a + w, r0)}`);
+      poly.setAttribute('fill', k % 3 === 1 || k % 7 === 3 ? '#f0b90a' : '#121110');
       svg.appendChild(poly);
     }
     return svg;
@@ -61,13 +62,17 @@ function init() {
       if (!burst) return;
       const cr = c.getBoundingClientRect();
       const br = btn.getBoundingClientRect();
-      burst.style.left = br.right - cr.left - 10 + 'px';
-      burst.style.top = br.top - cr.top + br.height / 2 + 'px';
+      const half = burst.getBoundingClientRect().width ? parseFloat(getComputedStyle(burst).width) / 2 : 70;
+      const narrow = innerWidth <= 900;
+      // desktop: beside the question's right end; phone: tucked at its top right corner
+      const cx = narrow ? Math.min(br.right - half * 0.35, innerWidth - half - 4) : br.right + half * 0.55;
+      burst.style.left = cx - cr.left + 'px';
+      burst.style.top = (narrow ? br.top - half * 0.1 : br.top + br.height / 2) - cr.top + 'px';
     };
     const showAnswer = () => {
       if (burst) {
         place();
-        if (!still) burst.classList.add('pop');
+        burst.classList.add(still ? 'rest' : 'pop');
       }
       ans.hidden = false;
     };

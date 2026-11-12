@@ -63,29 +63,34 @@ if (sec) {
 
   sec.classList.add('ly-on');
 
-  // pull the prints in one after another as they enter
+  // pull the prints in as they enter: carved is the default, the script only adds a short "uncut" wait
   const show = (li, d) => {
     li.style.setProperty('--d', `${d}s`);
+    li.classList.remove('ly-wait');
     li.classList.add('is-in');
   };
-  if (reducedMotion() || !('IntersectionObserver' in window)) {
-    items.forEach((li) => li.classList.add('is-in'));
-  } else {
+  if (!reducedMotion() && 'IntersectionObserver' in window) {
     let batch = 0;
     let timer = 0;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
-          show(e.target, batch * 0.28);
+          show(e.target, batch * 0.08);
           batch += 1;
           io.unobserve(e.target);
         });
         clearTimeout(timer);
-        timer = setTimeout(() => (batch = 0), 400);
+        timer = setTimeout(() => (batch = 0), 300);
       },
-      { threshold: 0.2 },
+      // fire as the print's top edge is still 12% below the fold: carved well before a quarter is in view
+      { threshold: 0, rootMargin: '0px 0px 12% 0px' },
     );
-    items.forEach((li) => io.observe(li));
+    items.forEach((li) => {
+      const r = li.getBoundingClientRect();
+      if (r.top < window.innerHeight * 1.12 && r.bottom > 0) return; // already near view: stay carved
+      li.classList.add('ly-wait');
+      io.observe(li);
+    });
   }
 }

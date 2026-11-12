@@ -478,9 +478,9 @@ html {
   clip-path: inset(50%);
   white-space: nowrap;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--paper);
   background: var(--salt), var(--ink);
