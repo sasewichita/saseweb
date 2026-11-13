@@ -12,7 +12,7 @@ function check() {
   const actor = sec.querySelector('.goat-actor');
   if (!actor) return;
   const r = actor.getBoundingClientRect();
-  if (!r.width) return;
+  if (!r.width || 'busy' in actor.dataset) return;
   const mid = r.left + r.width / 2;
   const flip = actor.classList.contains('flip');
   const behind = flip ? px > mid : px < mid;

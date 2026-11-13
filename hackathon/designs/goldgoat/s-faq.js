@@ -7,9 +7,11 @@ const exchanges = [...document.querySelectorAll('#faq .exchange')];
 exchanges.forEach((ex) => {
   const a = ex.querySelector('.bubble--a');
   if (still) { ex.classList.add('said', 'now'); return; }
+  // already above the pop line at load: full size at once, no pop, no talk
+  if (a.getBoundingClientRect().top < innerHeight * 0.92) { ex.classList.add('said', 'now'); return; }
   once(a, (past) => {
     ex.classList.add('said');
     if (past) { ex.classList.add('now'); return; }
     play(goat, ['talk', 'sit', 'talk', 'sit', 'talk', 'sit'], 160);
-  }, 0.55);
+  }, 0.92);
 });

@@ -14,8 +14,9 @@ function targetX(i) {
   const g = goat.getBoundingClientRect();
   const c = cards[i].getBoundingClientRect();
   const base = g.left - gx;
-  return Math.round(c.right - g.width * 0.62 - base - g.width / 2 + g.width / 2 - 0);
+  return Math.round(c.right - g.width * 0.62 - base);
 }
+function leaveEdge() { goat.classList.remove('on-edge'); }
 function park(i) {
   at = i;
   if (phone()) return;
@@ -40,30 +41,32 @@ function crumbs(card) {
 async function bite(i) {
   const card = cards[i];
   await play(goat, ['graze'], 0);
-  await wait(260);
+  await wait(110);
   card.classList.add('bite-1');
   crumbs(card);
-  await wait(260);
+  await wait(110);
   pose(goat, 'stand');
-  await wait(140);
+  await wait(90);
   await play(goat, ['graze'], 0);
-  await wait(260);
+  await wait(110);
   card.classList.add('bite-2');
   crumbs(card);
-  await wait(200);
+  await wait(110);
   pose(goat, 'stand');
+  await wait(80);
 }
 
 async function walkTo(x) {
-  const step = 24;
+  const step = 30;
   let k = 0;
   while (gx < x) {
     gx = Math.min(x, gx + step);
     goat.style.setProperty('--gx', gx + 'px');
     pose(goat, k++ % 2 ? 'walk-b' : 'walk-a');
-    await wait(110);
+    await wait(80);
   }
   pose(goat, 'stand');
+  await wait(80);
 }
 
 async function run() {
@@ -71,9 +74,10 @@ async function run() {
   busy = true;
   for (let i = 0; i < cards.length; i++) {
     if (i === 0) {
+      leaveEdge();
       park(0);
-      await play(goat, ['crouch', 'air', 'stand'], 130);
-      await wait(150);
+      await play(goat, ['crouch', 'air', 'stand'], 90);
+      await wait(80);
     } else {
       await walkTo(targetX(i));
       at = i;
@@ -84,6 +88,7 @@ async function run() {
 }
 
 function endState() {
+  leaveEdge();
   cards.forEach((c) => c.classList.add('bite-2'));
   park(cards.length - 1);
   pose(goat, 'stand');
@@ -93,10 +98,11 @@ if (goat && cards.length) {
   if (still) {
     endState();
   } else {
-    park(0);
-    addEventListener('resize', () => { if (!busy) park(at); });
+    // the hero hands the goat over standing on the page's top edge; it stays there until the cards show
+    goat.classList.add('on-edge');
+    addEventListener('resize', () => { if (!busy && !goat.classList.contains('on-edge')) park(at); });
     once(list, (past) => {
       if (past) endState(); else run();
-    }, 0.7);
+    }, 0.6);
   }
 }

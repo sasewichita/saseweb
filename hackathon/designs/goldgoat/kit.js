@@ -24,12 +24,15 @@ export async function play(actor, names, ms = 130) {
   const token = {};
   runs.set(actor, token);
   if (still) { pose(actor, names[names.length - 1]); return true; }
+  actor.dataset.busy = '';
   for (let i = 0; i < names.length; i++) {
     if (runs.get(actor) !== token) return false;
     pose(actor, names[i]);
     if (i < names.length - 1) await wait(ms);
   }
-  return runs.get(actor) === token;
+  const ok = runs.get(actor) === token;
+  if (ok) delete actor.dataset.busy;
+  return ok;
 }
 
 // Add a class that runs a CSS steps() animation, and drop it when the animation ends.
@@ -92,7 +95,7 @@ function track(H) {
     if (el.getBoundingClientRect().top <= 0.6 * H) cur = el;
   }
   const last = stops[stops.length - 1];
-  if (last && scrollY > 0 && Math.ceil(scrollY + H) >= root.scrollHeight - 8) cur = last;
+  if (last && scrollY > 0 && scrollY + H >= root.scrollHeight - 2) cur = last;
   if (cur === hereEl) return;
   if (hereEl) hereEl.removeAttribute('data-here');
   hereEl = cur;

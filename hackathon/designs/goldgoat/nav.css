@@ -3,6 +3,7 @@
 .trail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .trail li { margin: 0; }
 .trail a { position: relative; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px; color: var(--paper); text-decoration: none; font-family: var(--mono, "Martian Mono", monospace); font-size: 12px; line-height: 1; isolation: isolate; }
+.trail a::after { content: ""; position: absolute; inset: -2px 0; } /* hit box 44px+ tall, drawn size unchanged */
 .trail a::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--block); clip-path: var(--cut-a); }
 .trail .prints { flex: none; width: 44px; height: 30px; }
 .trail .prints use { fill: none; stroke: var(--gold); stroke-width: 1.4; }
@@ -12,6 +13,9 @@
 .trail li.is-here a { font-weight: 700; }
 .trail a:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
 .trail a:focus-visible::before { clip-path: none; }
+
+/* the footer goat rests where the column stands, so the column steps aside (hard switch) */
+html.at-foot .trail { visibility: hidden; }
 
 /* two frames: left hoof, then right hoof */
 @keyframes hoof-r { 0%, 49.9% { fill: none; stroke: var(--gold); } 50%, 100% { fill: var(--gold); stroke: var(--gold); } }

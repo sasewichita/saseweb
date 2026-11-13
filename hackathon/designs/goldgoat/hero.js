@@ -147,7 +147,13 @@ function update() {
   root.classList.toggle('hero-done', q >= 1);
 }
 
-addEventListener('resize', () => { geom(); update(); });
+// The module can run before the stylesheet has laid the hero out (WebKit does), so the geometry it
+// first measured is stale. Re-measure whenever the hero's size changes and when load/fonts settle.
+const remeasure = () => { geom(); update(); };
+addEventListener('resize', remeasure);
+addEventListener('load', remeasure);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+if (window.ResizeObserver) new ResizeObserver(remeasure).observe(hero);
 geom();
 onScroll(update);
 update();
