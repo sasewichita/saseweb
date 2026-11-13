@@ -140,28 +140,30 @@ main { position: relative; z-index: 2; background: var(--block); }
 .rig .lid { fill: var(--gold); }
 .rig .rim { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
 
-/* the puppet's joints. Angles: positive swings a leg back, a head down. */
+/* the puppet's joints. Angles: positive swings a leg back, a head down.
+   Swapped parts (neck, mouth) switch with display, never visibility: an explicit
+   visibility: visible on a part would show through a hidden actor. */
 .r-all { transform: translate(var(--gx, 0px), var(--gy, 0px)) translate(230px, 700px) rotate(var(--gr, 0deg)) translate(-230px, -700px); }
 .r-fh { transform: translate(222px, 486px) rotate(var(--fh, 0deg)) translate(-222px, -486px); }
 .r-fh2 { transform: translate(296px, 500px) rotate(var(--fh2, 0deg)) translate(-296px, -500px); }
 .r-ff { transform: translate(628px, 508px) rotate(var(--ff, 0deg)) translate(-628px, -508px); }
 .r-ff2 { transform: translate(555px, 516px) rotate(var(--ff2, 0deg)) translate(-555px, -516px); }
 .r-tail { transform: translate(170px, 390px) rotate(var(--tail, 0deg)) translate(-170px, -390px); }
-.r-neck { visibility: var(--nk, visible); transform: translate(592px, 336px) rotate(var(--nrot, 0deg)) translate(-592px, -336px); }
-.r-neckd { visibility: var(--nd, hidden); }
+.r-neck { display: var(--nk, inline); transform: translate(592px, 336px) rotate(var(--nrot, 0deg)) translate(-592px, -336px); }
+.r-neckd { display: var(--nd, none); }
 .r-head { transform: translate(610px, 280px) translate(var(--hx, 0px), var(--hy, 0px)) rotate(var(--ha, 0deg)) scaleX(var(--hf, 1)) translate(-610px, -280px); }
 .r-ear { transform: translate(595px, 255px) rotate(var(--ear, 0deg)) translate(-595px, -255px); }
-.r-shut { visibility: var(--ms, visible); }
-.r-open { visibility: var(--mo, hidden); }
+.r-shut { display: var(--ms, inline); }
+.r-open { display: var(--mo, none); }
 
 /* poses: set with data-pose in the HTML or pose(actor, name) in kit.js */
 .goat-actor[data-pose="walk-a"] { --ff: -20deg; --ff2: 16deg; --fh: 16deg; --fh2: -18deg; }
 .goat-actor[data-pose="walk-b"] { --ff: 16deg; --ff2: -20deg; --fh: -18deg; --fh2: 16deg; --gy: -5px; }
-.goat-actor[data-pose="graze"] { --nk: hidden; --nd: visible; --hx: 100px; --hy: 203px; --ha: 62deg; }
+.goat-actor[data-pose="graze"] { --nk: none; --nd: inline; --hx: 100px; --hy: 203px; --ha: 62deg; }
 .goat-actor[data-pose="crouch"] { --gy: 26px; --ff: -26deg; --ff2: -30deg; --fh: 26deg; --fh2: 30deg; --ha: 8deg; }
 .goat-actor[data-pose="air"] { --gr: -9deg; --ff: -52deg; --ff2: -40deg; --fh: 48deg; --fh2: 38deg; --tail: -28deg; --ear: -20deg; }
 .goat-actor[data-pose="sit"] { --gr: -9deg; --gy: 58px; --fh: -52deg; --fh2: -58deg; --ff: 9deg; --ff2: 9deg; }
-.goat-actor[data-pose="talk"] { --gr: -9deg; --gy: 58px; --fh: -52deg; --fh2: -58deg; --ff: 9deg; --ff2: 9deg; --ha: -6deg; --ms: hidden; --mo: visible; }
+.goat-actor[data-pose="talk"] { --gr: -9deg; --gy: 58px; --fh: -52deg; --fh2: -58deg; --ff: 9deg; --ff2: 9deg; --ha: -6deg; --ms: none; --mo: inline; }
 .goat-actor[data-pose="ears-up"] { --ear: -38deg; --ha: -12deg; --tail: -14deg; }
 .goat-actor[data-pose="look-back"] { --hf: -1; --hx: -6px; }
 .goat-actor[data-pose="nudge"] { --gr: 4deg; --nrot: 22deg; --hx: 44px; --hy: 26px; --ha: 10deg; }

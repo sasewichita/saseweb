@@ -1,1 +1,38 @@
-/* stub: its builder writes this file */
+/* details and countdown */
+#details .details-sheet { display: grid; grid-template-columns: 1fr auto; gap: 32px 56px; align-items: start; color: var(--block); }
+#details .facts { margin: 0; display: grid; gap: 20px; }
+#details .facts dt { font-family: var(--display); font-weight: 900; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--block); }
+#details .facts dd { margin: 2px 0 0; font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.15; color: var(--block); }
+#details .month { border-collapse: collapse; width: 308px; table-layout: fixed; color: var(--block); }
+#details .month caption { font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; text-align: left; padding-bottom: 8px; color: var(--block); }
+#details .month th, #details .month td { width: 44px; height: 44px; padding: 0; text-align: center; font-family: var(--display); font-weight: 900; font-size: 18px; color: var(--block); }
+#details .month th { font-size: 13px; letter-spacing: 0.1em; }
+#details .month td.on { background: var(--gold); }
+
+#details .count { margin-top: 72px; }
+#details .count-when { margin: 0 0 16px; font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); }
+#details .count-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+#details .clock { margin: 0; display: grid; grid-template-columns: repeat(4, auto); gap: clamp(12px, 3vw, 44px); padding-bottom: 20px; }
+#details .clock > div { display: flex; flex-direction: column-reverse; align-items: center; min-width: 0; }
+#details .clock dd { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(64px, 11vw, 150px); line-height: 0.95; color: var(--gold); text-shadow: 4px 3px 0 var(--gold2); font-variant-numeric: tabular-nums; }
+#details .clock dt { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); margin-top: 6px; }
+#details .count .goat-actor { flex: none; }
+#details .count-ground { margin: 0; }
+
+.no-js #details .clock { display: none; }
+
+.js #details .clock dd.drop { animation: det-drop 120ms steps(1); }
+.js #details .clock dd.shift { animation: det-shift 120ms steps(1); }
+@keyframes det-drop { from { translate: 0 6px; } to { translate: 0 0; } }
+@keyframes det-shift { from { translate: -6px 0; } to { translate: 0 0; } }
+.static #details .clock dd { animation: none; }
+
+@media (max-width: 760px) {
+  #details .details-sheet { grid-template-columns: 1fr; }
+  #details .month { width: 100%; }
+  #details .month th, #details .month td { width: auto; }
+  #details .count { margin-top: 56px; }
+  #details .count-row { flex-direction: column; align-items: stretch; gap: 0; }
+  #details .clock { gap: 4px; padding-bottom: 0; }
+  #details .count .goat-actor { width: 72px; align-self: flex-end; margin-top: 8px; }
+}

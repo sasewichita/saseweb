@@ -1,1 +1,17 @@
-/* stub: its builder writes this file */
+/* footer: ground band, goat half past the edge, lines, chop */
+.foot { position: relative; overflow: clip; background: var(--block); color: var(--paper); padding: 220px var(--lane, 160px) 40px var(--gut, 24px); min-height: 360px; box-sizing: border-box; }
+.foot-ground { position: absolute; left: 0; right: 0; top: 176px; z-index: 0; }
+.foot #foot-goat { position: absolute; top: 48px; left: calc(100% - 80px); width: 160px; z-index: 1; }
+.foot-lines { position: relative; z-index: 1; display: grid; gap: 2px; justify-items: start; }
+.foot-lines p { margin: 0; display: block; padding: 10px 0; min-height: 44px; font-size: 16px; }
+.foot-lines a { display: inline-flex; align-items: center; min-height: 44px; color: var(--paper); text-decoration: underline; text-underline-offset: 4px; }
+.foot-note { font-family: var(--mono, "Martian Mono", monospace); font-size: 12px; }
+.foot-top a { gap: 10px; font-weight: 700; }
+.foot-top .prints { width: 44px; height: 30px; flex: none; rotate: -90deg; margin: 7px -7px; }
+.foot-top .prints use { fill: var(--gold); }
+.foot a:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+.foot-chop { position: absolute; right: calc(var(--lane, 160px) + 8px); bottom: 28px; z-index: 1; width: 56px; height: 56px; display: grid; place-items: center; font-size: 34px; }
+@media (max-width: 760px) {
+  .foot { padding-right: 96px; padding-top: 214px; }
+  .foot-chop { right: 24px; width: 52px; height: 52px; bottom: 24px; }
+}

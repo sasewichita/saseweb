@@ -1,1 +1,27 @@
-/* stub: its builder writes this file */
+/* register */
+#register .reg-stage { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-top: 24px; }
+#register .bell { grid-column: 1; grid-row: 1; width: 180px; height: auto; margin-left: 40px; display: block; }
+#register #register-goat { grid-column: 2; grid-row: 1; align-self: end; width: 160px; margin-bottom: -2px; }
+#register .reg-sheet { grid-column: 1 / -1; grid-row: 2; }
+#register .bell-strap, #register .bell-copy { fill: var(--gold2); }
+#register .bell-body { fill: var(--gold); }
+#register .bell-line { fill: none; stroke: var(--gold2); stroke-width: 5; }
+#register .bell-clapper { fill: var(--block); }
+#register .bell-swing { transform-box: view-box; transform-origin: 110px 44px; }
+#register .ring { visibility: hidden; }
+#register .ring path { fill: none; stroke: var(--paper); stroke-width: 5; }
+.js #register .bell.ringing .bell-swing { animation: reg-swing 480ms steps(1); }
+.js #register .bell.ringing .ring { animation: reg-ring 480ms steps(1); }
+.static #register .bell-swing, .static #register .ring { animation: none !important; }
+@keyframes reg-swing { 0% { rotate: 0deg; } 25% { rotate: -8deg; } 50% { rotate: 8deg; } 75% { rotate: 0deg; } }
+@keyframes reg-ring { 0% { visibility: hidden; } 25% { visibility: visible; } 50% { visibility: hidden; } 100% { visibility: hidden; } }
+#register .reg-links { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 0; }
+#register .reg-main { font-size: 28px; min-height: 64px; padding: 0 36px; order: -1; }
+#register .reg-links .btn--ink:last-child { font-size: 15px; letter-spacing: .04em; text-transform: none; }
+@media (max-width: 760px) {
+  #register .bell { width: 130px; margin-left: 12px; }
+  #register #register-goat { width: 90px; }
+  #register .reg-links .btn { font-size: 16px; letter-spacing: .06em; padding: 0 16px; max-width: 100%; }
+  #register .reg-links .reg-main { font-size: 22px; }
+  #register .reg-links .btn--ink:last-child { font-size: 14px; letter-spacing: .02em; }
+}

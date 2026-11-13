@@ -60,6 +60,10 @@
 .caption--when { left: 52px; top: 100px; text-align: left; }
 .caption--pitch { left: 52px; top: 164px; }
 .hero-actions { position: absolute; z-index: 3; margin: 0; display: flex; gap: 14px; }
+/* W2: mid-zoom the gold Register button rides over the gold goat. A hard oxblood plate under
+   the buttons keeps its shape there. The filter sits on the parent because a button's own
+   clip-path would cut it off; zero radius, so it is an offset copy, not a soft shadow. */
+.hero-gone .hero-actions { filter: drop-shadow(4px 3px 0 var(--ink)) drop-shadow(-2px -2px 0 var(--ink)); }
 .hero .chop { position: absolute; z-index: 3; right: 52px; bottom: 48px; font-size: 28px; }
 
 /* W3: the scroll cue, from first paint until the page rises. On its own red tag so it reads
@@ -116,4 +120,6 @@
   .no-js .stage .slot { left: 24px; right: 24px; width: auto; height: 64px; bottom: 40svh; }
   .no-js .caption--pitch { top: auto; bottom: calc(40svh - 62px); }
   .no-js .hero-actions { left: 24px; right: 24px; top: auto; bottom: calc(40svh - 140px); }
+  /* with no script the phone bar always shows; keep the cue above it */
+  .no-js .cue { bottom: calc(74px + env(safe-area-inset-bottom, 0px)); }
 }
