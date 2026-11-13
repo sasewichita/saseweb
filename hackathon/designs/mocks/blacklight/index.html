@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Hack the Wu · Year of the Goat</title>
+    <meta
+      name="description"
+      content="Hack the Wu is SASE at Wichita State's second annual hackathon: beginner friendly and open to every undergrad and grad student, in every major."
+    />
+    <meta name="theme-color" content="#ece6d6" />
+    <link rel="icon" href="../../../assets/favicon-32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="mock.css" />
+  </head>
+  <body>
+    <a class="skip" href="#about">Skip to content</a>
+
+    <canvas class="eye" id="eye" aria-hidden="true"></canvas>
+
+    <!-- hidden notes, shown only near the light -->
+    <div class="notes" aria-hidden="true">
+      <span class="note" style="--x: 9; --y: 27; --mx: 6; --my: 19; --r: -1.6deg">Beginner friendly</span>
+      <span class="note" style="--x: 66; --y: 22; --mx: 44; --my: 11; --r: 1.4deg">Open to all students</span>
+      <span class="note" style="--x: 7; --y: 66; --mx: 5; --my: 64; --r: 1.8deg">Every major welcome</span>
+      <span class="note" style="--x: 77; --y: 61; --mx: 58; --my: 36; --r: -1.2deg">March 26–28</span>
+      <span class="note" style="--x: 40; --y: 14; --mx: 12; --my: 28; --r: 1.1deg">2nd annual</span>
+      <span class="note note--long" style="--x: 33; --y: 71; --mx: 8; --my: 50; --r: -1.4deg"
+        >Teams need designers, planners and presenters as much as programmers.</span
+      >
+    </div>
+
+    <div class="lamp" aria-hidden="true"><i></i></div>
+
+    <header class="hero" id="top">
+      <div class="slot">
+        <h1>Hack the Wu <small>Year of the Goat</small></h1>
+      </div>
+      <p class="cap cap--edition">SASE at Wichita State · 2nd annual hackathon</p>
+      <p class="cap cap--when"><b>March 26–28, 2027</b><br />Wichita State University</p>
+      <p class="cap cap--pitch">
+        A beginner-friendly hackathon at Wichita State, open to every undergrad and grad student in every major.
+      </p>
+      <p class="actions">
+        <a class="go" href="../../panorama/register.html">Register</a>
+        <a class="side" href="https://discord.gg/VwQhFkzWNH">Get updates on Discord</a>
+      </p>
+    </header>
+
+    <main class="frame">
+      <section class="about" id="about" aria-labelledby="about-h">
+        <h2 id="about-h">What Hack the Wu is</h2>
+        <p class="lead" data-lit>
+          Teams spend <mark data-lit>a weekend building something new</mark>, from an app to a hardware project, then
+          show it off at the end. This is our <mark data-lit>second year</mark> running it.
+        </p>
+        <ul class="points">
+          <li data-lit>
+            <h3><mark data-lit>Beginner friendly</mark></h3>
+            <p>Never been to a hackathon or written much code? You're exactly who we built this for.</p>
+          </li>
+          <li data-lit>
+            <h3><mark data-lit>Open to all students</mark></h3>
+            <p>Undergrad and grad students are both welcome to join.</p>
+          </li>
+          <li data-lit>
+            <h3><mark data-lit>Every major welcome</mark></h3>
+            <p>Design, business, science and engineering students all bring something a team needs.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <nav class="strip" aria-label="Sections">
+      <ul>
+        <li><a href="#about" data-lit>About</a></li>
+        <li><a href="#about" data-lit>Weekend</a></li>
+        <li><a href="#about" data-lit>Last year</a></li>
+        <li><a href="#about" data-lit>Details</a></li>
+        <li><a href="#about" data-lit>Sponsors</a></li>
+        <li><a href="#about" data-lit>FAQ</a></li>
+        <li><a href="../../panorama/register.html" data-lit>Register</a></li>
+      </ul>
+    </nav>
+
+    <script type="module" src="mock.js"></script>
+  </body>
+</html>

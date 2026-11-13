@@ -1,0 +1,179 @@
+/* GOLD GOAT KIT. Tokens, base type, shared pieces, the goat rig and its poses.
+   Builders: use this file, do not edit it. Ask the main thread for changes. */
+
+:root {
+  /* five colours, nothing else: no black, no white */
+  --block: #8f1d14; /* page red */
+  --gold: #e3b55a;
+  --gold2: #c08a2e; /* the off-register copy; never text */
+  --paper: #f6e7c3; /* cream */
+  --ink: #4a0d0a; /* oxblood: type on gold or cream, small details */
+
+  --display: 'Londrina Solid', 'Arial Black', Impact, sans-serif;
+  --mono: 'Martian Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --seal: 'Noto Serif TC', 'Songti TC', 'PingFang TC', 'Microsoft JhengHei', serif;
+
+  /* layout */
+  --gut: 52px; /* left gutter, the hero captions' line */
+  --lane: 160px; /* right gutter above 760px: the hoofprint nav lives here */
+  --goat-land: 240px; /* width of the goat where the hero exit lands it */
+  --edge-lift: 11px; /* hoof line above the page's top edge (the gold band) */
+
+  /* rough hand-cut edges */
+  --cut-a: polygon(0.8% 8%, 6% 0%, 19% 4%, 34% 0%, 52% 5%, 71% 0%, 88% 3%, 99.4% 0%, 100% 28%, 99% 61%, 100% 93%, 93% 100%, 76% 96%, 58% 100%, 41% 95%, 22% 100%, 9% 97%, 0% 100%, 1.2% 66%, 0% 34%);
+  --cut-b: polygon(0% 4%, 11% 0%, 27% 6%, 45% 1%, 63% 4%, 82% 0%, 100% 5%, 98.6% 38%, 100% 70%, 99% 100%, 84% 94%, 66% 100%, 47% 96%, 30% 100%, 12% 95%, 0% 99%, 1.4% 62%, 0% 30%);
+  --cut-c: polygon(1% 0%, 14% 5%, 33% 1%, 49% 6%, 68% 0%, 86% 5%, 100% 1%, 99% 34%, 100% 66%, 98.4% 100%, 80% 95%, 61% 100%, 39% 94%, 20% 100%, 7% 94%, 0% 100%, 1.6% 70%, 0% 36%);
+  --cut-sq: polygon(3% 5%, 22% 0%, 48% 3%, 77% 0%, 97% 4%, 100% 27%, 96% 52%, 100% 78%, 97% 97%, 74% 100%, 49% 96%, 24% 100%, 2% 96%, 0% 71%, 4% 47%, 0% 24%);
+  /* a big block: the cut stays shallow so it never eats text */
+  --cut-big: polygon(0.3% 1.5%, 7% 0%, 18% 1%, 31% 0%, 46% 1.2%, 62% 0%, 79% 0.9%, 93% 0%, 99.7% 1.2%, 100% 24%, 99.5% 52%, 100% 78%, 99.6% 99%, 90% 100%, 74% 99%, 57% 100%, 40% 98.9%, 24% 100%, 9% 99.1%, 0.2% 100%, 0.5% 71%, 0% 43%, 0.4% 19%);
+  /* a band's hand-cut top edge */
+  --cut-top: polygon(0% 34%, 3% 6%, 9% 26%, 16% 2%, 24% 30%, 33% 8%, 41% 28%, 50% 0%, 59% 26%, 67% 6%, 76% 32%, 84% 4%, 92% 24%, 97% 2%, 100% 22%, 100% 100%, 0% 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background: var(--block);
+  color: var(--paper);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--block);
+  font-family: var(--mono);
+  font-stretch: 87.5%;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+/* clip, not hidden: no scroll container (sticky keeps working) and a wide child can never
+   widen the phone viewport, which would throw off the hero's geometry */
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* W2: only links and buttons are underlined or look like a button */
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
+.on-light :focus-visible, .on-light:focus-visible { outline-color: var(--ink); }
+
+.skip { position: fixed; left: 12px; top: -90px; z-index: 60; background: var(--paper); color: var(--ink); padding: 12px 16px; font-weight: 700; }
+.skip:focus { top: 12px; }
+
+/* the seal: a small square block with one character, like a printmaker's chop */
+.seal {
+  display: inline-grid; place-items: center; width: 1.55em; height: 1.55em;
+  background: var(--seal-bg, var(--gold)); color: var(--seal-fg, var(--block));
+  font-family: var(--seal); font-weight: 900; line-height: 1;
+  clip-path: var(--cut-sq); transform: rotate(-3deg); user-select: none;
+}
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; font-family: var(--display); font-stretch: normal; font-weight: 900; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 0; }
+.btn--block { background: var(--gold); color: var(--ink); clip-path: var(--cut-b); transform: rotate(-0.6deg); }
+.btn--ink { background: var(--ink); color: var(--paper); clip-path: var(--cut-c); transform: rotate(0.5deg); }
+.btn--red { background: var(--block); color: var(--paper); clip-path: var(--cut-b); transform: rotate(-0.6deg); } /* the main button on cream */
+.btn:hover { transform: translate(1px, 2px) rotate(0.3deg); }
+.btn:focus-visible { clip-path: none; outline: 3px solid var(--paper); outline-offset: 3px; }
+.on-light .btn:focus-visible { outline-color: var(--ink); }
+
+/* the page: it rises over the fixed hero stage */
+main { position: relative; z-index: 2; background: var(--block); }
+.foot { position: relative; z-index: 2; background: var(--block); }
+.page-edge { position: absolute; left: 0; right: 0; bottom: 100%; }
+
+/* sections */
+.sec { position: relative; padding: clamp(88px, 12vh, 144px) var(--lane) clamp(88px, 12vh, 144px) var(--gut); }
+.sec > * { max-width: 1120px; }
+.sec-head { display: grid; gap: 18px; margin-bottom: 48px; }
+.sec h2 { font-family: var(--display); font-stretch: normal; font-weight: 900; font-size: clamp(44px, 7vw, 96px); line-height: 0.95; letter-spacing: 0.01em; color: var(--gold); text-shadow: 4px 3px 0 var(--gold2); }
+.sec h3 { font-family: var(--display); font-stretch: normal; font-weight: 900; font-size: 28px; line-height: 1.05; letter-spacing: 0.02em; }
+.kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); }
+.lede { font-size: 17px; line-height: 1.65; max-width: 60ch; }
+.small { font-size: 12px; }
+
+/* the surface goats stand on: a gold band with a hand-cut top edge */
+.ground { height: 14px; background: var(--gold); clip-path: var(--cut-top); }
+
+/* a hand-cut block with its gold2 copy off register under it.
+   Set --blk-bg (default cream) and --blk-cut (default --cut-a). Text on it is oxblood. */
+.blk { position: relative; isolation: isolate; color: var(--ink); }
+.blk::before, .blk::after { content: ""; position: absolute; inset: 0; clip-path: var(--blk-cut, var(--cut-a)); }
+.blk::before { z-index: -1; background: var(--blk-bg, var(--paper)); }
+.blk::after { z-index: -2; background: var(--gold2); translate: 4px 3px; }
+.blk--gold { --blk-bg: var(--gold); }
+/* a large cream sheet for long reading (Details, Register) */
+.sheet { --blk-cut: var(--cut-big); padding: clamp(24px, 4vw, 56px); }
+
+/* hoofprints: the page's one sign for "this way" and "you are here" */
+.prints { display: inline-block; width: 44px; height: 30px; overflow: visible; vertical-align: middle; }
+.prints use { fill: var(--gold); }
+
+/* ---------- the goat ---------- */
+/* An actor: <svg class="goat-actor" data-pose="stand" viewBox="0 0 760 630" aria-hidden="true"
+   focusable="false"><use href="#goat-rig"/></svg>. Its bottom edge is the hoof line. It faces
+   right; add .flip to face left. Size it with width only. */
+.goat-actor { display: block; width: 160px; height: auto; aspect-ratio: 760 / 630; overflow: visible; pointer-events: none; }
+.goat-actor.flip { scale: -1 1; }
+/* one goat at a time: only the current section's actor shows (kit.js sets data-here) */
+.js [data-sec]:not([data-here]) .goat-actor { visibility: hidden; }
+
+/* the goat the hero exit hands over to: on the page's top edge at the left gutter */
+#about-goat.on-edge { position: absolute; left: var(--gut); bottom: calc(100% + var(--edge-lift)); width: var(--goat-land); }
+.js:not(.hero-done) #about-goat.on-edge { visibility: hidden; }
+
+.rig .gold { fill: var(--gold); }
+.rig .far { fill: var(--gold2); }
+.rig .g2 { fill: var(--gold2); transform: translate(4px, 3px); }
+.rig .oxb { fill: var(--ink); }
+.rig .cut { stroke: var(--block); stroke-width: 4; stroke-linejoin: round; }
+.rig .cutlines path, .rig .brow { fill: none; stroke: var(--block); stroke-width: 5; stroke-linecap: round; }
+.rig .cutfl { fill: var(--block); }
+#rig-fl .ctr { fill: var(--gold); }
+.rig .eyewhite { fill: var(--paper); }
+.rig .iris { fill: var(--gold); }
+.rig .pupil { fill: var(--ink); }
+.rig .lid { fill: var(--gold); }
+.rig .rim { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+
+/* the puppet's joints. Angles: positive swings a leg back, a head down.
+   Swapped parts (neck, mouth) switch with display, never visibility: an explicit
+   visibility: visible on a part would show through a hidden actor. */
+.r-all { transform: translate(var(--gx, 0px), var(--gy, 0px)) translate(230px, 700px) rotate(var(--gr, 0deg)) translate(-230px, -700px); }
+.r-fh { transform: translate(222px, 486px) rotate(var(--fh, 0deg)) translate(-222px, -486px); }
+.r-fh2 { transform: translate(296px, 500px) rotate(var(--fh2, 0deg)) translate(-296px, -500px); }
+.r-ff { transform: translate(628px, 508px) rotate(var(--ff, 0deg)) translate(-628px, -508px); }
+.r-ff2 { transform: translate(555px, 516px) rotate(var(--ff2, 0deg)) translate(-555px, -516px); }
+.r-tail { transform: translate(170px, 390px) rotate(var(--tail, 0deg)) translate(-170px, -390px); }
+.r-neck { display: var(--nk, inline); transform: translate(592px, 336px) rotate(var(--nrot, 0deg)) translate(-592px, -336px); }
+.r-neckd { display: var(--nd, none); }
+.r-head { transform: translate(610px, 280px) translate(var(--hx, 0px), var(--hy, 0px)) rotate(var(--ha, 0deg)) scaleX(var(--hf, 1)) translate(-610px, -280px); }
+.r-ear { transform: translate(595px, 255px) rotate(var(--ear, 0deg)) translate(-595px, -255px); }
+.r-shut { display: var(--ms, inline); }
+.r-open { display: var(--mo, none); }
+
+/* poses: set with data-pose in the HTML or pose(actor, name) in kit.js */
+.goat-actor[data-pose="walk-a"] { --ff: -20deg; --ff2: 16deg; --fh: 16deg; --fh2: -18deg; }
+.goat-actor[data-pose="walk-b"] { --ff: 16deg; --ff2: -20deg; --fh: -18deg; --fh2: 16deg; --gy: -5px; }
+.goat-actor[data-pose="graze"] { --nk: none; --nd: inline; --hx: 100px; --hy: 203px; --ha: 62deg; }
+.goat-actor[data-pose="crouch"] { --gy: 26px; --ff: -26deg; --ff2: -30deg; --fh: 26deg; --fh2: 30deg; --ha: 8deg; }
+.goat-actor[data-pose="air"] { --gr: -9deg; --ff: -52deg; --ff2: -40deg; --fh: 48deg; --fh2: 38deg; --tail: -28deg; --ear: -20deg; }
+.goat-actor[data-pose="sit"] { --gr: -9deg; --gy: 58px; --fh: -52deg; --fh2: -58deg; --ff: 9deg; --ff2: 9deg; }
+.goat-actor[data-pose="talk"] { --gr: -9deg; --gy: 58px; --fh: -52deg; --fh2: -58deg; --ff: 9deg; --ff2: 9deg; --ha: -6deg; --ms: none; --mo: inline; }
+.goat-actor[data-pose="ears-up"] { --ear: -38deg; --ha: -12deg; --tail: -14deg; }
+.goat-actor[data-pose="look-back"] { --hf: -1; --hx: -6px; }
+.goat-actor[data-pose="nudge"] { --gr: 4deg; --nrot: 22deg; --hx: 44px; --hy: 26px; --ha: 10deg; }
+.goat-actor[data-pose="peek"] { --ha: -10deg; --ear: -16deg; }
+.goat-actor[data-pose="wag"] { --tail: -30deg; }
+
+@media (max-width: 760px) {
+  :root { --gut: 24px; --lane: 24px; --goat-land: 150px; }
+  /* the phone bottom bar never covers the footer */
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  .lede { font-size: 15px; }
+  .sec-head { margin-bottom: 32px; }
+}

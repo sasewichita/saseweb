@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Hack the Wu · goat heroes</title>
+    <link rel="icon" href="../../../assets/favicon-32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../kit/lino.css" />
+    <style>
+      :root { --block: #e0301e; --field: #8f1d14; --gold: #e3b55a; --cream: #f6e7c3; --oxblood: #4a0d0a; }
+      html { background: var(--paper); color: var(--ink); }
+      body { margin: 0; padding: 28px 20px 60px; font-family: var(--mono); min-height: 100svh; }
+      h1 { font-family: var(--display); font-weight: 900; font-size: clamp(36px, 9vw, 72px); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; line-height: 1; }
+      .lede { font-size: 14px; line-height: 1.5; max-width: 62ch; margin: 0 0 30px; }
+      h2 { font-family: var(--display); font-weight: 900; font-size: clamp(24px, 5vw, 34px); letter-spacing: 0.1em; text-transform: uppercase; margin: 36px 0 6px; line-height: 1; }
+      .note { font-size: 13px; line-height: 1.5; max-width: 62ch; margin: 0 0 16px; }
+      .opts { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); max-width: 1100px; }
+      .opt { display: block; padding: 22px 20px 24px; text-decoration: none; clip-path: var(--cut-b); transform: rotate(-0.4deg); min-height: 132px; }
+      .opt:nth-child(even) { clip-path: var(--cut-c); transform: rotate(0.5deg); }
+      .opt b { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(26px, 6vw, 36px); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; line-height: 1; }
+      .opt span { font-size: 13px; line-height: 1.5; display: block; }
+      .opt:focus-visible { clip-path: none; outline: 3px solid var(--ink); outline-offset: 3px; }
+      .gold .opt { background: var(--field); color: var(--cream); }
+      .gold .opt b { color: var(--gold); }
+      .first .opt { background: var(--block); color: var(--ink); }
+      .first .opt:nth-child(even) { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 3px var(--ink); clip-path: none; }
+      .old .opt { background: var(--salt), var(--ink); color: var(--paper); }
+    </style>
+  </head>
+  <body>
+    <h1>Hack the Wu · goat heroes</h1>
+    <p class="lede">First-screen mocks only. Each opens on a goat, then the scroll pushes into its eye. Tell us which one you would click, and which one feels wrong.</p>
+
+    <section class="gold">
+      <h2>Red and gold</h2>
+      <p class="note">The softer colours: a deep red page, gold, cream, no black and no white.</p>
+      <div class="opts">
+        <a class="opt" href="./gold-goat/"><b>Gold goat</b><span>A whole goat with its hooves up on the title, blossoms cut out of its coat, inside a fret-corner frame.</span></a>
+        <a class="opt" href="./three-goats/?c=gold"><b>Three goats</b><span>A nanny chewing wheat and two kids, standing on the title bar.</span></a>
+        <a class="opt" href="./kid-face/?c=gold"><b>Face to face</b><span>A kid looks straight at you, relaxed, with a wheat stalk.</span></a>
+        <a class="opt" href="./kid-leap/?c=gold"><b>Kid, mid-leap</b><span>A baby goat jumps toward the title.</span></a>
+        <a class="opt" href="./soft-goat/?c=gold"><b>Same goat, softened</b><span>The first goat head, redone in gold on red with a calmer eye.</span></a>
+      </div>
+    </section>
+
+    <section class="first">
+      <h2>Paper and ink</h2>
+      <p class="note">The same drawings in the bone, red and gold print colours.</p>
+      <div class="opts">
+        <a class="opt" href="./three-goats/"><b>Three goats</b><span>Red, gold and bone goats on bone paper.</span></a>
+        <a class="opt" href="./kid-face/"><b>Face to face</b><span>A bone face on a red block.</span></a>
+        <a class="opt" href="./kid-leap/"><b>Kid, mid-leap</b><span>A bone kid with a red collar.</span></a>
+        <a class="opt" href="./soft-goat/?c=bone"><b>Same goat, bone</b><span>The first goat head in bone on a red page.</span></a>
+        <a class="opt" href="./soft-goat/"><b>Same goat, red</b><span>The first goat head in red on bone paper.</span></a>
+      </div>
+    </section>
+
+    <section class="old">
+      <h2>The first two</h2>
+      <p class="note">The versions people called cool but a little scary.</p>
+      <div class="opts">
+        <a class="opt" href="./whole-goat/"><b>Whole goat first</b><span>A carved goat head opens the page, then the scroll pushes into its eye.</span></a>
+        <a class="opt" href="./horned-mask/"><b>Goat with the title in its eye</b><span>A goat head on plain paper, the title already in its eye.</span></a>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="../../assets/favicon-32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hack the Wu · mock feels</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* The chooser: nine feels, all grown from the Panorama goat eye. Pick the ones to build in full. */
+      :root {
+        --bone: #ece6d6;
+        --ink: #0f0f13;
+        --yellow: #f2c40a;
+        --blue: #2645cc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--bone);
+        color: var(--ink);
+      }
+      body {
+        margin: 0;
+        padding: clamp(20px, 4vw, 56px);
+        font-family: 'Martian Mono', ui-monospace, Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      h1 {
+        margin: 0;
+        font-family: 'Anybody', 'Arial Black', sans-serif;
+        font-weight: 800;
+        font-variation-settings: 'wdth' 150;
+        font-size: clamp(30px, 6.4vw, 92px);
+        line-height: 0.95;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+      }
+      .lead {
+        margin: 18px 0 0;
+        max-width: 62ch;
+      }
+      ol {
+        list-style: none;
+        margin: clamp(28px, 5vw, 64px) 0 0;
+        padding: 0;
+        border-top: 3px solid var(--ink);
+      }
+      li {
+        border-bottom: 3px solid var(--ink);
+      }
+      a {
+        display: grid;
+        grid-template-columns: minmax(64px, 9vw) minmax(0, 1.1fr) minmax(0, 1.6fr) auto;
+        gap: clamp(12px, 2.4vw, 36px);
+        align-items: center;
+        min-height: 92px;
+        padding: 14px 0;
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover,
+      a:focus-visible {
+        background: var(--ink);
+        color: var(--bone);
+        outline: none;
+      }
+      .n {
+        font-family: 'Anybody', sans-serif;
+        font-weight: 800;
+        font-variation-settings: 'wdth' 50;
+        font-size: clamp(40px, 6vw, 84px);
+        line-height: 0.8;
+        padding-left: 10px;
+        transition: font-variation-settings 0.25s ease;
+      }
+      a:hover .n,
+      a:focus-visible .n {
+        font-variation-settings: 'wdth' 150;
+        color: var(--yellow);
+      }
+      .name {
+        font-family: 'Anybody', sans-serif;
+        font-weight: 800;
+        font-variation-settings: 'wdth' 125;
+        font-size: clamp(18px, 2.3vw, 32px);
+        line-height: 1;
+        text-transform: uppercase;
+      }
+      .name small {
+        display: block;
+        margin-top: 8px;
+        font-family: 'Martian Mono', monospace;
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--blue);
+      }
+      a:hover .name small,
+      a:focus-visible .name small {
+        color: var(--yellow);
+      }
+      .feel {
+        margin: 0;
+        max-width: 52ch;
+      }
+      /* a small pupil bar that widens when the row is under the pointer */
+      .go {
+        width: 26px;
+        height: 9px;
+        margin-right: 14px;
+        border-radius: 3px;
+        background: currentColor;
+        transition: width 0.25s ease;
+      }
+      a:hover .go,
+      a:focus-visible .go {
+        width: 74px;
+        background: var(--yellow);
+      }
+      .foot {
+        margin: 28px 0 0;
+        max-width: 62ch;
+      }
+      @media (max-width: 760px) {
+        a {
+          grid-template-columns: 56px minmax(0, 1fr);
+          align-items: start;
+        }
+        .feel {
+          grid-column: 2;
+        }
+        .go {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .n,
+        .go {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nine feels, one eye</h1>
+    <p class="lead">
+      Every one of these grows from the Panorama goat eye. Each is a mock: a hero, the scroll into the page, one
+      content screen, and its navigation and cursor. Open them on a laptop and on a phone, then pick the ones to
+      build in full.
+    </p>
+    <ol>
+      <li>
+        <a href="../panorama/">
+          <span class="n">1</span>
+          <span class="name">Panorama <small>The baseline, as built</small></span>
+          <p class="feel">A three-ink print: yellow, blue and black on bone. Ruled lines, a bar cursor, the pupil opens into the page.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="torch/">
+          <span class="n">2</span>
+          <span class="name">Torch <small>Night watch</small></span>
+          <p class="feel">The eye as a dark relief, lit only by a flame at the pointer. Text brightens as the light comes near.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="lino/">
+          <span class="n">3</span>
+          <span class="name">Lino <small>Cut by hand</small></span>
+          <p class="feel">A one-colour block print. Heavy black, gouged lines that wobble and break, one flat block of yellow.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="halftone/">
+          <span class="n">4</span>
+          <span class="name">Halftone <small>Under the loupe</small></span>
+          <p class="feel">The eye in coarse two-colour dot screens. The dots swell under the pointer and break apart as you scroll.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="cyanotype/">
+          <span class="n">5</span>
+          <span class="name">Cyanotype <small>Plate, fig. 1</small></span>
+          <p class="feel">A blueprint. Thin white drafting lines on Prussian blue, a crosshair cursor with a live bearing, a title block.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="eyes/">
+          <span class="n">6</span>
+          <span class="name">Eyes <small>They all look at you</small></span>
+          <p class="feel">A wall of small eyes that all follow the pointer and blink on their own. The middle one holds the title.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="slot/">
+          <span class="n">7</span>
+          <span class="name">Slot <small>You are the goat</small></span>
+          <p class="feel">A black screen with one wide slot. Through it, a level print landscape and a title too big to see at once.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="blacklight/">
+          <span class="n">8</span>
+          <span class="name">Blacklight <small>The second print</small></span>
+          <p class="feel">A quiet outline print. A light at the pointer reveals the colour, and notes that are hidden without it.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li>
+        <a href="type-eye/">
+          <span class="n">9</span>
+          <span class="name">Type eye <small>Read the eye</small></span>
+          <p class="feel">The eye built only from words. The letters stretch toward the pointer, and the lids are lines of text.</p>
+          <span class="go" aria-hidden="true"></span>
+        </a>
+      </li>
+    </ol>
+    <p class="foot">Mocks only. Nothing here is the final site, and the copy is last year's preview copy.</p>
+  </body>
+</html>

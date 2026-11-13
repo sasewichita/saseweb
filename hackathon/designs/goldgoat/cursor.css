@@ -1,0 +1,5 @@
+/* cursor: gold sprig, bloom on links */
+@media (pointer: fine) {
+  html, body { cursor: url(sprig.png) 4 4, auto; cursor: image-set(url(sprig.png) 1x, url(sprig-2x.png) 2x) 4 4, auto; }
+  a, button, summary, .btn, [role="button"] { cursor: url(sprig-bloom.png) 4 4, pointer; cursor: image-set(url(sprig-bloom.png) 1x, url(sprig-bloom-2x.png) 2x) 4 4, pointer; }
+}

@@ -1,0 +1,265 @@
+/* A · New Year Print: Last year. Seven carved prints and a pupil-shaped lens. */
+
+#last-year .prints {
+  list-style: none;
+  margin: clamp(40px, 7vw, 72px) 0 0;
+  padding: 0;
+}
+#last-year .prints li {
+  position: relative;
+  margin: 0;
+}
+#last-year .print {
+  position: relative;
+  margin: 0;
+  transform: rotate(var(--rot, 0deg));
+}
+#last-year .print img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* plain look with scripts off: composed photos with ink caption bars */
+#last-year figcaption {
+  position: absolute;
+  left: -6px;
+  bottom: -12px;
+  max-width: 82%;
+  padding: 8px 14px 9px;
+  background: var(--salt), var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  clip-path: var(--cut-b);
+  transform: rotate(var(--tag, -1.4deg));
+  z-index: 4;
+}
+
+/* ---------- composed hang, desktop ---------- */
+@media (min-width: 901px) {
+  #last-year {
+    padding-right: max(var(--pad-x), 84px);
+  }
+  #last-year .prints {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: start;
+    row-gap: 0;
+  }
+  #last-year .prints li:nth-child(1) { grid-column: 1 / 8; grid-row: 1; z-index: 1; }
+  #last-year .prints li:nth-child(2) { grid-column: 8 / 12; grid-row: 1; margin: 9% 0 0 -2%; z-index: 3; }
+  #last-year .prints li:nth-child(3) { grid-column: 2 / 6; grid-row: 2; margin: -4% 0 0 0; z-index: 4; }
+  #last-year .prints li:nth-child(4) { grid-column: 5 / 10; grid-row: 2; margin: 5% 0 0 4%; z-index: 5; }
+  #last-year .prints li:nth-child(5) { grid-column: 10 / 13; grid-row: 2; margin: 14% 0 0 0; z-index: 3; }
+  #last-year .prints li:nth-child(6) { grid-column: 3 / 7; grid-row: 3; margin: 2% 0 0 0; z-index: 3; }
+  #last-year .prints li:nth-child(7) { grid-column: 7 / 12; grid-row: 3; margin: -2% 0 0 3%; z-index: 4; }
+}
+
+/* ---------- phone: one column, alternating offsets ---------- */
+@media (max-width: 900px) {
+  #last-year .prints {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  #last-year .prints li:nth-child(1) { width: 96%; }
+  #last-year .prints li:nth-child(2) { width: 74%; align-self: flex-end; margin-top: -14px; }
+  #last-year .prints li:nth-child(3) { width: 84%; margin-top: -6px; }
+  #last-year .prints li:nth-child(4) { width: 68%; align-self: flex-end; }
+  #last-year .prints li:nth-child(5) { width: 92%; margin-top: -10px; }
+  #last-year .prints li:nth-child(6) { width: 72%; align-self: flex-end; }
+  #last-year .prints li:nth-child(7) { width: 86%; margin-top: -8px; }
+}
+
+/* per print: angle of the cut, tilt, caption tilt, crop shape, tonal tuning */
+#last-year .prints li:nth-child(1) { --a: 14deg;  --rot: -1.2deg; --tag: -1.6deg; --ar: 3 / 2;  --edge: var(--cut-a);  --br: 1; --op: 50% 40%; }
+#last-year .prints li:nth-child(2) { --a: -32deg; --rot: 1.5deg;  --tag: 1.1deg;  --ar: 4 / 5;  --edge: var(--cut-c);  --br: 1; --op: 38% 50%; }
+#last-year .prints li:nth-child(3) { --a: 78deg;  --rot: -0.7deg; --tag: -0.8deg; --ar: 1 / 1;  --edge: var(--cut-sq); --br: 1; --op: 50% 50%; }
+#last-year .prints li:nth-child(4) { --a: -8deg;  --rot: 0.9deg;  --tag: 1.8deg;  --ar: 3 / 2;  --edge: var(--cut-b);  --br: 1; --op: 50% 50%; }
+#last-year .prints li:nth-child(5) { --a: 46deg;  --rot: -1.8deg; --tag: -1.2deg; --ar: 3 / 4;  --edge: var(--cut-a);  --br: 1; --op: 50% 40%; }
+#last-year .prints li:nth-child(6) { --a: -61deg; --rot: 1.1deg;  --tag: 1.4deg;  --ar: 1 / 1;  --edge: var(--cut-c);  --br: 1; --op: 50% 45%; }
+#last-year .prints li:nth-child(7) { --a: 27deg;  --rot: -0.5deg; --tag: -1.9deg; --ar: 3 / 2;  --edge: var(--cut-sq); --br: 1; --op: 50% 50%; }
+
+/* ---------- the carved print (JS adds .ly-on) ---------- */
+#last-year .plate {
+  position: relative;
+  aspect-ratio: var(--ar, 3 / 2);
+  clip-path: var(--edge, var(--cut-a));
+}
+#last-year .stack {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  --lw: 240px;
+  --lh: 70px;
+  --lx: -999px;
+  --ly: -999px;
+}
+#last-year .stack > * {
+  position: absolute;
+  pointer-events: none;
+}
+#last-year .carve {
+  inset: 0;
+  isolation: isolate;
+  background: #fff;
+  filter: contrast(var(--k, 9));
+}
+#last-year .carve img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--op, 50% 50%);
+  filter: grayscale(1) contrast(0.76) brightness(var(--br, 1));
+}
+/* the line pattern at this print's own angle */
+#last-year .ln {
+  position: absolute;
+  pointer-events: none;
+  inset: -20%;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  background: repeating-linear-gradient(var(--a, 20deg), #000 0, #fff 2.4px, #000 4.8px);
+}
+/* bone turns the white to paper, ink lifts the black */
+#last-year .tb {
+  inset: 0;
+  background: var(--paper);
+  mix-blend-mode: multiply;
+}
+#last-year .ti {
+  inset: 0;
+  background: var(--ink);
+  mix-blend-mode: lighten;
+}
+#last-year .real {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--op, 50% 50%);
+  visibility: hidden;
+  clip-path: inset(
+    calc(var(--ly) - var(--lh) / 2) calc(100% - var(--lx) - var(--lw) / 2) calc(100% - var(--ly) - var(--lh) / 2)
+      calc(var(--lx) - var(--lw) / 2) round calc(var(--lh) / 2)
+  );
+}
+#last-year .key {
+  left: calc(var(--lx) - var(--lw) / 2);
+  top: calc(var(--ly) - var(--lh) / 2);
+  width: var(--lw);
+  height: var(--lh);
+  border: 3px solid var(--paper);
+  border-radius: 999px;
+  visibility: hidden;
+}
+#last-year .stack.is-lens .real,
+#last-year .stack.is-lens .key {
+  visibility: visible;
+}
+/* whole print flipped to the real photo with a hard cut */
+#last-year .print.is-real .real {
+  visibility: visible;
+  clip-path: none;
+}
+#last-year .print.is-real .key {
+  visibility: hidden;
+}
+
+/* the flip button: 44px, a pupil bar on a bone block */
+#last-year .flip {
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  clip-path: var(--cut-sq);
+  pointer-events: auto !important;
+  cursor: pointer;
+  visibility: hidden;
+  z-index: 5;
+}
+#last-year .flip::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 17px;
+  width: 26px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+#last-year .flip[aria-pressed='true'] {
+  background: var(--ink);
+}
+#last-year .flip[aria-pressed='true']::before {
+  background: var(--paper);
+}
+#last-year .flip:focus-visible {
+  visibility: visible;
+  clip-path: none;
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--ink);
+}
+#last-year .print:hover .flip,
+#last-year .print:focus-within .flip {
+  visibility: visible;
+}
+@media (hover: none) {
+  #last-year .flip {
+    visibility: visible;
+  }
+}
+
+/* caption on the carved print: tucked on the edge */
+#last-year.ly-on figcaption {
+  left: -8px;
+  bottom: -14px;
+}
+
+/* ---------- entry: the print is pulled across with a hard wipe ---------- */
+#last-year.ly-on .prints li.ly-wait .stack,
+#last-year.ly-on .prints li.ly-wait figcaption {
+  visibility: hidden;
+}
+#last-year.ly-on .prints li.is-in .stack {
+  animation: ly-pull 0.3s steps(6, jump-end) both;
+  animation-delay: var(--d, 0s);
+}
+#last-year.ly-on .prints li:nth-child(even).is-in .stack {
+  animation-name: ly-pull-v;
+}
+#last-year.ly-on .prints li.is-in figcaption {
+  animation: ly-tag 0.2s steps(3, jump-end) both;
+  animation-delay: calc(var(--d, 0s) + 0.25s);
+}
+@keyframes ly-pull {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ly-pull-v {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ly-tag {
+  from { transform: translate(-14px, 4px) rotate(var(--tag, -1.4deg)); }
+  to { transform: translate(0, 0) rotate(var(--tag, -1.4deg)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #last-year.ly-on .prints li.ly-wait .stack,
+  #last-year.ly-on .prints li.ly-wait figcaption {
+    visibility: visible;
+  }
+  #last-year.ly-on .prints li.is-in .stack,
+  #last-year.ly-on .prints li.is-in figcaption {
+    animation: none;
+  }
+}

@@ -1,0 +1,101 @@
+:root { --block: #b3261a; --face: #ebe3cf; --gold2: #f0b90a; --cream: #f6efe0; --flood: 0; }
+html { background: var(--block); color: var(--ink); }
+body { margin: 0; overflow-x: hidden; }
+
+.hero { position: relative; z-index: 1; height: 240svh; }
+.static .hero { height: 100svh; }
+.strip { height: 60svh; background: var(--block); }
+.static .strip { display: none; }
+
+.stage { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.stage a { pointer-events: auto; }
+.no-webgl .stage { background: var(--paper); }
+.stage-off .stage { visibility: hidden; }
+
+.goat { position: absolute; left: 0; top: 0; width: 1060px; height: 1180px; transform-origin: 0 0; z-index: 0; overflow: visible; display: block; }
+.goat .face { fill: var(--face); stroke: var(--ink); }
+.goat .ink { stroke: var(--ink); }
+.goat .ink:not([fill="none"]) { fill: var(--ink); }
+.goat .ink[fill="none"] { fill: none; }
+.goat .gold { fill: var(--gold2); stroke: var(--ink); }
+.goat .cream { fill: var(--cream); }
+.eye { visibility: hidden; }
+.live-eye .eye { visibility: visible; }
+.live-eye .goat .draweye { display: none; }
+.no-webgl .goat .draweye { display: block !important; }
+.no-webgl .eye { visibility: hidden !important; }
+.goat .jaw { animation: jaw 6s steps(1, end) infinite; }
+.goat .earL { transform-origin: 360px 345px; animation: flickL 9s steps(1, end) infinite; }
+.goat .earR { transform-origin: 630px 320px; animation: flickR 13s steps(1, end) infinite; }
+.goat .shut { visibility: hidden; animation: blink 4s steps(1, end) infinite; }
+.static .goat .jaw, .static .goat .earL, .static .goat .earR, .static .goat .shut { animation: none; }
+@keyframes jaw { 0% { transform: translateX(0); } 40% { transform: translateX(14px); } 50% { transform: translateX(0); } 85% { transform: translateX(-12px); } 92% { transform: translateX(0); } }
+@keyframes flickL { 0%, 70% { transform: rotate(0); } 72% { transform: rotate(-5deg); } 76% { transform: rotate(0); } }
+@keyframes flickR { 0%, 40% { transform: rotate(0); } 42% { transform: rotate(5deg); } 46% { transform: rotate(0); } }
+@keyframes blink { 0%, 92% { visibility: hidden; } 94%, 98% { visibility: visible; } 100% { visibility: hidden; } }
+.eye { clip-path: var(--socket, polygon(0 0)); }
+.flood-done .eye, .head-gone .eye { clip-path: none; }
+.head-gone .goat { visibility: hidden; }
+
+/* title slot (copied from site A, positioned by hero.js) */
+.stage .slot, .no-webgl .stage .slot {
+  position: absolute; left: 0; top: 0; right: auto; bottom: auto;
+  width: 300px; height: 70px; transform: none;
+  display: grid; place-items: center; container-type: size;
+  color: var(--paper); z-index: 1; pointer-events: none;
+  background: var(--salt), var(--ink); clip-path: var(--cut-a);
+}
+.live.head-gone .stage .slot { background: none; clip-path: none; }
+.slot h1 {
+  margin: 0; font-family: var(--display); font-weight: 900;
+  font-size: min(54cqh, 9.6cqw); line-height: 0.95; letter-spacing: 0.2em;
+  margin-right: -0.2em; text-transform: uppercase; white-space: nowrap; text-align: center;
+}
+.slot h1 small {
+  display: block; margin-top: 0.1em; font-size: 0.34em; font-weight: 400;
+  letter-spacing: 0.5em; color: var(--paper);
+}
+.slot-off .stage .slot { visibility: hidden; }
+
+.hero-gone .hero .caption, .hero-gone .hero .hero-actions, .hero-gone .hero .chop { visibility: hidden; }
+.caption {
+  position: absolute; z-index: 2; margin: 0;
+  background: var(--salt), var(--ink); color: var(--paper);
+  padding: 12px 18px 13px; font-size: 12px; line-height: 1.5; letter-spacing: 0.03em;
+  max-width: 36ch; opacity: calc(1 - var(--flood) * 4);
+}
+.caption b { font-weight: 700; }
+.caption--edition { left: 26px; top: 28px; transform: rotate(-0.5deg); clip-path: var(--cut-b); }
+.caption--when { right: 26px; top: 30px; text-align: right; transform: rotate(0.9deg); clip-path: var(--cut-c); }
+.caption--pitch { left: 26px; top: calc(100svh - 196px); font-size: 13px; transform: rotate(0.4deg); clip-path: var(--cut-a); }
+.hero-actions { position: absolute; right: 26px; top: calc(100svh - 158px); z-index: 2; margin: 0; display: flex; gap: 14px; opacity: calc(1 - var(--flood) * 4); }
+.hero-actions .btn--block { outline: 0; }
+.chop { position: absolute; z-index: 2; right: 34px; top: calc(100svh - 92px); font-size: 28px; opacity: calc(1 - var(--flood) * 4); }
+
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 0; }
+.btn--block { background: var(--face); color: var(--ink); clip-path: var(--cut-b); transform: rotate(-0.6deg); }
+.btn--ink { background: var(--salt), var(--ink); color: var(--paper); clip-path: var(--cut-c); transform: rotate(0.5deg); }
+.btn:hover { transform: translate(1px, 2px) rotate(0.3deg); }
+.btn:focus-visible { clip-path: none; outline: 3px solid var(--paper); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .caption { font-size: 11px; max-width: none; }
+  .caption--edition { left: 12px; top: 14px; }
+  .caption--when { right: 12px; top: 68px; }
+  .caption--pitch { left: 12px; right: 12px; top: calc(100svh - 266px); font-size: 12px; }
+  .hero-actions { left: 12px; right: 12px; top: calc(100svh - 168px); gap: 10px; }
+  .btn { flex: 1; justify-content: center; min-height: 56px; padding: 0 8px; font-size: 17px; letter-spacing: 0.08em; text-align: center; line-height: 1.05; }
+  .chop { right: 14px; top: calc(100svh - 96px); }
+}
+
+/* ?c=gold : softer gold on deep red, no black, no white */
+.c-gold { --block: #8f1d14; --face: #e3b55a; --gold2: #c08a2e; --ink: #4a0d0a; --cream: #f6e7c3; --paper: #f6e7c3; --gold: #c08a2e; }
+.c-gold .goat .hair .ink { stroke: var(--block); }
+.c-gold .stage .slot { background: var(--face); }
+.c-gold .slot h1, .c-gold .slot h1 small { color: var(--block); }
+.c-gold.live.head-gone .stage .slot { background: none; }
+.c-gold.live.head-gone .slot h1, .c-gold.live.head-gone .slot h1 small { color: var(--cream); }
+.c-gold .caption { background: none; color: var(--cream); clip-path: none; }
+.c-gold .btn--block { background: var(--face); color: var(--ink); }
+.c-gold .btn--ink { background: none; color: var(--cream); outline: 2px solid var(--cream); outline-offset: -2px; clip-path: none; }
+.c-gold .chop { color: var(--face); background: none; }
