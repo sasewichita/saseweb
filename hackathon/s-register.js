@@ -1,6 +1,6 @@
 // register: the bell rings, the goat pricks its ears
 import { still, once, play, frames } from './kit.js';
-import { isPhone } from '../shared/base.js';
+import { isPhone } from './designs/shared/base.js';
 
 const stage = document.querySelector('#register .reg-stage');
 const bell = document.querySelector('#register .bell');

@@ -1,6 +1,6 @@
 // GOLD GOAT KIT. Shared helpers for every section module.
 // Builders: import from this file, do not edit it. Ask the main thread for changes.
-import { reducedMotion } from '../shared/base.js';
+import { reducedMotion } from './designs/shared/base.js';
 
 const root = document.documentElement;
 

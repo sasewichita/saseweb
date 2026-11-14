@@ -1,6 +1,6 @@
 // details countdown
 import { still, frames, play } from './kit.js';
-import { countdown } from '../shared/base.js';
+import { countdown } from './designs/shared/base.js';
 
 const TARGET = '2027-03-26T17:00:00-05:00';
 const goat = document.getElementById('details-goat');
