@@ -11,6 +11,7 @@ document.addEventListener('here', (e) => {
   if (at < 0 || at === last) return;
   last = at;
   const foot = at === ids.length - 1;
+  document.documentElement.classList.toggle('at-foot', foot);
   lis.forEach((li, k) => {
     const i = k + 1;
     const state = foot || i < at ? 'behind' : i === at ? 'here' : 'ahead';

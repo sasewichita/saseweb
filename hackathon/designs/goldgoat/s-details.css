@@ -20,6 +20,7 @@
 #details .count-ground { margin: 0; }
 
 .no-js #details .clock { display: none; }
+.no-js #details .count-row { justify-content: flex-end; }
 
 .js #details .clock dd.drop { animation: det-drop 120ms steps(1); }
 .js #details .clock dd.shift { animation: det-shift 120ms steps(1); }

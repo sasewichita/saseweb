@@ -37,3 +37,14 @@
   .ledge-n { font-size: 44px; }
   #weekend-goat { width: 72px; left: calc(100% - 96px); }
 }
+
+/* scripts off: goat rests on ledge 03 (grid puts it in flow just above the last ledge) */
+.no-js .stairs { display: grid; grid-template-columns: minmax(0, 1fr); padding-top: 0; }
+.no-js .ledges { display: contents; }
+.no-js .ledge:nth-child(2) { margin-bottom: 21px; }
+.no-js #weekend-goat { position: static; display: block; grid-row: 3; margin: 0 0 -2px calc(62% - 130px); }
+.no-js .ledge:nth-child(3) { grid-row: 4; }
+@media (max-width: 760px) {
+  .no-js .ledge:nth-child(2) { margin-bottom: 29px; }
+  .no-js #weekend-goat { margin-left: calc(100% - 96px); }
+}

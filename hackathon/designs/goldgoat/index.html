@@ -35,6 +35,43 @@
   <body>
     <a class="skip" href="#about">Skip to content</a>
 
+    <!-- W4: Register in one click whenever the hero's own button is off screen (desktop) -->
+    <a class="btn btn--block reg-fixed" href="register.html">Register</a>
+
+
+    <!-- ============ NAVIGATION: the hoofprint trail (shell builder) ============ -->
+    <nav class="trail" aria-label="Sections">
+      <ol>
+        <li><a href="#about"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>About</span></a></li>
+        <li><a href="#weekend"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Weekend</span></a></li>
+        <li><a href="#last-year"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Last year</span></a></li>
+        <li><a href="#details"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Details</span></a></li>
+        <li><a href="#sponsors"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Sponsors</span></a></li>
+        <li><a href="#faq"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>FAQ</span></a></li>
+        <li><a href="#register"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Register</span></a></li>
+      </ol>
+    </nav>
+
+    <!-- phones: the bottom bar. The details element works with scripts off. -->
+    <div class="bar">
+      <details class="bar-menu">
+        <summary><span class="bar-here">Sections</span></summary>
+        <ol>
+          <li><a href="#about">About</a></li>
+          <li><a href="#weekend">Weekend</a></li>
+          <li><a href="#last-year">Last year</a></li>
+          <li><a href="#details">Details</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#register">Register</a></li>
+        </ol>
+      </details>
+      <span class="bar-prints" aria-hidden="true">
+        <svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg>
+      </span>
+      <a class="btn btn--block bar-reg" href="register.html">Register</a>
+    </div>
+
     <!-- ============ SHARED DRAWINGS (kit): the goat rig and the hoofprint. Frozen. ============ -->
     <svg class="defs" width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
       <defs>
@@ -435,42 +472,6 @@
       </div>
       <span class="seal chop foot-chop" lang="zh-Hant" aria-hidden="true">羊</span>
     </footer>
-
-    <!-- ============ NAVIGATION: the hoofprint trail (shell builder) ============ -->
-    <nav class="trail" aria-label="Sections">
-      <ol>
-        <li><a href="#about"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>About</span></a></li>
-        <li><a href="#weekend"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Weekend</span></a></li>
-        <li><a href="#last-year"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Last year</span></a></li>
-        <li><a href="#details"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Details</span></a></li>
-        <li><a href="#sponsors"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Sponsors</span></a></li>
-        <li><a href="#faq"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>FAQ</span></a></li>
-        <li><a href="#register"><svg class="prints" viewBox="0 0 44 30" aria-hidden="true" focusable="false"><use class="p-l" href="#hoof" x="2" y="6" width="18" height="24"/><use class="p-r" href="#hoof" x="24" y="0" width="18" height="24"/></svg><span>Register</span></a></li>
-      </ol>
-    </nav>
-
-    <!-- W4: Register in one click whenever the hero's own button is off screen (desktop) -->
-    <a class="btn btn--block reg-fixed" href="register.html">Register</a>
-
-    <!-- phones: the bottom bar. The details element works with scripts off. -->
-    <div class="bar">
-      <details class="bar-menu">
-        <summary><span class="bar-here">Sections</span></summary>
-        <ol>
-          <li><a href="#about">About</a></li>
-          <li><a href="#weekend">Weekend</a></li>
-          <li><a href="#last-year">Last year</a></li>
-          <li><a href="#details">Details</a></li>
-          <li><a href="#sponsors">Sponsors</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#register">Register</a></li>
-        </ol>
-      </details>
-      <span class="bar-prints" aria-hidden="true">
-        <svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg><svg viewBox="0 0 18 24" focusable="false"><use href="#hoof"/></svg>
-      </span>
-      <a class="btn btn--block bar-reg" href="register.html">Register</a>
-    </div>
 
     <script type="module" src="kit.js"></script>
     <script type="module" src="hero.js"></script>
