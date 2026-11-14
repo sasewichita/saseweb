@@ -1,0 +1,18 @@
+/* sponsors */
+#sponsors .wall-wrap { display: grid; width: fit-content; max-width: 100%; margin-top: 32px; }
+#sponsors #sponsors-goat { justify-self: end; width: 160px; margin-bottom: -2px; }
+#sponsors .wall-cap { margin-bottom: 24px; }
+#sponsors .wall { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 240px); gap: 24px; }
+#sponsors .wall li { height: 160px; display: flex; align-items: center; justify-content: center; margin: 0; padding: 0; }
+#sponsors .wall img { max-width: 70%; max-height: 64%; width: auto; height: auto; object-fit: contain; display: block; }
+.js #sponsors .blk.up { translate: 0 -16px; }
+.js #sponsors .blk.up::after { translate: 8px 6px; }
+.js #sponsors .blk.mid { translate: 0 -8px; }
+.js #sponsors .blk.mid::after { translate: 6px 4px; }
+.static #sponsors .blk.up, .static #sponsors .blk.mid { translate: none; }
+@media (max-width: 760px) {
+  #sponsors .wall-wrap { width: 100%; }
+  #sponsors #sponsors-goat { width: 90px; }
+  #sponsors .wall { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #sponsors .wall li { height: auto; aspect-ratio: 3 / 2; }
+}

@@ -1,0 +1,118 @@
+/* About: three huge ink numerals, each struck by a gold block. */
+#about .points {
+  list-style: none;
+  margin: clamp(28px, 6vh, 64px) 0 0;
+  padding: 0;
+  display: block;
+}
+#about .points li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 3vw, 40px);
+  margin-bottom: clamp(26px, 5vh, 56px);
+  max-width: 880px;
+}
+#about .points li:nth-child(2) {
+  margin-left: clamp(0px, 9vw, 150px);
+}
+#about .points li:nth-child(3) {
+  margin-left: clamp(0px, 3vw, 50px);
+}
+#about .points .num {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 1.05em;
+  height: 1.05em;
+  font: 900 clamp(110px, 18vw, 230px) / 1 var(--display);
+  color: var(--ink);
+  isolation: isolate;
+}
+/* the gold block that strikes the numeral */
+#about .points .num::before {
+  content: '';
+  position: absolute;
+  inset: 8% -4% 6% -6%;
+  z-index: -1;
+  background: var(--gold);
+  clip-path: polygon(2% 8%, 38% 0, 74% 5%, 100% 2%, 97% 46%, 100% 93%, 62% 100%, 26% 95%, 0 100%, 3% 52%);
+  transform: rotate(-1.4deg);
+  transform-origin: 20% 50%;
+  opacity: 0;
+}
+#about .points li:nth-child(2) .num::before {
+  transform: rotate(1.1deg);
+  clip-path: polygon(0 4%, 44% 0, 100% 6%, 96% 54%, 100% 100%, 55% 94%, 12% 100%, 4% 50%);
+}
+#about .points li:nth-child(3) .num::before {
+  transform: rotate(-0.6deg);
+  clip-path: polygon(3% 0, 60% 6%, 100% 0, 98% 60%, 94% 100%, 40% 95%, 0 100%, 2% 44%);
+}
+/* body text on a bone block */
+#about .points li > div {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 14px 18px 16px;
+  max-width: 400px;
+  clip-path: var(--cut-a);
+  transform: rotate(0.7deg);
+}
+#about .points li:nth-child(2) > div {
+  transform: rotate(-1.2deg);
+  clip-path: var(--cut-b);
+}
+#about .points li:nth-child(3) > div {
+  transform: rotate(0.3deg);
+  clip-path: var(--cut-c);
+}
+#about .points h3 {
+  margin: 0 0 6px;
+}
+#about .points p {
+  margin: 0;
+}
+/* JS marks the numerals; before that the gold block simply shows */
+#about .points .num::before {
+  opacity: 1;
+}
+#about.is-armed .points .num::before {
+  opacity: 0;
+}
+#about.is-armed .points li.is-struck .num::before,
+#about.is-armed .points li:hover .num::before,
+#about.is-armed .points li:focus-within .num::before {
+  opacity: 1;
+  animation: strike 0.24s steps(4) 1;
+}
+@keyframes strike {
+  0% {
+    transform: translate(-14px, -10px) rotate(-3deg) scale(1.12);
+  }
+  50% {
+    transform: translate(3px, 2px) rotate(-1.4deg) scale(1.03);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-1.4deg) scale(1);
+  }
+}
+@media (max-width: 760px) {
+  #about .points li {
+    gap: 6px;
+    flex-wrap: nowrap;
+    margin-left: 0 !important;
+  }
+  #about .points .num {
+    font-size: clamp(96px, 30vw, 130px);
+  }
+  #about .points li > div {
+    padding: 10px 12px 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #about.is-armed .points .num::before {
+    opacity: 1;
+    animation: none !important;
+  }
+}

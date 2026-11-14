@@ -1,0 +1,738 @@
+/* A · NEW YEAR PRINT. The shell: colours, the field, the shared section pieces.
+   The block below (down to "SHELL") is the contract every section file builds on.
+   Do not rename or remove anything in it. The shell builder adds hero, nav, cursor and footer
+   styles under the SHELL line. */
+
+:root {
+  --paper: #ebe3cf;
+  --ink: #121110;
+  --block: #e0301e; /* the New Year red */
+  --gold: #f0b90a; /* small struck accents only */
+  --flood: 0; /* 0..1, written by site.js while the red floods the hero */
+  --pad-x: clamp(18px, 7vw, 110px);
+}
+
+html {
+  /* with no WebGL the page is a plain red sheet */
+  background: var(--block);
+  color: var(--ink);
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* the field: everything after the hero. It rides over the fixed eye canvas.
+   The field itself has no background: each section paints its own red, so a section can
+   leave a clear window onto the canvas. */
+.field {
+  position: relative;
+  z-index: 3;
+}
+
+/* one section = one print on the red sheet */
+.sec {
+  position: relative;
+  padding: clamp(84px, 15vh, 160px) var(--pad-x);
+  background: var(--mottle), var(--block);
+  color: var(--ink);
+  scroll-margin-top: 0;
+}
+
+/* Rule of the red sheet: only big display type sits straight on red, in ink.
+   Small text always sits on a bone block (ink type) or an ink bar (bone type). */
+.sec h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(46px, 8.4vw, 124px);
+  line-height: 0.88;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.sec h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* an ink bar with bone type: labels, kickers, links */
+.bar,
+.kicker {
+  display: inline-block;
+  margin: 0;
+  padding: 9px 15px 10px;
+  background: var(--salt), var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  clip-path: var(--cut-b);
+  transform: rotate(-0.6deg);
+}
+
+/* a bone block with ink type: paragraphs */
+.bone,
+.lede {
+  margin: 0;
+  max-width: 56ch;
+  padding: 16px 20px 17px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  clip-path: var(--cut-a);
+  transform: rotate(0.35deg);
+}
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0;
+}
+.btn--block {
+  background: var(--block);
+  color: var(--ink);
+  clip-path: var(--cut-b);
+  transform: rotate(-0.6deg);
+}
+.btn--ink {
+  background: var(--salt), var(--ink);
+  color: var(--paper);
+  clip-path: var(--cut-c);
+  transform: rotate(0.5deg);
+}
+.btn:hover {
+  transform: translate(1px, 2px) rotate(0.3deg);
+}
+.btn:focus-visible {
+  clip-path: none;
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .sec {
+    padding: 72px 18px 84px;
+  }
+  .bone,
+  .lede {
+    font-size: 14px;
+    padding: 14px 16px 15px;
+  }
+}
+
+/* ============================== SHELL ==============================
+   Hero, fuse navigation, cursor modes and footer go below this line. */
+
+/* ---------- hero: a tall track, the eye stays fixed behind it ---------- */
+.hero {
+  position: relative;
+  z-index: 1;
+  height: 175svh;
+  min-height: 980px;
+}
+/* once the red has flooded, the captions are gone and cannot be clicked */
+.hero-gone .hero .caption,
+.hero-gone .hero .hero-actions,
+.hero-gone .hero .chop {
+  visibility: hidden;
+}
+/* the title sits on the pupil bar */
+.slot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--pw);
+  height: var(--ph);
+  transform: translate3d(var(--px), var(--py), 0);
+  display: grid;
+  place-items: center;
+  container-type: size;
+  color: var(--paper);
+  z-index: 1;
+  pointer-events: none;
+}
+.slot h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: min(54cqh, 9.6cqw);
+  line-height: 0.95;
+  letter-spacing: 0.2em;
+  margin-right: -0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+}
+.slot h1 small {
+  display: block;
+  margin-top: 0.1em;
+  font-size: 0.34em;
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  color: var(--paper);
+}
+/* with no WebGL there is no pupil, so the title gets its own ink bar */
+.no-webgl .slot {
+  left: 50%;
+  top: 42%;
+  width: min(86vw, 720px);
+  height: clamp(90px, 18vmin, 170px);
+  transform: translate(-50%, -50%);
+  background: var(--salt), var(--ink);
+  clip-path: var(--cut-a);
+}
+
+/* captions: ink bars with bone type */
+.caption {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  background: var(--salt), var(--ink);
+  color: var(--paper);
+  padding: 12px 18px 13px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  max-width: 36ch;
+  opacity: calc(1 - var(--flood) * 4);
+}
+.caption b {
+  font-weight: 700;
+}
+.caption--edition {
+  left: 26px;
+  top: 28px;
+  transform: rotate(-0.5deg);
+  clip-path: var(--cut-b);
+}
+.caption--when {
+  right: 26px;
+  top: 30px;
+  text-align: right;
+  transform: rotate(0.9deg);
+  clip-path: var(--cut-c);
+}
+.caption--pitch {
+  left: 26px;
+  top: calc(100svh - 196px);
+  font-size: 13px;
+  transform: rotate(0.4deg);
+  clip-path: var(--cut-a);
+}
+.hero-actions {
+  position: absolute;
+  right: 26px;
+  top: calc(100svh - 158px);
+  z-index: 2;
+  margin: 0;
+  display: flex;
+  gap: 14px;
+  opacity: calc(1 - var(--flood) * 4);
+}
+.hero-actions .btn--block {
+  outline: 0;
+}
+.chop {
+  position: absolute;
+  z-index: 2;
+  right: 34px;
+  top: calc(100svh - 92px);
+  font-size: 28px;
+  opacity: calc(1 - var(--flood) * 4);
+}
+/* the About sheet starts with a ragged torn-looking edge */
+#about::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30px;
+  height: 32px;
+  background: var(--mottle), var(--block);
+  clip-path: polygon(0 100%, 0 55%, 3% 30%, 7% 62%, 12% 12%, 18% 48%, 24% 20%, 31% 66%, 37% 8%, 44% 52%, 50% 24%, 57% 70%, 63% 14%, 70% 50%, 77% 26%, 84% 64%, 90% 10%, 95% 46%, 100% 22%, 100% 100%);
+  pointer-events: none;
+}
+
+/* ---------- windows onto the fixed eye canvas ---------- */
+.window {
+  display: block;
+  position: relative;
+}
+.no-webgl .window {
+  display: none;
+}
+/* the red sheet that holds a hole (clip-path set by script) */
+.red {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--mottle), var(--block);
+  pointer-events: none;
+}
+.no-webgl .red {
+  clip-path: none !important;
+}
+
+/* ---------- footer: the eye shut ---------- */
+.foot {
+  position: relative;
+  padding: clamp(36px, 7vh, 80px) max(var(--pad-x), 84px) 96px var(--pad-x);
+  min-height: 62svh;
+  background: var(--mottle), var(--block);
+}
+.foot.has-hole {
+  background: none;
+}
+.foot > :not(.red) {
+  position: relative;
+  z-index: 1;
+}
+.foot .window {
+  height: clamp(150px, 27svh, 270px);
+  margin-bottom: 34px;
+}
+.foot-host,
+.foot-mail {
+  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--salt), var(--ink);
+  color: var(--paper);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.foot-host {
+  padding: 4px 18px 5px;
+  clip-path: var(--cut-b);
+  transform: rotate(-0.7deg);
+}
+.foot-mail {
+  margin: -2px 0 0 clamp(18px, 9vw, 150px);
+  padding: 4px 18px 5px;
+  clip-path: var(--cut-c);
+  transform: rotate(0.5deg);
+  text-transform: none;
+}
+.foot-host a,
+.foot-mail a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 2px;
+}
+.foot-host a:focus-visible,
+.foot-mail a:focus-visible {
+  outline-offset: -2px;
+}
+.foot-note {
+  margin: 26px 0 0 auto;
+  width: fit-content;
+  max-width: 34ch;
+  padding: 11px 16px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 12px;
+  clip-path: var(--cut-a);
+  transform: rotate(1.1deg);
+}
+
+/* ---------- navigation: the fuse ---------- */
+.fuse {
+  position: fixed;
+  z-index: 20;
+  margin: 0;
+}
+.js .fuse {
+  visibility: hidden;
+}
+.nav-on .fuse {
+  visibility: visible;
+}
+.fuse ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* without script: a plain ink list */
+.fuse:not(.is-built) {
+  right: 0;
+  top: 15vh;
+  width: 72px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.fuse:not(.is-built) a {
+  display: block;
+  padding: 10px 2px;
+  min-height: 44px;
+  font-size: 9px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.fuse.is-built {
+  right: 0;
+  top: 15vh;
+  height: 70vh;
+  width: 72px;
+}
+.fuse.is-built ol {
+  position: absolute;
+  inset: 0;
+}
+.fuse svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.fuse svg path {
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+.f-burnt {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-dasharray: 11 4 3 6 7 3;
+}
+.f-bone {
+  stroke: var(--paper);
+  stroke-width: 5;
+}
+.f-ticks {
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-dasharray: 1.6 12;
+}
+.fuse li {
+  position: absolute;
+  left: 0;
+  width: 72px;
+  height: 44px;
+  transform: translateY(-50%);
+}
+.fuse.is-built a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  font-size: 0;
+}
+.fuse.is-built a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: -3px;
+}
+.stop {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5px 0 0 -5px;
+  background: var(--paper);
+  clip-path: polygon(8% 0, 100% 14%, 90% 100%, 0 86%);
+}
+.fuse li.is-burnt .stop {
+  background: var(--ink);
+  width: 9px;
+  height: 9px;
+  margin: -4px 0 0 -4px;
+}
+.fuse a[aria-current] .stop {
+  width: 15px;
+  height: 15px;
+  margin: -7px 0 0 -7px;
+}
+/* labels: hidden from sight, never from readers */
+.lab {
+  position: absolute;
+  right: 54px;
+  top: 50%;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--salt), var(--ink);
+}
+.fuse a[aria-current] .lab,
+.fuse a:hover .lab,
+.fuse a:focus-visible .lab {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  padding: 6px 12px 7px;
+  clip-path: var(--cut-b);
+  transform: translateY(-50%) rotate(-0.6deg);
+}
+.now {
+  display: none;
+}
+.spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 60% 32%, 92% 18%, 70% 46%, 100% 56%, 66% 62%, 84% 96%, 52% 72%, 40% 100%, 36% 68%, 6% 84%, 30% 54%, 0 40%, 34% 36%, 22% 6%, 44% 28%);
+  pointer-events: none;
+  animation: flicker 0.36s steps(1, end) infinite;
+}
+@keyframes flicker {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  34% {
+    transform: rotate(38deg) scale(0.78);
+  }
+  67% {
+    transform: rotate(-22deg) scale(1.12);
+  }
+}
+
+@media (max-width: 900px) {
+  .fuse:not(.is-built),
+  .fuse.is-built {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    height: 64px;
+    background: var(--salt), var(--ink);
+    color: var(--paper);
+    clip-path: polygon(0 9px, 5% 3px, 13% 8px, 24% 2px, 38% 7px, 52% 1px, 66% 8px, 80% 3px, 92% 8px, 100% 2px, 100% 100%, 0 100%);
+  }
+  .fuse:not(.is-built) ol {
+    display: flex;
+    padding-top: 10px;
+  }
+  .fuse:not(.is-built) li {
+    flex: 1;
+    min-width: 0;
+  }
+  .fuse:not(.is-built) a {
+    font-size: 8px;
+    padding: 12px 1px;
+  }
+  .fuse li {
+    top: 0;
+    width: 48px;
+    height: 64px;
+    transform: translateX(-50%);
+  }
+  .fuse:not(.is-built) li {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+  }
+  .stop {
+    top: 22px;
+    background: var(--paper);
+  }
+  .fuse li.is-burnt .stop {
+    background: var(--paper);
+  }
+  .f-bone {
+    stroke: var(--paper);
+  }
+  .f-ticks {
+    stroke: var(--ink);
+  }
+  .f-burnt {
+    stroke: var(--paper);
+    stroke-width: 1.4;
+  }
+  .fuse.is-built a:focus-visible {
+    outline-color: var(--paper);
+  }
+  .lab {
+    left: 50%;
+    right: auto;
+  }
+  .fuse a[aria-current] .lab,
+  .fuse a:hover .lab,
+  .fuse a:focus-visible .lab {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .fuse.is-built .now {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper);
+    pointer-events: none;
+  }
+  .foot {
+    padding: 36px 18px 112px;
+  }
+  .foot-mail {
+    margin-left: 22px;
+  }
+  .foot-note {
+    margin-top: 20px;
+  }
+}
+
+/* ---------- phone hero: captions above and below the eye ---------- */
+@media (max-width: 760px) {
+  .caption {
+    font-size: 11px;
+    max-width: none;
+  }
+  .caption--edition {
+    left: 12px;
+    top: 14px;
+  }
+  .caption--when {
+    right: 12px;
+    top: 68px;
+  }
+  .caption--pitch {
+    left: 12px;
+    right: 12px;
+    top: calc(100svh - 266px);
+    font-size: 12px;
+  }
+  .hero-actions {
+    left: 12px;
+    right: 12px;
+    top: calc(100svh - 168px);
+    gap: 10px;
+  }
+  .hero-actions .btn {
+    flex: 1;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 8px;
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    text-align: center;
+    line-height: 1.05;
+  }
+  .chop {
+    right: 14px;
+    top: calc(100svh - 96px);
+  }
+}
+
+/* ---------- the site cursor (cursor.js) ---------- */
+.cur {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+  display: none;
+}
+.has-cursor .cur.is-on {
+  display: block;
+}
+.cur i {
+  position: absolute;
+  display: block;
+}
+.cur-k {
+  inset: -3px;
+  background: var(--paper);
+}
+.cur-m {
+  inset: 0;
+  background: var(--ink);
+}
+.cur[data-mode='strike'] .cur-m,
+.cur[data-mode='spark'] .cur-m {
+  background: var(--gold);
+}
+.cur[data-mode='strike'] .cur-k,
+.cur[data-mode='spark'] .cur-k {
+  background: var(--ink);
+}
+.cur[data-mode='bar'] i,
+.cur[data-mode='lens'] i {
+  clip-path: polygon(0 12%, 5% 0, 94% 8%, 100% 0, 97% 100%, 6% 92%, 0 100%);
+}
+.cur[data-mode='roller'] i {
+  clip-path: polygon(0 18%, 3% 0, 31% 10%, 62% 0, 97% 8%, 100% 0, 98% 88%, 100% 100%, 70% 92%, 38% 100%, 4% 90%);
+}
+.cur[data-mode='strike'] i {
+  clip-path: polygon(4% 6%, 38% 0, 70% 5%, 100% 0, 96% 40%, 100% 74%, 94% 100%, 58% 94%, 24% 100%, 0 92%, 5% 54%);
+}
+.cur[data-mode='seal'] .cur-m {
+  clip-path: polygon(evenodd, 3% 5%, 48% 0, 97% 4%, 100% 52%, 96% 98%, 50% 100%, 2% 96%, 0 48%, 3% 5%, 24% 24%, 25% 76%, 77% 75%, 75% 25%, 24% 24%);
+}
+.cur[data-mode='seal'] .cur-k {
+  clip-path: polygon(evenodd, 3% 5%, 48% 0, 97% 4%, 100% 52%, 96% 98%, 50% 100%, 2% 96%, 0 48%, 3% 5%, 20% 20%, 21% 80%, 81% 79%, 79% 21%, 20% 20%);
+}
+.cur[data-mode='spark'] i {
+  clip-path: polygon(50% 0, 60% 32%, 92% 18%, 70% 46%, 100% 56%, 66% 62%, 84% 96%, 52% 72%, 40% 100%, 36% 68%, 6% 84%, 30% 54%, 0 40%, 34% 36%, 22% 6%, 44% 28%);
+}
+/* over the bare hero paper: plain difference bar */
+.cur.is-diff {
+  mix-blend-mode: difference;
+}
+.cur.is-diff .cur-k {
+  display: none;
+}
+.cur.is-diff .cur-m {
+  background: #fff;
+}
+
+/* once the hero track is behind us, the pupil title goes with it */
+.hero-off .slot {
+  visibility: hidden;
+}
+/* a press moves the cursor a hair off register */
+.cur.is-hit {
+  margin: 2px 0 0 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spark {
+    animation: none;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}

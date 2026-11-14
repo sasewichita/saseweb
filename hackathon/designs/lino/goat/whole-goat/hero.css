@@ -1,0 +1,73 @@
+:root { --block: #e0301e; --flood: 0; }
+html { background: var(--block); color: var(--ink); }
+body { margin: 0; overflow-x: hidden; }
+
+.hero { position: relative; z-index: 1; height: 240svh; }
+.static .hero { height: 100svh; }
+.strip { height: 60svh; background: var(--block); }
+.static .strip { display: none; }
+
+.stage { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.stage a { pointer-events: auto; }
+.no-webgl .stage { background: var(--paper); }
+.stage-off .stage { visibility: hidden; }
+
+.goat { position: absolute; left: 0; top: 0; width: 1060px; height: 1180px; transform-origin: 0 0; z-index: 0; overflow: visible; display: block; }
+.goat .ink { fill: var(--ink); }
+.goat .red { fill: var(--block); }
+.goat .gold { fill: var(--gold); }
+.goat .bone { fill: var(--paper); }
+.goat .draweye { display: none; }
+.no-webgl .goat .draweye { display: block; }
+.head-gone .goat { visibility: hidden; }
+
+/* title slot (copied from site A, positioned by hero.js) */
+.stage .slot, .no-webgl .stage .slot {
+  position: absolute; left: 0; top: 0; right: auto; bottom: auto;
+  width: 300px; height: 70px; transform: none;
+  display: grid; place-items: center; container-type: size;
+  color: var(--paper); z-index: 1; pointer-events: none;
+  background: var(--salt), var(--ink); clip-path: var(--cut-a);
+}
+.live.head-gone .stage .slot { background: none; clip-path: none; }
+.slot h1 {
+  margin: 0; font-family: var(--display); font-weight: 900;
+  font-size: min(54cqh, 9.6cqw); line-height: 0.95; letter-spacing: 0.2em;
+  margin-right: -0.2em; text-transform: uppercase; white-space: nowrap; text-align: center;
+}
+.slot h1 small {
+  display: block; margin-top: 0.1em; font-size: 0.34em; font-weight: 400;
+  letter-spacing: 0.5em; color: var(--paper);
+}
+.slot-off .stage .slot { visibility: hidden; }
+
+.hero-gone .hero .caption, .hero-gone .hero .hero-actions, .hero-gone .hero .chop { visibility: hidden; }
+.caption {
+  position: absolute; z-index: 2; margin: 0;
+  background: var(--salt), var(--ink); color: var(--paper);
+  padding: 12px 18px 13px; font-size: 12px; line-height: 1.5; letter-spacing: 0.03em;
+  max-width: 36ch; opacity: calc(1 - var(--flood) * 4);
+}
+.caption b { font-weight: 700; }
+.caption--edition { left: 26px; top: 28px; transform: rotate(-0.5deg); clip-path: var(--cut-b); }
+.caption--when { right: 26px; top: 30px; text-align: right; transform: rotate(0.9deg); clip-path: var(--cut-c); }
+.caption--pitch { left: 26px; top: calc(100svh - 196px); font-size: 13px; transform: rotate(0.4deg); clip-path: var(--cut-a); }
+.hero-actions { position: absolute; right: 26px; top: calc(100svh - 158px); z-index: 2; margin: 0; display: flex; gap: 14px; opacity: calc(1 - var(--flood) * 4); }
+.hero-actions .btn--block { outline: 0; }
+.chop { position: absolute; z-index: 2; right: 34px; top: calc(100svh - 92px); font-size: 28px; opacity: calc(1 - var(--flood) * 4); }
+
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 0; }
+.btn--block { background: var(--block); color: var(--ink); clip-path: var(--cut-b); transform: rotate(-0.6deg); }
+.btn--ink { background: var(--salt), var(--ink); color: var(--paper); clip-path: var(--cut-c); transform: rotate(0.5deg); }
+.btn:hover { transform: translate(1px, 2px) rotate(0.3deg); }
+.btn:focus-visible { clip-path: none; outline: 3px solid var(--paper); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .caption { font-size: 11px; max-width: none; }
+  .caption--edition { left: 12px; top: 14px; }
+  .caption--when { right: 12px; top: 68px; }
+  .caption--pitch { left: 12px; right: 12px; top: calc(100svh - 266px); font-size: 12px; }
+  .hero-actions { left: 12px; right: 12px; top: calc(100svh - 168px); gap: 10px; }
+  .btn { flex: 1; justify-content: center; min-height: 56px; padding: 0 8px; font-size: 17px; letter-spacing: 0.08em; text-align: center; line-height: 1.05; }
+  .chop { right: 14px; top: calc(100svh - 96px); }
+}

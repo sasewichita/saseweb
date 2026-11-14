@@ -1,0 +1,158 @@
+/* LINO KIT: what every Lino site shares. Tokens, reset, the eye canvas, cut edges, ink texture,
+   the seal and the base bar cursor. A site sets its own colours by overriding the four colour
+   tokens in its site.css. Builders: use this file, do not edit it. */
+
+:root {
+  /* colours: paper, key ink, colour block, small accent */
+  --paper: #ebe3cf;
+  --ink: #121110;
+  --block: #f0b90a;
+  --gold: #f0b90a;
+
+  --display: 'Londrina Solid', 'Arial Black', Impact, sans-serif;
+  --mono: 'Martian Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --seal: 'Noto Serif TC', 'Songti TC', 'PingFang TC', 'Microsoft JhengHei', serif;
+
+  /* the pupil bar in css pixels, written by the site script from eye.pupilRect() */
+  --px: 50vw;
+  --py: 50vh;
+  --pw: 60vmin;
+  --ph: 18vmin;
+
+  /* rough hand-cut edges, a few different cuts */
+  --cut-a: polygon(0.8% 8%, 6% 0%, 19% 4%, 34% 0%, 52% 5%, 71% 0%, 88% 3%, 99.4% 0%, 100% 28%, 99% 61%, 100% 93%, 93% 100%, 76% 96%, 58% 100%, 41% 95%, 22% 100%, 9% 97%, 0% 100%, 1.2% 66%, 0% 34%);
+  --cut-b: polygon(0% 4%, 11% 0%, 27% 6%, 45% 1%, 63% 4%, 82% 0%, 100% 5%, 98.6% 38%, 100% 70%, 99% 100%, 84% 94%, 66% 100%, 47% 96%, 30% 100%, 12% 95%, 0% 99%, 1.4% 62%, 0% 30%);
+  --cut-c: polygon(1% 0%, 14% 5%, 33% 1%, 49% 6%, 68% 0%, 86% 5%, 100% 1%, 99% 34%, 100% 66%, 98.4% 100%, 80% 95%, 61% 100%, 39% 94%, 20% 100%, 7% 94%, 0% 100%, 1.6% 70%, 0% 36%);
+  /* a squarer cut for seals and small blocks */
+  --cut-sq: polygon(3% 5%, 22% 0%, 48% 3%, 77% 0%, 97% 4%, 100% 27%, 96% 52%, 100% 78%, 97% 97%, 74% 100%, 49% 96%, 24% 100%, 2% 96%, 0% 71%, 4% 47%, 0% 24%);
+
+  /* ink texture as background layers. --mottle is uneven ink (dark, soft); --salt is specks of
+     bare paper through solid ink. Use: background: var(--salt), var(--mottle), var(--ink); */
+  --mottle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.011 .017' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --salt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .92 0 0 0 0 .89 0 0 0 0 .81 0 0 0 9 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+.skip {
+  position: fixed;
+  left: 12px;
+  top: -90px;
+  z-index: 60;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 12px 16px;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+.skip:focus {
+  top: 12px;
+}
+
+/* the one fixed canvas the whole site prints from */
+.eye {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+.no-webgl .eye {
+  display: none;
+}
+
+/* cut edges */
+.cut {
+  clip-path: var(--cut-a);
+}
+.cut-b {
+  clip-path: var(--cut-b);
+}
+.cut-c {
+  clip-path: var(--cut-c);
+}
+
+/* the seal: a small square block with one character, like a printmaker's chop.
+   Size it with font-size. Colours: --seal-bg and --seal-fg. */
+.seal {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55em;
+  height: 1.55em;
+  background: var(--seal-bg, var(--gold));
+  color: var(--seal-fg, var(--ink));
+  font-family: var(--seal);
+  font-weight: 900;
+  line-height: 1;
+  clip-path: var(--cut-sq);
+  transform: rotate(-3deg);
+  user-select: none;
+}
+
+/* cursor: a thick bar with cut ends. Only for a real pointer (html.has-cursor). */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+.bar-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 34px;
+  height: 8px;
+  background: #fff;
+  mix-blend-mode: difference;
+  clip-path: polygon(0 12%, 5% 0, 94% 8%, 100% 0, 97% 100%, 6% 92%, 0 100%);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, width, height;
+}
+.has-cursor .bar-cursor.is-on {
+  opacity: 1;
+}
+.bar-cursor.is-idle:not(.is-snapped) {
+  animation: caret 1.06s steps(1) infinite;
+}
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-cursor {
+    animation: none !important;
+  }
+}

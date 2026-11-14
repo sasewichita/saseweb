@@ -1,0 +1,125 @@
+/* HERO: the approved gold goat, the scroll zoom into its eye, then the pull-back exit.
+   Main thread only. Tokens, buttons and the seal come from kit.css. */
+:root { --barb: 600px; }
+
+.hero { position: relative; z-index: 1; height: 220svh; }
+.static .hero { height: 100svh; }
+
+.stage { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.stage a { pointer-events: auto; }
+.hero-done .stage { visibility: hidden; }
+
+.goat { position: absolute; left: 0; top: 0; width: 900px; height: 820px; transform-origin: 0 0; z-index: 1; overflow: visible; display: block; }
+.goat .gold { fill: var(--gold); }
+.goat .far { fill: var(--gold2); }
+.goat .g2 { fill: var(--gold2); transform: translate(4px, 3px); }
+.goat .rock, .goat .oxb { fill: var(--ink); }
+.goat .rim { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.goat .cut { stroke: var(--block); stroke-width: 4; stroke-linejoin: round; }
+.goat .cutline, .goat .cutlines path { fill: none; stroke: var(--block); stroke-width: 5; stroke-linecap: round; }
+.goat .cutfl { fill: var(--block); }
+.goat .around use { fill: var(--gold); }
+.goat .ctr { fill: var(--ctr, var(--gold)); }
+.goat .spark { fill: var(--gold); }
+.goat .eyewhite { fill: var(--paper); }
+.goat .iris { fill: var(--gold); }
+.goat .irisring { fill: none; stroke: var(--gold2); stroke-width: 1.6; stroke-linejoin: round; }
+.goat .pupil { fill: var(--ink); }
+.goat .catch { fill: var(--paper); }
+.goat .lid { fill: var(--gold); }
+.goat .lidline { fill: none; stroke: var(--ink); stroke-width: 0.9; stroke-linejoin: round; stroke-linecap: round; }
+
+.frame { position: absolute; inset: 20px; z-index: 0; border: 3px solid var(--gold); pointer-events: none; }
+.frame::before { content: ""; position: absolute; inset: 6px; border: 2px solid var(--gold); }
+.frame i { position: absolute; width: 30px; height: 30px; background: var(--block); border: 3px solid var(--gold); box-sizing: border-box; }
+.frame i::after { content: ""; position: absolute; inset: 4px; border: 2px solid var(--gold); }
+.frame i:nth-child(1) { left: -6px; top: -6px; }
+.frame i:nth-child(2) { right: -6px; top: -6px; }
+.frame i:nth-child(3) { left: -6px; bottom: -6px; }
+.frame i:nth-child(4) { right: -6px; bottom: -6px; }
+
+.stage .slot {
+  position: absolute; left: 0; top: 0; right: auto; bottom: auto;
+  width: 300px; height: 70px; transform: none;
+  display: grid; place-items: center; container-type: size;
+  color: var(--block); z-index: 2; pointer-events: none;
+  background: var(--gold); clip-path: var(--cut-a);
+}
+.in-pupil .stage .slot { background: none; clip-path: none; color: var(--paper); }
+.slot h1 {
+  margin: 0; font-family: var(--display); font-stretch: normal; font-weight: 900;
+  font-size: min(54cqh, 9.2cqw); line-height: 0.95; letter-spacing: 0.2em;
+  margin-right: -0.2em; text-transform: uppercase; white-space: nowrap; text-align: center;
+}
+.slot h1 small { display: block; margin-top: 0.1em; font-size: 0.34em; font-weight: 400; letter-spacing: 0.5em; color: inherit; }
+
+.hero-gone .hero .caption, .hero-gone .hero .chop, .hero-gone .hero .frame { visibility: hidden; }
+.caption { position: absolute; z-index: 3; margin: 0; background: none; color: var(--paper); padding: 0; font-size: 14px; line-height: 1.5; letter-spacing: 0.03em; max-width: 32ch; }
+.caption b { font-weight: 700; }
+.caption--edition { left: 52px; top: 48px; }
+.caption--when { left: 52px; top: 100px; text-align: left; }
+.caption--pitch { left: 52px; top: 164px; }
+.hero-actions { position: absolute; z-index: 3; margin: 0; display: flex; gap: 14px; }
+/* W2: mid-zoom the gold Register button rides over the gold goat. A hard oxblood plate under
+   the buttons keeps its shape there. The filter sits on the parent because a button's own
+   clip-path would cut it off; zero radius, so it is an offset copy, not a soft shadow. */
+.hero-gone .hero-actions { filter: drop-shadow(4px 3px 0 var(--ink)) drop-shadow(-2px -2px 0 var(--ink)); }
+.hero .chop { position: absolute; z-index: 3; right: 52px; bottom: 48px; font-size: 28px; }
+
+/* W3: the scroll cue, from first paint until the page rises. On its own red tag so it reads
+   over the gold and cream of the zoom. Bottom left on desktop (bottom centre is where the
+   buttons sit), bottom centre on phones. */
+.cue { position: absolute; left: var(--gut); bottom: 44px; z-index: 4; margin: 0; padding: 8px 16px 6px; display: grid; justify-items: center; gap: 4px; background: var(--block); clip-path: var(--cut-c); color: var(--paper); font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+.cue .prints { width: 36px; height: 25px; rotate: 180deg; }
+.cue .p-l { animation: cue 1.2s steps(1, end) infinite; }
+.cue .p-r { animation: cue 1.2s steps(1, end) 0.6s infinite; }
+@keyframes cue { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+
+/* the exit: the page has started to rise */
+.hero-out .stage .slot, .hero-out .hero-actions, .hero-out .cue, .hero-out .goat .around { visibility: hidden; }
+
+/* motion: hard steps only */
+.bloom { transform-box: fill-box; transform-origin: center; animation: stamp .44s steps(2, end) both; animation-delay: calc(var(--i) * .22s); }
+@keyframes stamp { from { transform: scale(0); } to { transform: scale(1); } }
+.tail { transform-box: view-box; transform-origin: 170px 390px; animation: tail 5s steps(1, end) 2.4s infinite; }
+@keyframes tail { 0%, 100% { transform: rotate(0); } 3% { transform: rotate(-7deg); } 6% { transform: rotate(0); } 9% { transform: rotate(-7deg); } 12% { transform: rotate(0); } }
+.ear { transform-box: view-box; transform-origin: 595px 255px; animation: ear 7s steps(1, end) 3.6s infinite; }
+@keyframes ear { 0%, 100% { transform: rotate(0); } 3% { transform: rotate(-9deg); } 6% { transform: rotate(0); } }
+.spark { transform-box: fill-box; transform-origin: center; animation: blink 4.5s steps(1, end) 3s infinite; }
+.spark.s2 { animation-delay: 4.3s; } .spark.s3 { animation-delay: 5.6s; } .spark.s4 { animation-delay: 6.9s; }
+@keyframes blink { 0%, 100% { transform: scale(1); } 4% { transform: scale(.35); } 8% { transform: scale(1); } }
+.static .bloom, .static .tail, .static .ear, .static .spark, .static .cue use,
+.no-js .bloom, .no-js .tail, .no-js .ear, .no-js .spark, .no-js .cue use { animation: none; }
+@media (prefers-reduced-motion: reduce) { .bloom, .tail, .ear, .spark, .cue use { animation: none; } }
+
+@media (max-width: 760px) {
+  .frame { inset: 10px; }
+  .frame::before { display: none; }
+  .frame i { width: 18px; height: 18px; border-width: 2px; }
+  .frame i::after { display: none; }
+  .frame i:nth-child(1) { left: -4px; top: -4px; } .frame i:nth-child(2) { right: -4px; top: -4px; }
+  .frame i:nth-child(3) { left: -4px; bottom: -4px; } .frame i:nth-child(4) { right: -4px; bottom: -4px; }
+  .caption { font-size: 12px; max-width: none; }
+  .caption--edition { left: 24px; right: auto; top: 24px; }
+  .caption--when { left: 24px; right: auto; top: 62px; }
+  .caption--pitch { left: 24px; right: 24px; top: calc(var(--barb) + 12px); }
+  .hero-actions { left: 24px; right: 24px; top: calc(var(--barb) + 86px); gap: 10px; }
+  .hero-actions .btn { flex: 1; justify-content: center; min-height: 54px; padding: 0 8px; font-size: 16px; letter-spacing: 0.08em; text-align: center; line-height: 1.05; }
+  .hero .chop { right: 26px; bottom: 26px; font-size: 24px; }
+  .cue { left: 50%; translate: -50% 0; bottom: 18px; }
+}
+
+/* ---------- no script: the same first frame, laid out by CSS alone ---------- */
+.no-js .hero { height: auto; }
+.no-js .stage { position: relative; inset: auto; height: 100svh; min-height: 640px; }
+.no-js .goat { --gw: min(46vw, 64svh); left: auto; right: 9vw; top: auto; width: var(--gw); height: auto; bottom: calc(24svh + 96px - var(--gw) * 0.133); }
+.no-js .stage .slot { left: auto; right: 9vw; top: auto; bottom: 24svh; width: min(46vw, 700px); height: 96px; }
+.no-js .hero-actions { right: 9vw; bottom: calc(24svh - 70px); }
+@media (max-width: 760px) {
+  .no-js .goat { --gw: min(84vw, 44svh); right: 8vw; bottom: calc(40svh + 64px - var(--gw) * 0.133); }
+  .no-js .stage .slot { left: 24px; right: 24px; width: auto; height: 64px; bottom: 40svh; }
+  .no-js .caption--pitch { top: auto; bottom: calc(40svh - 62px); }
+  .no-js .hero-actions { left: 24px; right: 24px; top: auto; bottom: calc(40svh - 140px); }
+  /* with no script the phone bar always shows; keep the cue above it */
+  .no-js .cue { bottom: calc(74px + env(safe-area-inset-bottom, 0px)); }
+}
