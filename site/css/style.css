@@ -303,6 +303,8 @@ a.hero-notice:hover span { background-size: 100% 1px; transition-duration: .15s;
 }
 .pillar h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.6rem, 1.2rem + 1vw, 2.1rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--brand); margin: 0; }
 .pillar p { margin: 0; color: var(--muted); max-width: 34ch; }
+.pillar .pillar-more { padding-top: 12px; border-top: 1px solid var(--border); }
+.pillar-more .link { display: inline-block; margin-top: 4px; }
 .pillar .tag { margin-top: auto; padding-top: 24px; font-size: 0.85rem; }
 .pillar .tag::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--cat-color); margin-right: 8px; vertical-align: 1px; }
 @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } .pillar { min-height: 0; } }
