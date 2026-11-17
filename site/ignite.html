@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SASE Ignite · SASE at Wichita State</title>
+  <meta name="description" content="Ignite is SASE at Wichita State's mentorship program, pairing high school and college students with mentors who can help them grow academically and professionally." />
+  <meta property="og:title" content="SASE Ignite Mentorship Program" />
+  <meta property="og:description" content="Apply to be a mentor or a mentee with SASE at Wichita State." />
+  <meta property="og:image" content="assets/logo/sase-square.png" />
+  <meta name="theme-color" content="#141b4d" />
+  <link rel="icon" type="image/png" href="assets/logo/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>document.documentElement.classList.add("m-enter");setTimeout(()=>document.documentElement.classList.add("m-enter-done"),900)</script>
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <section class="page-intro" data-enter>
+      <div class="container">
+        <p class="eyebrow" data-enter-item>Mentorship program</p>
+        <h1>SASE Ignite</h1>
+        <p class="lead" data-enter-item>
+          Ignite connects high school and college students with mentors who can help them grow academically and professionally.
+        </p>
+        <div class="hero-actions" data-enter-item style="margin-top:32px;">
+          <a class="btn" href="#apply">Apply now <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ignite-block" aria-labelledby="how-h">
+      <div class="container">
+        <h2 id="how-h">How it works</h2>
+        <ol class="ruled-cols">
+          <li>
+            <h3>Apply</h3>
+            <p>Fill out one short form as a mentor or a mentee. It takes about 5 minutes.</p>
+          </li>
+          <li>
+            <h3>Get matched</h3>
+            <p>Officers pair mentors and mentees by goals, major, availability and how you'd like to meet.</p>
+          </li>
+          <li>
+            <h3>Meet up</h3>
+            <p>You'll get each other's contact info and set your own schedule, in person or virtually.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ignite-block ignite-roles" aria-label="Who can apply">
+      <div class="container">
+        <div class="roles">
+          <div class="role">
+            <h2>Mentees</h2>
+            <p class="muted">High school students and WSU students at any year. Your mentor can help with:</p>
+            <ul class="help-list">
+              <li>Choosing classes and studying</li>
+              <li>Picking a major or career path</li>
+              <li>Internships, co-ops and job search</li>
+              <li>Resume, LinkedIn and interviews</li>
+              <li>Research opportunities</li>
+              <li>Getting involved on campus</li>
+              <li>Applying to college and the move from high school</li>
+              <li>Networking and professional development</li>
+              <li>Personal projects and technical skills</li>
+            </ul>
+          </div>
+          <div class="role">
+            <h2>Mentors</h2>
+            <p class="muted">WSU upperclassmen, graduate students, alumni and industry professionals.</p>
+            <p>Share what you've learned from your classes, internships, research or projects. You choose how many mentees to take on, from one to three or more, and whether you'd like to mentor high school students, college students, or both.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ignite-block ignite-apply" id="apply" aria-labelledby="apply-h">
+      <div class="container">
+        <div class="screen-head">
+          <h2 id="apply-h">Apply</h2>
+          <p>Start with your general info, then choose mentor or mentee. Form not loading? <a class="link" data-ignite-form href="#" target="_blank" rel="noopener">Open it in Google Forms</a>.</p>
+        </div>
+        <div class="form-frame">
+          <iframe id="ignite-form" title="SASE Ignite Mentorship Program application" loading="lazy">Loading…</iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/motion.js"></script>
+  <script type="module">
+    import { config } from "./js/config.js";
+    document.querySelectorAll("[data-ignite-form]").forEach((a) => (a.href = config.links.ignite));
+    document.querySelector("#ignite-form").src = config.links.ignite + "?embedded=true";
+  </script>
+</body>
+</html>

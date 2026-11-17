@@ -5,6 +5,7 @@ import { isDemo } from "./data.js";
 const NAV = [
   ["index.html", "Home"],
   ["events.html", "Events"],
+  ["ignite.html", "Ignite"],
   ["leaderboard.html", "Leaderboard"],
 ];
 

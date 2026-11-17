@@ -552,3 +552,39 @@ tr.unpaid .rank { opacity: .55; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-property: color, background-color, border-color, opacity !important; animation: none !important; }
 }
+
+/* ==========================================================================
+   SASE Ignite (home band + ignite.html)
+   ========================================================================== */
+.ignite-band { padding: clamp(72px, 10vh, 112px) 0; border-top: 1px solid var(--border); }
+.ignite-band .screen-head { margin-bottom: 32px; }
+
+.ignite-block { padding: clamp(56px, 8vh, 96px) 0; border-top: 1px solid var(--border); }
+.ignite-block > .container > h2 { margin-bottom: clamp(28px, 4vh, 48px); }
+.ruled-cols { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); counter-reset: step; }
+.ruled-cols li { counter-increment: step; padding: 4px clamp(20px, 3vw, 36px); border-left: 1px solid var(--border); }
+.ruled-cols li:first-child { padding-left: 0; border-left: 0; }
+.ruled-cols h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 1.2rem + .8vw, 1.9rem); letter-spacing: -0.02em; color: var(--brand); margin-bottom: 8px; }
+.ruled-cols h3::before { content: counter(step) ". "; color: var(--muted); }
+.ruled-cols p { margin: 0; color: var(--muted); max-width: 34ch; }
+@media (max-width: 860px) {
+  .ruled-cols { grid-template-columns: 1fr; }
+  .ruled-cols li { padding: 20px 0; border-left: 0; border-top: 1px solid var(--border); }
+  .ruled-cols li:first-child { padding-top: 0; border-top: 0; }
+}
+
+.ignite-roles { background: var(--surface-2); }
+.roles { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gutter); }
+.role + .role { border-left: 1px solid var(--border); padding-left: var(--gutter); }
+.role h2 { margin-bottom: 12px; }
+.role p { max-width: 46ch; }
+.help-list { list-style: none; margin: 8px 0 0; padding: 0; max-width: 46ch; }
+.help-list li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.help-list li:last-child { border-bottom: 0; }
+@media (max-width: 860px) {
+  .roles { grid-template-columns: 1fr; }
+  .role + .role { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 40px; }
+}
+
+.form-frame { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: #fff; max-width: 820px; }
+.form-frame iframe { display: block; width: 100%; height: min(2000px, 180svh); border: 0; }

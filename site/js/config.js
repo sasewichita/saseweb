@@ -21,5 +21,7 @@ export const config = {
     discord: "https://discord.gg/VwQhFkzWNH",
     linkedin: "https://www.linkedin.com/company/sase-wsu/",
     join: "https://wichita.campuslabs.com/engage/organization/societyofasianscientistsandengineers",
+    // SASE Ignite mentorship application (Google Form). ignite.html embeds it.
+    ignite: "https://docs.google.com/forms/d/e/1FAIpQLScBcnSTdSkEVYn3SBVC6u5N0bcPS6eqwUgIbXXEC6eYUn3JWw/viewform",
   },
 };
