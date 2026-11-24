@@ -29,7 +29,7 @@ async function enter() {
   SplitText.create(h1, {
     type: "lines", mask: "lines", maskClass: "line-mask", autoSplit: true,
     onSplit: (self) => gsap.from(self.lines, {
-      yPercent: 110, duration: 0.7, ease: "expo.out", stagger: Math.min(0.08, 0.24 / self.lines.length),
+      yPercent: 140, duration: 0.7, ease: "expo.out", stagger: Math.min(0.08, 0.24 / self.lines.length),
     }),
   });
   const tl = gsap.timeline({ defaults: { ease: "expo.out" } });

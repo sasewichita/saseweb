@@ -252,7 +252,9 @@ body:has(.close) #site-footer { border-top: 0; }
   .m-enter [data-enter] h1, .m-enter [data-enter-item] { opacity: 0; }
   .m-enter.m-enter-done [data-enter] h1, .m-enter.m-enter-done [data-enter-item] { opacity: 1; transition: opacity .4s var(--ease); }
 }
-[data-enter] .line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+/* SplitText masks clip to the line box; tight display leading puts descenders (g, y, p) and
+   ascenders outside it, so pad the mask out and pull the layout back with matching negative margins. */
+.line-mask { padding-block: 0.12em 0.3em; margin-block: -0.12em -0.3em; }
 
 /* ==========================================================================
    Home — one section per screen
