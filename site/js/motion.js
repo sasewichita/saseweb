@@ -27,7 +27,8 @@ async function enter() {
   // The split stays in place after the entrance: reverting it re-lays the balanced h1 and makes the
   // lines jump. autoSplit re-splits on resize, and the returned tween keeps its finished state.
   SplitText.create(h1, {
-    type: "lines", mask: "lines", maskClass: "line-mask", autoSplit: true,
+    // SplitText names each mask after its line's class, so "line" gives the masks .line-mask.
+    type: "lines", linesClass: "line", mask: "lines", autoSplit: true,
     onSplit: (self) => gsap.from(self.lines, {
       yPercent: 140, duration: 0.7, ease: "expo.out", stagger: Math.min(0.08, 0.24 / self.lines.length),
     }),
