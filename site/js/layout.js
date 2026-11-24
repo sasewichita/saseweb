@@ -15,10 +15,7 @@ document.querySelector("#site-header").innerHTML = `
   ${isDemo ? `<div class="demo-banner">Demo mode: showing sample data. Add Supabase keys in <code>js/config.js</code> to go live.</div>` : ""}
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <picture>
-        <source srcset="assets/logo/sase-wordmark-dark.png" media="(prefers-color-scheme: dark)" />
-        <img src="assets/logo/sase-wordmark.png" alt="${config.orgName}" width="168" height="36" />
-      </picture>
+      <img src="assets/logo/sase-collegiate-seal.png" alt="${config.orgName}" width="40" height="40" />
       <span class="brand-school">Wichita State<br />University</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
@@ -33,10 +30,7 @@ document.querySelector("#site-header").innerHTML = `
 document.querySelector("#site-footer").innerHTML = `
   <div class="container footer-inner">
     <div class="footer-brand">
-      <picture>
-        <source srcset="assets/logo/sase-mark-dark.png" media="(prefers-color-scheme: dark)" />
-        <img src="assets/logo/sase-mark.png" alt="" width="32" height="44" />
-      </picture>
+      <img src="assets/logo/sase-collegiate-midwest-banner.png" alt="SASE Collegiate Midwest" width="196" height="44" />
       <div>
         <strong>${config.orgFullName}</strong><br />
         ${config.school}<br />

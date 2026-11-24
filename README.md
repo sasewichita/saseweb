@@ -111,12 +111,12 @@ The SQL files in `supabase/` besides `schema.sql` are one-time migrations for th
 The site was redesigned with [taste-skill](https://github.com/leonxlnx/taste-skill) and [GSAP](https://github.com/greensock/gsap).
 
 **taste-skill** is a Claude Code skill with design rules and checking scripts. It was used to:
-- pick the type pairing (Zilla Slab for headings, Rethink Sans for body text) and the scroll moment for the home page;
+- pick the scroll moment for the home page;
 - lay the home page out as roughly one section per screen, with equal left and right edges;
 - keep motion to three places: the hero entrance, one scroll section, and hover/press feedback;
 - check copy and screenshot the page at desktop and phone widths.
 
-The SASE brand colours were kept instead of a generated palette.
+The SASE brand colours and type were kept instead of a generated palette (see [Branding](#branding--placeholders)).
 
 **GSAP** (3.13, loaded from jsDelivr in each page's `<script>` tags) powers `site/js/motion.js`:
 - **Hero entrance:** the heading rises line by line (SplitText), then the text and buttons fade up and the logo settles. It runs once on load, on every public page.
@@ -126,23 +126,25 @@ Hover and press effects are plain CSS in `style.css`. With reduced motion turned
 
 ## Branding & placeholders
 
-Logo files live in `site/assets/logo/`:
+The site follows the **SASE Collegiate Brand Guidelines** (November 2026). Logo files live in `site/assets/logo/`, resized from the official Logo Suite:
 
 | File | Used for |
 | --- | --- |
-| `sase-wordmark.png` / `sase-wordmark-dark.png` | Header (light / dark mode, swapped automatically) |
-| `sase-mark.svg` / `sase-mark-dark.svg` | Hero logo, a sharp vector trace of the mark (light / dark mode) |
-| `sase-mark.png` / `sase-mark-dark.png` | Footer icon (light / dark mode) |
-| `sase-icon.png` | Gold/cream icon for use on navy backgrounds |
-| `sase-square.png`, `favicon-32.png`, `apple-touch-icon.png` | Link previews, browser tab, phone home screen |
+| `sase-collegiate-seal.png` | Header, hero and member card (the Collegiate Teal Seal) |
+| `sase-collegiate-midwest-banner.png` | Footer (Midwest Regional Banner, full color) |
+| `share.png`, `favicon-32.png`, `apple-touch-icon.png` | Link previews, browser tab, phone home screen (the Seal on black) |
 
-The colors come from the SASE Brand Guide 2025 (national colorway) and are set at the top of `site/css/style.css`:
-- navy blue `#141B4D`
-- national blue `#89ABE3`
-- sandy brown `#DBC8B6`
-- brand white `#E9E8E8`
+The official Chapter Banner is due 11/25/26; when it arrives it replaces the Seal in the header. Rules worth remembering: the Seal is only ever Collegiate Teal, white or black; never recolor, stretch or add effects to a logo; never combine the SASE logo with a university logo or mascot.
 
-Headings use Zilla Slab, and body text uses Rethink Sans, both from Google Fonts. The brand guide PDF is kept out of the repo.
+The colors are set at the top of `site/css/style.css`, and nothing outside this palette is used:
+- National Base: white `#FDFDFD`, black `#101820` (navy `#141B4D` is in the guide but left out of the site by choice; raised surfaces are black tinted with stone)
+- National Neutrals: stone `#D0D0CE`, sand `#DBC8B6`, khaki `#968C83`, charcoal `#3F4444`
+- Collegiate Teal `#00B6A5`
+- Midwest colorway: orange `#F68F2E`, lite orange `#FCDAAC` (the `--region` tokens; a chapter uses only its own region's colors)
+
+The page is dark only, like the guide: teal and orange read well as text on black, not on white. Text on teal is always black.
+
+Type, all from Google Fonts: IBM Plex Mono for headlines, labels and buttons; IBM Plex Sans for all paragraph copy (required by the guide); Orbitron as the accent for small uppercase labels. The brand guide PDF is kept out of the repo.
 
 Sponsor logos live in `site/assets/sponsors/`, taken from each sponsor's own website. The Mochinut logo is small (69px tall); a larger file from them would look sharper.
 
